@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;800&display=swap");
+
+body {
+  font-family: "League Spartan", sans-serif !important;
+  background: linear-gradient(
+    144deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(41, 41, 45, 1) 50%,
+    rgba(78, 85, 87, 1) 100%
+  ) !important;
+  color: #fff !important;
+  height: 100vh;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+h1 {
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 20px;
+  background: linear-gradient(
+    144deg,
+    rgba(69, 194, 112, 1) 0%,
+    rgba(33, 205, 195, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  text-align: left;
+}
+
+h3 span {
+  color: rgba(33, 205, 195, 1);
+  font-size: 2em;
+  line-height: 1.3em;
+  font-weight: 800;
+}
+
+#zakatForm p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.container {
+  padding-top: 20px;
+}
+
+.result {
+  transition: 0.5s;
+}
+
+.btn-primary {
+  background: linear-gradient(
+    144deg,
+    rgba(69, 194, 112, 1) 0%,
+    rgba(33, 205, 195, 1) 100%
+  );
+  color: black !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+footer {
+  margin-top: 20px;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: transparent !important;
+}

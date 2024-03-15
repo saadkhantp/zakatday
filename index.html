@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZakatDay - Zakat Calculator</title>
+    <link href="./style.css" rel="stylesheet" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="mb-4">
+        <h1>ZakatDay</h1>
+      </header>
+
+      <!-- Zakat Calculation Form -->
+      <form id="zakatForm">
+        <div class="mb-3">
+          <p>
+            Please enter the total value of your assets, including cash,
+            savings, gold, silver, and investments, that have been in your
+            possession for at least one lunar year.
+          </p>
+          <input
+            type="number"
+            class="form-control"
+            id="totalWealth"
+            placeholder="Enter total wealth"
+            oninput="validateInput()"
+          />
+        </div>
+        <button
+          type="submit"
+          id="submitButton"
+          class="btn btn-primary btn-block btn-lg"
+          disabled
+        >
+          Calculate Zakat
+        </button>
+      </form>
+
+      <div id="result" class="mt-4 result"></div>
+    </div>
+
+    <footer class="text-light">
+      <div class="container">&copy; 2024 ZakatDay. All rights reserved.</div>
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script src="./script.js"></script>
+    <script>
+      function validateInput() {
+        const input = document.getElementById("totalWealth").value;
+        const button = document.getElementById("submitButton");
+
+        // Check if input is a number and not empty
+        if (input && !isNaN(input)) {
+          button.disabled = false; // Enable the button if input is a number
+        } else {
+          button.disabled = true; // Keep the button disabled otherwise
+        }
+      }
+    </script>
+  </body>
+</html>
