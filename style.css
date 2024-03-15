@@ -33,6 +33,10 @@ h1 {
   text-align: left;
 }
 
+h3 {
+  font-size: 2rem !important;
+}
+
 h3 span {
   color: rgba(33, 205, 195, 1);
   font-size: 2em;
@@ -40,13 +44,10 @@ h3 span {
   font-weight: 800;
 }
 
-#zakatForm p {
+header p {
   font-size: 1.2rem;
+  font-weight: 400;
   margin-bottom: 20px;
-}
-
-.container {
-  padding-top: 20px;
 }
 
 .result {
@@ -63,10 +64,27 @@ h3 span {
   font-weight: 600 !important;
   border: none !important;
 }
+
+.btn-check:focus + .btn-outline-secondary,
+.btn-outline-secondary:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#submitButton:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
 footer {
   margin-top: 20px;
   padding: 20px 0;
   text-align: center;
   font-size: 0.9rem;
   background-color: transparent !important;
+}
+
+footer small {
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 12px;
 }

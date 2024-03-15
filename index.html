@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-    <!-- Google tag (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-8Q118LFKYR"
@@ -84,19 +83,60 @@
     <div class="container">
       <header class="mb-4">
         <h1>ZakatDay</h1>
+        <p>
+          Please select currency and enter the total value of your assets,
+          including cash, savings, gold, silver, and investments.
+        </p>
       </header>
-
-      <!-- Zakat Calculation Form -->
       <form id="zakatForm">
         <div class="mb-3">
-          <p>
-            Please enter the total value of your assets, including cash,
-            savings, gold, silver, and investments, that have been in your
-            possession for at least one lunar year.
-          </p>
+          <div class="mb-3">
+            <div
+              class="btn-group btn-block"
+              role="group"
+              aria-label="Currency selection"
+            >
+              <input
+                type="radio"
+                class="btn-check"
+                name="currency"
+                id="currencyPKR"
+                value="PKR"
+                autocomplete="off"
+                checked
+              />
+              <label class="btn btn-outline-secondary" for="currencyPKR"
+                >PKR</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="currency"
+                id="currencyUSD"
+                value="USD"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary" for="currencyUSD"
+                >USD</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="currency"
+                id="currencyAED"
+                value="AED"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary" for="currencyAED"
+                >AED</label
+              >
+            </div>
+          </div>
           <input
             type="number"
-            class="form-control"
+            class="form-control form-control-lg"
             id="totalWealth"
             placeholder="Enter total wealth"
             oninput="validateInput()"
@@ -108,7 +148,7 @@
           class="btn btn-primary btn-block btn-lg"
           disabled
         >
-          Calculate Zakat
+          Calculate Now
         </button>
       </form>
 
@@ -116,6 +156,10 @@
     </div>
 
     <footer class="text-light">
+      <small
+        >Zakat calculations provided by this app are based on rough
+        estimates.</small
+      >
       <div class="container">&copy; 2024 ZakatDay. All rights reserved.</div>
     </footer>
 
