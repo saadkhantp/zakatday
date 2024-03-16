@@ -40,9 +40,11 @@ h3 {
 
 h3 span {
   color: rgba(33, 205, 195, 1);
-  font-size: 2em;
-  line-height: 1.3em;
+  font-size: 3rem;
+  line-height: 3rem;
   font-weight: 800;
+  display: block;
+  margin-top: 6px;
 }
 
 header p {
@@ -75,6 +77,10 @@ header p {
 
 #submitButton {
   transition: 0.5s;
+}
+
+#submitButton:focus {
+  box-shadow: none !important;
 }
 
 #submitButton:disabled {
