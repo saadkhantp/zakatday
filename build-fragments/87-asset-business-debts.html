@@ -1,0 +1,91 @@
+
+          <details class="asset-card">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">storefront</span>
+              </span>
+              <span class="asset-card__title">
+                Business assets
+                <span class="asset-card__hint">Sale stock &amp; money owed to you</span>
+              </span>
+              <span id="businessTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="bizStock">
+                <span class="money-field__label">Stock for sale</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="bizStock"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="business"
+                    data-field="stock"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="bizReceivables">
+                <span class="money-field__label">
+                  Receivables
+                  <span class="text-[0.62rem] font-medium text-slate-400">likely to be repaid</span>
+                </span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="bizReceivables"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="business"
+                    data-field="receivables"
+                  />
+                </span>
+              </label>
+            </div>
+          </details>
+
+          <details class="asset-card asset-card--debt">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">receipt_long</span>
+              </span>
+              <span class="asset-card__title">
+                Debts due now
+                <span class="asset-card__hint">Subtracted from your assets</span>
+              </span>
+              <span id="debtsTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="debtPayable">
+                <span class="money-field__label">Amounts you must pay</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="debtPayable"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="debts"
+                    data-field="payable"
+                  />
+                </span>
+              </label>
+              <p class="inline-note">
+                Include loans and bills due immediately. Long-term instalments are usually
+                deducted only for the coming year — ask a scholar about your situation.
+              </p>
+            </div>
+          </details>
+        </section>

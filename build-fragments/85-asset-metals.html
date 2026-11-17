@@ -1,0 +1,113 @@
+
+          <details class="asset-card asset-card--metal">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">diamond</span>
+              </span>
+              <span class="asset-card__title">
+                Gold &amp; silver
+                <span class="asset-card__hint">Jewellery, coins &amp; bars — priced at live rates</span>
+              </span>
+              <span id="metalsTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <div class="metal-grid">
+                <label class="money-field" for="goldGrams">
+                  <span class="money-field__label">
+                    Gold
+                    <select id="goldUnit" class="mini-select" aria-label="Gold weight unit">
+                      <option value="g">grams</option>
+                      <option value="tola">tola</option>
+                      <option value="oz">oz</option>
+                    </select>
+                  </span>
+                  <span class="money-field__control">
+                    <input
+                      id="goldGrams"
+                      class="money-input"
+                      type="text"
+                      inputmode="decimal"
+                      autocomplete="off"
+                      spellcheck="false"
+                      placeholder="0"
+                      data-metal="gold"
+                    />
+                  </span>
+                </label>
+                <label class="money-field" for="goldKarat">
+                  <span class="money-field__label">Purity</span>
+                  <span class="money-field__control">
+                    <select id="goldKarat" class="mini-select w-full" data-metal="goldKarat">
+                      <option value="24">24K · 999</option>
+                      <option value="22">22K · 916</option>
+                      <option value="21">21K · 875</option>
+                      <option value="18">18K · 750</option>
+                      <option value="14">14K · 585</option>
+                    </select>
+                  </span>
+                </label>
+              </div>
+
+              <div class="metal-grid">
+                <label class="money-field" for="silverGrams">
+                  <span class="money-field__label">
+                    Silver
+                    <select id="silverUnit" class="mini-select" aria-label="Silver weight unit">
+                      <option value="g">grams</option>
+                      <option value="tola">tola</option>
+                      <option value="oz">oz</option>
+                    </select>
+                  </span>
+                  <span class="money-field__control">
+                    <input
+                      id="silverGrams"
+                      class="money-input"
+                      type="text"
+                      inputmode="decimal"
+                      autocomplete="off"
+                      spellcheck="false"
+                      placeholder="0"
+                      data-metal="silver"
+                    />
+                  </span>
+                </label>
+                <label class="money-field" for="silverPurity">
+                  <span class="money-field__label">Purity</span>
+                  <span class="money-field__control">
+                    <select id="silverPurity" class="mini-select w-full" data-metal="silverPurity">
+                      <option value="1">Fine · 999</option>
+                      <option value="0.958">958</option>
+                      <option value="0.925">Sterling · 925</option>
+                      <option value="0.8">800</option>
+                    </select>
+                  </span>
+                </label>
+              </div>
+
+              <div class="space-y-1">
+                <div class="karat-row">
+                  <span class="karat-row__label">Gold</span>
+                  <span id="goldWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
+                    >0 g fine</span
+                  >
+                  <span id="goldValueText" class="karat-row__value">—</span>
+                </div>
+                <div class="karat-row">
+                  <span class="karat-row__label">Silver</span>
+                  <span id="silverWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
+                    >0 g fine</span
+                  >
+                  <span id="silverValueText" class="karat-row__value">—</span>
+                </div>
+              </div>
+              <p class="inline-note">
+                Nisab uses the fine-metal weight shown above.
+                <a
+                  href="./faq/#gold-silver"
+                  class="font-bold text-sky-700 underline underline-offset-2 dark:text-sky-300"
+                  >How this works →</a
+                >
+              </p>
+            </div>
+          </details>

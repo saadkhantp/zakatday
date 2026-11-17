@@ -1,0 +1,94 @@
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Zakat and who has to pay it?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zakat is 2.5% of qualifying wealth held for one lunar year, obligatory for adult Muslims whose wealth exceeds the nisab threshold free of debt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the nisab calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nisab is 87.48 g of gold or 612.36 g of silver. ZakatDay multiplies the live price per gram of the chosen metal by that weight. The silver nisab is lower and is commonly recommended for cash-based wealth."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which assets are included in Zakat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cash, bank and digital wallet balances, gold and silver in any form, shares, funds, crypto, accessible pensions, business stock for sale and collectible receivables. Personal items such as a home or car are excluded."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are debts treated in the Zakat calculation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Debts due now are subtracted from assets before comparing with nisab. For long-term debts many scholars allow deducting only the instalments due in the coming year."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do karat and weight both matter for gold?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Market prices quote fine 24K gold, so a 22K item weighing 10 g contains 9.17 g of pure gold. ZakatDay converts grams, tola and troy ounces to fine metal before applying the price per gram."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does ZakatDay store?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nothing you type is stored. Amounts exist only in page memory. Four preferences are kept in local storage: theme, zakatday-currency, zakatday-favorites and zakatday-nisab-standard. They contain no money or personal data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does anything get sent over the network?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The page fetches exchange and metal prices, loads Google Fonts and records an anonymous page view with Google Analytics. Your amounts are never included in any request or analytics event."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is ZakatDay a fatwa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. ZakatDay is an arithmetic tool using widely accepted thresholds and the 2.5% rate. Rules on specific assets differ between schools, so confirm your final figure with a qualified scholar."
+            }
+          }
+        ]
+      }
+    </script>
+    <script src="../theme.js"></script>
+    <script>
+      (function () {
+        if (typeof initThemeToggle === "function") initThemeToggle();
+        var glyph = document.querySelector("#themeToggleBtn .header-icon-btn__glyph");
+        var sync = function () {
+          if (glyph) {
+            glyph.textContent = document.documentElement.classList.contains("dark")
+              ? "light_mode"
+              : "dark_mode";
+          }
+        };
+        sync();
+        var toggle = document.getElementById("themeToggleBtn");
+        if (toggle) toggle.addEventListener("click", sync);
+        var year = document.getElementById("footerYear");
+        if (year) year.textContent = String(new Date().getFullYear());
+      })();
+    </script>
+  </body>
+</html>

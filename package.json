@@ -1,0 +1,28 @@
+{
+  "name": "zakatday",
+  "private": true,
+  "version": "2.0.0",
+  "description": "ZakatDay static app. Tailwind builds design tokens to dist/app.css; all calculator maths run client-side with zero storage.",
+  "scripts": {
+    "build:css": "NODE_ENV=production postcss ./src/styles/tailwind-entry.css -o ./dist/app.css",
+    "watch:css": "postcss ./src/styles/tailwind-entry.css -o ./dist/app.css --watch",
+    "build:js": "node ./scripts/build-app.cjs",
+    "build:html": "node ./scripts/build-html.cjs",
+    "build": "npm run build:js && npm run build:html && npm run build:css",
+    "test:engine": "node ./scripts/test-zakat-engine.cjs",
+    "test:css": "node ./scripts/check-css-coverage.cjs",
+    "test:audit": "node ./scripts/audit.cjs",
+    "test:smoke": "node ./scripts/smoke.cjs",
+    "test": "npm run build && npm run test:engine && npm run test:css && npm run test:audit && npm run test:smoke"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^8.0.1",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.0",
+    "puppeteer-core": "^25.18.1",
+    "tailwindcss": "^3.4.19",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

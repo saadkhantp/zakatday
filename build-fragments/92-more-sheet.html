@@ -1,0 +1,83 @@
+
+    <!-- ================= Bottom sheet: more menu ================= -->
+    <div
+      id="moreSheet"
+      class="more-sheet"
+      data-open="false"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="moreSheetTitle"
+      hidden
+    >
+      <button type="button" class="more-sheet__backdrop" data-sheet-close aria-label="Close menu"></button>
+      <div class="more-sheet__panel">
+        <div class="more-sheet__grab" data-sheet-drag aria-hidden="true">
+          <span class="more-sheet__handle"></span>
+        </div>
+        <div class="more-sheet__body">
+          <h2 id="moreSheetTitle" class="more-sheet__title">More</h2>
+
+          <button type="button" class="more-menu-item" data-more-action="currency">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">payments</span>
+            </span>
+            <span class="more-menu-item__label">Currency</span>
+            <span id="moreCurrencyValue" class="text-[0.76rem] font-bold text-slate-400 dark:text-slate-500"
+              >USD</span
+            >
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="rates">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">monitoring</span>
+            </span>
+            <span class="more-menu-item__label">Refresh live rates</span>
+            <span id="moreRatesDot" class="more-menu-item__dot" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="theme">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">contrast</span>
+            </span>
+            <span class="more-menu-item__label">Toggle dark mode</span>
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="summary">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">receipt_long</span>
+            </span>
+            <span class="more-menu-item__label">View full summary</span>
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="latest">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">auto_awesome</span>
+            </span>
+            <span class="more-menu-item__label">What's new</span>
+          </button>
+
+          <a class="more-menu-item" href="./faq/">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">menu_book</span>
+            </span>
+            <span class="more-menu-item__label">Zakat guide &amp; FAQ</span>
+          </a>
+
+          <button type="button" class="more-menu-item" data-more-action="feedback">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">mail</span>
+            </span>
+            <span class="more-menu-item__label">Send feedback</span>
+          </button>
+
+          <div class="more-menu-meta">
+            <p>
+              <strong class="text-slate-600 dark:text-slate-300">Zero-storage by design.</strong>
+              Your amounts are never transmitted, logged or written to this device. Only your
+              theme, currency and pinned currencies are remembered.
+            </p>
+            <p class="mt-1.5">ZakatDay · v2.0 · <a href="./faq/#privacy" class="underline underline-offset-2">Privacy</a></p>
+          </div>
+        </div>
+      </div>
+    </div>

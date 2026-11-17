@@ -1,0 +1,59 @@
+:root {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 214 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: 0 0% 98%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 214 100% 50%;
+  --radius: 0.625rem;
+  --app-bg-top: 210 40% 98%;
+  --app-bg-bottom: 214 32% 92%;
+  --app-overlay-top: #f8fafc;
+  --app-overlay-bottom: #e2e8f0;
+
+  /* ZakatDay accents (match AyahDay solar tokens) */
+  --zakat-teal: #09dd97;
+  --zakat-green: #10b981;
+  --zakat-gold: #d99c1f;
+  --zakat-silver: #94a3b8;
+  --zakat-debt: #f43f5e;
+}
+
+.dark {
+  --background: 224 39% 11%;
+  --foreground: 210 40% 98%;
+  --card: 225 34% 15%;
+  --card-foreground: 210 40% 98%;
+  --popover: 225 34% 15%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 214 100% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 224 24% 20%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 224 26% 18%;
+  --muted-foreground: 215 20% 75%;
+  --accent: 216 42% 22%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: 0 0% 98%;
+  --border: 220 32% 30%;
+  --input: 220 26% 30%;
+  --ring: 214 100% 60%;
+  --app-bg-top: 222 47% 11%;
+  --app-bg-bottom: 229 84% 5%;
+  --app-overlay-top: #0f172a;
+  --app-overlay-bottom: #020617;
+}

@@ -1,0 +1,70 @@
+
+          <details class="asset-card">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">trending_up</span>
+              </span>
+              <span class="asset-card__title">
+                Investments
+                <span class="asset-card__hint">Shares, funds, crypto &amp; pensions</span>
+              </span>
+              <span id="investmentsTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="invShares">
+                <span class="money-field__label">Shares &amp; funds</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="invShares"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="investments"
+                    data-field="shares"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="invCrypto">
+                <span class="money-field__label">Crypto</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="invCrypto"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="investments"
+                    data-field="crypto"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="invRetirement">
+                <span class="money-field__label">
+                  Retirement / pension
+                  <span class="text-[0.62rem] font-medium text-slate-400">if accessible</span>
+                </span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="invRetirement"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="investments"
+                    data-field="retirement"
+                  />
+                </span>
+              </label>
+            </div>
+          </details>

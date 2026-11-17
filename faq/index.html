@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q118LFKYR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-8Q118LFKYR", { send_page_view: true });
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Zakat Guide &amp; FAQ — Nisab, Gold, Silver &amp; Privacy | ZakatDay</title>
+    <meta
+      name="description"
+      content="How ZakatDay calculates Zakat: nisab for gold and silver, which assets count, debts, live rates, and exactly what the app does (and does not) store."
+    />
+    <meta name="theme-color" content="#f8fafc" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.zakatday.cc/faq/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ZakatDay" />
+    <meta property="og:title" content="Zakat Guide &amp; FAQ — Nisab, Gold, Silver &amp; Privacy" />
+    <meta
+      property="og:description"
+      content="Nisab, assets, debts, live rates and privacy: everything behind ZakatDay's calculator."
+    />
+    <meta property="og:url" content="https://www.zakatday.cc/faq/" />
+    <meta property="og:image" content="https://www.zakatday.cc/assets/og/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ZakatDay — a clean, private Zakat calculator" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zakat Guide &amp; FAQ — ZakatDay" />
+    <meta
+      name="twitter:description"
+      content="Nisab, assets, debts, live rates and privacy: everything behind ZakatDay's calculator."
+    />
+    <meta name="twitter:image" content="https://www.zakatday.cc/assets/og/twitter-card.png" />
+    <meta name="twitter:image:alt" content="ZakatDay — a clean, private Zakat calculator" />
+
+    <!-- Icons & PWA. Root-absolute so the FAQ page shares the exact same paths. -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ZakatDay" />
+    <meta name="application-name" content="ZakatDay" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="../dist/app.css" rel="stylesheet" />
+    <script src="../theme-init.js"></script>
+  </head>
+  <body class="app-body theme min-h-dvh text-foreground">
+    <div class="mx-auto w-full max-w-[42rem] px-3 pb-12 pt-3 sm:px-5 sm:pt-6">
+      <header class="header-bar mb-4">
+        <a href="../" class="flex items-center gap-2 no-underline" aria-label="ZakatDay home">
+          <span class="font-logo text-[1.35rem] leading-none">
+            <span class="text-gradient-solar">Zakat</span
+            ><span class="text-slate-900 dark:text-white">Day</span>
+          </span>
+        </a>
+        <div class="header-actions">
+          <a href="../" class="btn-secondary !px-3 !py-2 !text-[0.76rem]">
+            <span class="material-symbols-outlined" aria-hidden="true">calculate</span>
+            Calculator
+          </a>
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="header-icon-btn"
+            aria-label="Switch to dark mode"
+            title="Dark mode"
+          >
+            <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true"
+              >dark_mode</span
+            >
+          </button>
+        </div>
+      </header>
+
+      <main class="space-y-4">
+        <section>
+          <h1 class="font-logo text-[1.6rem] leading-tight text-slate-900 dark:text-white">
+            Zakat guide &amp; FAQ
+          </h1>
+          <p class="mt-2 text-[0.85rem] leading-relaxed text-slate-600 dark:text-slate-300">
+            Zakat is 2.5% of the wealth you have held for one lunar year, once it reaches the
+            nisab threshold. ZakatDay does the arithmetic and keeps every figure on your device.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-1.5 text-[0.7rem]">
+            <span class="stat-chip">Rate <strong>2.5%</strong></span>
+            <span class="stat-chip">Silver nisab <strong>612.36 g</strong></span>
+            <span class="stat-chip">Gold nisab <strong>87.48 g</strong></span>
+            <span class="stat-chip">1 tola <strong>11.6638 g</strong></span>
+          </div>
+        </section>
+
+        <section aria-labelledby="basics">
+          <h2 id="basics" class="section-heading mb-2 px-0.5">The basics</h2>
+          <div class="faq-grid">
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>What is Zakat and who has to pay it?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Zakat is the obligatory annual charity in Islam: 2.5% of qualifying wealth held
+                  for one lunar year (hawl). It applies to adult Muslims who own wealth above the
+                  nisab threshold free of debt.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>How is the nisab calculated?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Nisab is the minimum wealth at which Zakat becomes due. There are two classical
+                  measures: 87.48 g of gold or 612.36 g of silver. ZakatDay multiplies the current
+                  price per gram of the metal you choose by that weight.
+                </p>
+                <p>
+                  Because silver is far cheaper, the silver nisab is much lower and is the standard
+                  most scholars recommend for cash-based wealth — it brings more people into Zakat
+                  and benefits the poor. Switch to the gold standard on the calculator if that is
+                  your madhhab's practice.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Which assets are included?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <ul>
+                  <li>Cash at home, in bank accounts and in digital wallets</li>
+                  <li>Gold and silver in any form — jewellery, coins or bars</li>
+                  <li>Shares, funds, crypto and accessible pensions</li>
+                  <li>Business stock held for sale and receivables likely to be repaid</li>
+                </ul>
+                <p>
+                  Assets used personally — your home, car, furniture, tools of trade — are not
+                  zakatable.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>How are debts treated?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Debts that must be paid now are subtracted from your assets before comparing
+                  against nisab. For long-term debts such as a mortgage, many scholars allow
+                  deducting only the instalments due in the coming year. Enter the figure your
+                  scholar advises.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section id="gold-silver" aria-labelledby="metalsHeading" class="scroll-mt-4">
+          <h2 id="metalsHeading" class="section-heading mb-2 px-0.5">Gold &amp; silver</h2>
+          <div class="faq-grid">
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Why do karat and weight both matter?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Market prices quote fine (24K) gold. A 22K ring weighing 10 g contains 9.17 g of
+                  pure gold, so its zakatable value is 9.17 g × the 24K price. ZakatDay converts
+                  grams, tola and troy ounces to fine metal for you, then multiplies by the live
+                  price per gram.
+                </p>
+                <ul>
+                  <li>24K = 999 purity, 22K = 916, 21K = 875, 18K = 750, 14K = 585</li>
+                  <li>1 tola = 11.6638 g, 1 troy ounce = 31.1034768 g</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Is jewellery worn daily still zakatable?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  The schools differ: the Hanafi position is that gold and silver jewellery is
+                  zakatable regardless of use, while other schools exempt jewellery in regular
+                  wear. ZakatDay treats all entered metal as zakatable — follow your school.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Where do the live prices come from?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Currency and metal rates come from public feeds (jsDelivr's
+                  <code>currency-api</code>, with <code>open.er-api.com</code> as a fallback). The
+                  app converts the USD spot price per troy ounce into your currency per gram.
+                </p>
+                <p>
+                  Retail prices in your city usually differ because of making charges and local
+                  premiums — use <strong>Edit</strong> on the calculator to enter the price you are
+                  actually quoted.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section id="privacy" aria-labelledby="privacyHeading" class="scroll-mt-4">
+          <h2 id="privacyHeading" class="section-heading mb-2 px-0.5">Privacy</h2>
+          <div class="faq-grid">
+            <details class="faq-item group" name="faq" open>
+              <summary class="faq-item__summary">
+                <span>What does ZakatDay store?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Nothing you type is stored. Amounts live in the page's memory and disappear when
+                  you close the tab. There is no account, no server database and no cookie carrying
+                  your figures.
+                </p>
+                <p>Only four simple preferences are kept in your browser's local storage:</p>
+                <ul>
+                  <li><code>theme</code> — light or dark</li>
+                  <li><code>zakatday-currency</code> — your chosen currency</li>
+                  <li><code>zakatday-favorites</code> — up to six pinned currencies</li>
+                  <li><code>zakatday-nisab-standard</code> — gold or silver nisab</li>
+                </ul>
+                <p class="mt-2">
+                  These contain no money, no names and nothing that identifies you. Clearing site
+                  data removes them.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Does anything get sent over the network?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  The page fetches exchange and metal prices, loads fonts from Google Fonts and
+                  records an anonymous page view with Google Analytics. Your amounts are never part
+                  of any of those requests, and no analytics event includes them.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>What happens when I share my summary?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Sharing is entirely in your hands: ZakatDay copies the text to your clipboard or
+                  opens WhatsApp on your device. “Send to WhatsApp” builds a PNG receipt of your
+                  figures inside this tab, saves or hands it to your phone's share sheet, then opens
+                  WhatsApp with the text summary. Nothing is uploaded, stored on a server or added to
+                  your browser history.
+                </p>
+                <p>
+                  You choose what the receipt contains. “Include itemized breakdown” lists each
+                  asset figure; “Total Zakat &amp; Nisab only” hides every amount except the nisab
+                  threshold and the Zakat due. The choice lives in memory for the current tab only.
+                </p>
+                <p>
+                  The receipt image is drawn by the open-source
+                  <a href="https://html2canvas.hertzen.com/" class="underline underline-offset-2" rel="noopener noreferrer" target="_blank">html2canvas</a>
+                  library, loaded from jsDelivr only when you press the button. If it cannot load —
+                  offline, or blocked by your network — ZakatDay sends the text summary instead.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section aria-labelledby="accuracy">
+          <h2 id="accuracy" class="section-heading mb-2 px-0.5">Accuracy &amp; sources</h2>
+          <div class="faq-grid">
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Is this a fatwa?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  No. ZakatDay is an arithmetic tool for the widely used thresholds and the 2.5%
+                  rate. Rules on particular assets — pensions, business inventory, jewellery in
+                  regular use, long-term debt — differ between schools. Please confirm your final
+                  figure with a qualified scholar.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>What is the source of the nisab figures?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  87.48 g of gold (7.5 tola) and 612.36 g of silver (52.5 tola), the values used in
+                  the classical manuals and in the calculator this site previously shipped. The
+                  zakat rate is 2.5% (1/40).
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Is there an app to install?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  ZakatDay is a web app that works in any modern browser. You can add it to your
+                  home screen from the browser menu for a full-screen experience, and the
+                  calculator keeps working offline once the page has loaded.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section class="section-card p-4 text-center">
+          <p class="text-[0.85rem] font-bold text-slate-800 dark:text-slate-100">Ready to calculate?</p>
+          <p class="mt-1 text-[0.75rem] leading-relaxed text-slate-500 dark:text-slate-400">
+            Takes about a minute, and nothing is saved.
+          </p>
+          <a href="../" class="btn-primary mt-3 w-full">
+            <span class="material-symbols-outlined" aria-hidden="true">calculate</span>
+            Open the calculator
+          </a>
+        </section>
+      </main>
+
+      <footer
+        class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[0.72rem] text-slate-500 dark:text-slate-400"
+      >
+        <a href="../" class="footer-link">Calculator</a>
+        <span aria-hidden="true">·</span>
+        <a href="#privacy" class="footer-link">Privacy</a>
+        <span class="w-full text-center">© <span id="footerYear">2026</span> ZakatDay</span>
+      </footer>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Zakat and who has to pay it?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zakat is 2.5% of qualifying wealth held for one lunar year, obligatory for adult Muslims whose wealth exceeds the nisab threshold free of debt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the nisab calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nisab is 87.48 g of gold or 612.36 g of silver. ZakatDay multiplies the live price per gram of the chosen metal by that weight. The silver nisab is lower and is commonly recommended for cash-based wealth."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which assets are included in Zakat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cash, bank and digital wallet balances, gold and silver in any form, shares, funds, crypto, accessible pensions, business stock for sale and collectible receivables. Personal items such as a home or car are excluded."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are debts treated in the Zakat calculation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Debts due now are subtracted from assets before comparing with nisab. For long-term debts many scholars allow deducting only the instalments due in the coming year."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do karat and weight both matter for gold?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Market prices quote fine 24K gold, so a 22K item weighing 10 g contains 9.17 g of pure gold. ZakatDay converts grams, tola and troy ounces to fine metal before applying the price per gram."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does ZakatDay store?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nothing you type is stored. Amounts exist only in page memory. Four preferences are kept in local storage: theme, zakatday-currency, zakatday-favorites and zakatday-nisab-standard. They contain no money or personal data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does anything get sent over the network?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The page fetches exchange and metal prices, loads Google Fonts and records an anonymous page view with Google Analytics. Your amounts are never included in any request or analytics event."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is ZakatDay a fatwa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. ZakatDay is an arithmetic tool using widely accepted thresholds and the 2.5% rate. Rules on specific assets differ between schools, so confirm your final figure with a qualified scholar."
+            }
+          }
+        ]
+      }
+    </script>
+    <script src="../theme.js"></script>
+    <script>
+      (function () {
+        if (typeof initThemeToggle === "function") initThemeToggle();
+        var glyph = document.querySelector("#themeToggleBtn .header-icon-btn__glyph");
+        var sync = function () {
+          if (glyph) {
+            glyph.textContent = document.documentElement.classList.contains("dark")
+              ? "light_mode"
+              : "dark_mode";
+          }
+        };
+        sync();
+        var toggle = document.getElementById("themeToggleBtn");
+        if (toggle) toggle.addEventListener("click", sync);
+        var year = document.getElementById("footerYear");
+        if (year) year.textContent = String(new Date().getFullYear());
+      })();
+    </script>
+  </body>
+</html>

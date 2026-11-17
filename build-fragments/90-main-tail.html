@@ -1,0 +1,70 @@
+
+        <!-- ================= Breakdown ================= -->
+        <section class="section-card p-3.5 sm:p-4" aria-labelledby="breakdownHeading">
+          <div class="mb-2 flex items-center justify-between gap-2">
+            <h2 id="breakdownHeading" class="section-heading">Where your wealth sits</h2>
+            <span
+              id="breakdownTotal"
+              class="text-[0.72rem] font-extrabold tabular-nums text-slate-700 dark:text-slate-200"
+              >—</span
+            >
+          </div>
+          <div class="breakdown-bar" role="img" aria-labelledby="breakdownLegendTitle">
+            <span id="segCash" class="breakdown-bar__seg breakdown-bar__seg--cash" style="width: 0%"></span>
+            <span id="segMetals" class="breakdown-bar__seg breakdown-bar__seg--metals" style="width: 0%"></span>
+            <span
+              id="segInvestments"
+              class="breakdown-bar__seg breakdown-bar__seg--investments"
+              style="width: 0%"
+            ></span>
+            <span
+              id="segBusiness"
+              class="breakdown-bar__seg breakdown-bar__seg--business"
+              style="width: 0%"
+            ></span>
+            <span id="segDebts" class="breakdown-bar__seg breakdown-bar__seg--debts" style="width: 0%"></span>
+          </div>
+          <p id="breakdownLegendTitle" class="sr-only">Share of gross assets by category</p>
+          <div class="breakdown-legend">
+            <span><span class="breakdown-legend__dot" style="background: #0ea5e9"></span>Cash</span>
+            <span><span class="breakdown-legend__dot" style="background: #d99c1f"></span>Gold &amp; silver</span>
+            <span><span class="breakdown-legend__dot" style="background: #6366f1"></span>Investments</span>
+            <span><span class="breakdown-legend__dot" style="background: #14b8a6"></span>Business</span>
+            <span><span class="breakdown-legend__dot" style="background: #f43f5e"></span>Debts</span>
+          </div>
+        </section>
+
+        <!-- ================= Actions ================= -->
+        <section class="space-y-2" aria-label="Actions">
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              id="shareSummaryBtn"
+              class="btn-primary"
+              onclick="window.ZakatDay && window.ZakatDay.openSummary()"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">share</span>
+              Share summary
+            </button>
+            <button
+              type="button"
+              id="whatsappBtn"
+              class="btn-whatsapp"
+              onclick="window.ZakatDay && window.ZakatDay.shareWhatsApp()"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+              WhatsApp
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 px-0.5 pt-1">
+            <span class="privacy-badge">
+              <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+              <span>Nothing you type is sent or saved — no accounts, no cookies.</span>
+            </span>
+            <button type="button" id="resetBtn" class="reset-btn" data-confirm="false">
+              <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
+              <span id="resetBtnLabel">Reset</span>
+            </button>
+          </div>
+        </section>
+      </main>

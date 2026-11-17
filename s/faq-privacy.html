@@ -1,0 +1,71 @@
+
+        <section id="privacy" aria-labelledby="privacyHeading" class="scroll-mt-4">
+          <h2 id="privacyHeading" class="section-heading mb-2 px-0.5">Privacy</h2>
+          <div class="faq-grid">
+            <details class="faq-item group" name="faq" open>
+              <summary class="faq-item__summary">
+                <span>What does ZakatDay store?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Nothing you type is stored. Amounts live in the page's memory and disappear when
+                  you close the tab. There is no account, no server database and no cookie carrying
+                  your figures.
+                </p>
+                <p>Only four simple preferences are kept in your browser's local storage:</p>
+                <ul>
+                  <li><code>theme</code> — light or dark</li>
+                  <li><code>zakatday-currency</code> — your chosen currency</li>
+                  <li><code>zakatday-favorites</code> — up to six pinned currencies</li>
+                  <li><code>zakatday-nisab-standard</code> — gold or silver nisab</li>
+                </ul>
+                <p class="mt-2">
+                  These contain no money, no names and nothing that identifies you. Clearing site
+                  data removes them.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>Does anything get sent over the network?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  The page fetches exchange and metal prices, loads fonts from Google Fonts and
+                  records an anonymous page view with Google Analytics. Your amounts are never part
+                  of any of those requests, and no analytics event includes them.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item group" name="faq">
+              <summary class="faq-item__summary">
+                <span>What happens when I share my summary?</span>
+                <span class="faq-item__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+              </summary>
+              <div class="faq-item__body">
+                <p>
+                  Sharing is entirely in your hands: ZakatDay copies the text to your clipboard or
+                  opens WhatsApp on your device. “Send to WhatsApp” builds a PNG receipt of your
+                  figures inside this tab, saves or hands it to your phone's share sheet, then opens
+                  WhatsApp with the text summary. Nothing is uploaded, stored on a server or added to
+                  your browser history.
+                </p>
+                <p>
+                  You choose what the receipt contains. “Include itemized breakdown” lists each
+                  asset figure; “Total Zakat &amp; Nisab only” hides every amount except the nisab
+                  threshold and the Zakat due. The choice lives in memory for the current tab only.
+                </p>
+                <p>
+                  The receipt image is drawn by the open-source
+                  <a href="https://html2canvas.hertzen.com/" class="underline underline-offset-2" rel="noopener noreferrer" target="_blank">html2canvas</a>
+                  library, loaded from jsDelivr only when you press the button. If it cannot load —
+                  offline, or blocked by your network — ZakatDay sends the text summary instead.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>

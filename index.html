@@ -1,182 +1,1296 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-8Q118LFKYR"
-    ></script>
+    <!-- Google tag (gtag.js) — page views only; no calculator amounts are sent. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q118LFKYR"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
-      gtag("config", "G-8Q118LFKYR");
+      gtag("config", "G-8Q118LFKYR", { send_page_view: true });
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./zakat-day-logo-512.png" type="image/png" />
-    <title>ZakatDay - Zakat Calculator</title>
-    <link href="./style.css" rel="stylesheet" />
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
 
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>ZakatDay — Clean, Private Global Zakat Calculator (Live Gold, Silver &amp; FX)</title>
     <meta
       name="description"
-      content="Embrace the spirit of generosity by calculating and fulfilling your Zakat, helping those in need, and spreading awareness."
+      content="A clean, distraction-free Zakat calculator with live gold and silver nisab rates, 150+ currencies, tola, gram and karat support — and zero data storage."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.zakatday.cc/" />
+
+    <!-- Global targeting for major Muslim & diaspora markets. One English page,
+         so every hreflang entry resolves to the same URL. -->
+    <link rel="alternate" hreflang="en" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-US" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-GB" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-PK" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-AE" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-SA" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-MY" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-CA" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-IN" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="en-AU" href="https://www.zakatday.cc/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.zakatday.cc/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ZakatDay" />
+    <meta
+      property="og:title"
+      content="ZakatDay — Clean, Private Global Zakat Calculator (Live Gold, Silver &amp; FX)"
     />
     <meta
-      name="keywords"
-      content="Ramzan 2024, Ramadan Kareem, Zakat, Quran, Islamic Wisdom, Muslim Spirituality, Daily Ayah, Quran Verses in Urdu, Quran Translation in English, Muslim App, Islamic App, Blessings of Ramadan, Spirituality, Peace in Islam, Islamic Teachings, Muslim Life, Word of God, Quranic Guidance, Fasting, Charity, Faith, Islamic Culture, Ramadan Blessings, Spiritual Growth, Quranic Study, Islamic Practice, Ummah"
+      property="og:description"
+      content="Calculate Zakat in a clean, distraction-free interface with live gold and silver nisab rates, 150+ currencies and zero data storage."
     />
+    <meta property="og:url" content="https://www.zakatday.cc/" />
+    <meta property="og:image" content="https://www.zakatday.cc/assets/og/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ZakatDay — a clean, private Zakat calculator" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ZakatDay — Clean, Private Global Zakat Calculator" />
+    <meta
+      name="twitter:description"
+      content="Live gold and silver nisab rates, 150+ currencies, tola/gram/karat support — and nothing you type is stored."
+    />
+    <meta name="twitter:image" content="https://www.zakatday.cc/assets/og/twitter-card.png" />
+    <meta name="twitter:image:alt" content="ZakatDay — a clean, private Zakat calculator" />
+    <!-- Browser chrome: the default meta comes first (theme.js keeps it in sync);
+         the prefers-color-scheme pair follows for browsers that honour it. -->
+    <meta name="theme-color" content="#f8fafc" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ZakatDay" />
+    <meta name="application-name" content="ZakatDay" />
 
+    <!-- Icons & PWA. Standardised paths — drop the final artwork in as-is. -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://open.er-api.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="manifest" href="./manifest.json" />
+    <link href="./dist/app.css" rel="stylesheet" />
+    <script src="./theme-init.js"></script>
 
-    <meta
-      property="og:title"
-      content="ZakatDay - Embrace the spirit of generosity by calculating and fulfilling your Zakat, helping those in need, and spreading awareness."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.zakatday.cc" />
-    <meta
-      property="og:image"
-      content="https://www.zakatday.cc/og-zakatday.jpg"
-    />
-    <meta
-      property="og:description"
-      content="Embrace the spirit of generosity by calculating and fulfilling your Zakat, helping those in need, and spreading awareness."
-    />
-    <meta property="og:site_name" content="ZakatDay" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="ZakatDay - Embrace the spirit of generosity by calculating and fulfilling your Zakat, helping those in need, and spreading awareness."
-    />
-    <meta
-      name="twitter:description"
-      content="Embrace the spirit of generosity by calculating and fulfilling your Zakat, helping those in need, and spreading awareness."
-    />
-    <meta
-      name="twitter:image"
-      content="https://www.zakatday.cc/og-zakatday.jpg"
-    />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="ZakatDay" />
-    <link rel="apple-touch-icon" href="./zakat-day-logo-192.png" />
-  </head>
-  <body>
-    <div class="container">
-      <header class="mb-4">
-        <h1>ZakatDay</h1>
-        <p>
-          Please select currency and enter the total value of your assets,
-          including cash, savings, gold, silver, and investments.
-        </p>
-      </header>
-      <form id="zakatForm">
-        <div class="mb-3">
-          <div class="mb-3">
-            <div
-              class="btn-group btn-block"
-              role="group"
-              aria-label="Currency selection"
-            >
-              <input
-                type="radio"
-                class="btn-check"
-                name="currency"
-                id="currencyPKR"
-                value="PKR"
-                autocomplete="off"
-                checked
-              />
-              <label class="btn btn-outline-secondary" for="currencyPKR"
-                >PKR</label
-              >
-
-              <input
-                type="radio"
-                class="btn-check"
-                name="currency"
-                id="currencyUSD"
-                value="USD"
-                autocomplete="off"
-              />
-              <label class="btn btn-outline-secondary" for="currencyUSD"
-                >USD</label
-              >
-
-              <input
-                type="radio"
-                class="btn-check"
-                name="currency"
-                id="currencyAED"
-                value="AED"
-                autocomplete="off"
-              />
-              <label class="btn btn-outline-secondary" for="currencyAED"
-                >AED</label
-              >
-            </div>
-          </div>
-          <input
-            type="number"
-            class="form-control form-control-lg"
-            id="totalWealth"
-            placeholder="Enter total wealth"
-            oninput="validateInput()"
-          />
-        </div>
-        <button
-          type="submit"
-          id="submitButton"
-          class="btn btn-primary btn-block btn-lg"
-          disabled
-        >
-          Calculate Now
-        </button>
-      </form>
-
-      <div id="result" class="mt-4 result"></div>
-    </div>
-
-    <footer class="text-light">
-      <small
-        >Zakat calculations provided by this app are based on rough
-        estimates.</small
-      >
-      <div class="container">&copy; 2024 ZakatDay</div>
-    </footer>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
-    <script src="./script.js"></script>
-    <script>
-      function validateInput() {
-        const input = document.getElementById("totalWealth").value;
-        const button = document.getElementById("submitButton");
-
-        // Check if input is a number and not empty
-        if (input && !isNaN(input)) {
-          button.disabled = false; // Enable the button if input is a number
-        } else {
-          button.disabled = true; // Keep the button disabled otherwise
-        }
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "@id": "https://www.zakatday.cc/#webapp",
+        "name": "ZakatDay",
+        "url": "https://www.zakatday.cc/",
+        "description": "A clean, private global Zakat calculator with live gold, silver and currency rates. Nothing you type is stored or sent.",
+        "applicationCategory": "FinanceApplication",
+        "applicationSubCategory": "Zakat calculator",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "inLanguage": ["en"],
+        "isFamilyFriendly": true,
+        "image": "https://www.zakatday.cc/assets/og/og-image.png",
+        "screenshot": "https://www.zakatday.cc/assets/og/og-image.png",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://www.zakatday.cc/#organization",
+          "name": "ZakatDay",
+          "url": "https://www.zakatday.cc/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.zakatday.cc/assets/brand/logo.svg",
+            "width": 512,
+            "height": 512
+          }
+        },
+        "featureList": [
+          "Live gold and silver prices for the nisab",
+          "Silver (612.36 g) and gold (87.48 g) nisab standards",
+          "150+ currencies with live exchange rates",
+          "Gold entered in grams, tola or troy ounces",
+          "14K, 18K, 21K, 22K and 24K karat adjustment",
+          "2.5% lunar-year Zakat calculation",
+          "Zero storage: amounts never leave the browser",
+          "WhatsApp receipt image plus text summary"
+        ]
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://www.zakatday.cc/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much is Zakat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zakat is 2.5% of the net wealth you have held for one lunar year, once that wealth reaches the nisab threshold."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the nisab threshold in grams and tolas?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The nisab is 612.36 g of silver (52.5 tola) or 87.48 g of gold (7.5 tola). ZakatDay offers both standards and prices them with live metal rates in your currency."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does ZakatDay store my amounts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Amounts exist only in page memory for the tab's lifetime. ZakatDay keeps no database, sets no cookies and writes no figures to local storage."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which currencies does ZakatDay support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Over 150 currencies, including USD, GBP, EUR, PKR, INR, AED, SAR, MYR, CAD and AUD, with live exchange rates so you can calculate in your local currency."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="app-body theme min-h-dvh text-foreground">
+    <a
+      href="#calculator"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[500] focus:rounded-lg focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-bold focus:text-slate-900 focus:shadow-lg"
+      >Skip to calculator</a
+    >
+
+    <div class="mx-auto w-full max-w-[34rem] px-3 pb-10 pt-3 sm:px-5 sm:pt-5">
+      <header class="header-bar mb-2">
+        <div class="flex items-center gap-2">
+          <a href="/" id="brandLogo" class="brand-logo-slot" aria-label="ZakatDay home">
+            <span class="brand-logo-slot__mark font-logo text-[1.45rem] leading-none">
+              <span class="text-gradient-solar">Zakat</span
+              ><span class="text-slate-900 dark:text-white">Day</span>
+            </span>
+          </a>
+          <span
+            class="hidden rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[0.56rem] font-extrabold uppercase tracking-wider text-emerald-700 sm:inline-block dark:border-emerald-400/30 dark:text-emerald-300"
+            >Zero storage</span
+          >
+        </div>
+
+        <div class="header-actions">
+          <button
+            type="button"
+            id="currencyTrigger"
+            class="currency-trigger"
+            aria-haspopup="dialog"
+            aria-controls="currencySheet"
+            aria-expanded="false"
+            aria-label="Change currency (currently USD)"
+          >
+            <span id="currencyTriggerFlag" class="emoji-flag text-[0.95rem]" aria-hidden="true">🇺🇸</span>
+            <span id="currencyTriggerCode" class="text-[0.78rem]">USD</span>
+            <span id="currencyTriggerSymbol" class="currency-trigger__symbol" aria-hidden="true">$</span>
+            <span class="material-symbols-outlined text-[1rem] leading-none text-slate-400" aria-hidden="true"
+              >expand_more</span
+            >
+          </button>
+
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="header-icon-btn"
+            aria-label="Switch to dark mode"
+            title="Dark mode"
+          >
+            <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">dark_mode</span>
+          </button>
+
+          <div class="more-menu">
+            <button
+              type="button"
+              id="moreMenuBtn"
+              class="header-icon-btn"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="moreSheet"
+              aria-label="More options"
+            >
+              <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">more_vert</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <p class="app-tagline mb-3 px-0.5 text-[0.74rem] font-semibold leading-snug">
+        Live gold, silver &amp; currency rates — everything is calculated on your device.
+      </p>
+
+      <main id="calculator" class="space-y-3">
+        <!-- ================= Nisab hero ================= -->
+        <section class="section-card fade-in p-3.5 sm:p-4" aria-labelledby="heroTitle">
+          <div class="mb-3 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <h1 id="heroTitle" class="section-heading">Your Zakat</h1>
+              <p class="mt-0.5 text-[0.68rem] font-semibold leading-snug text-slate-500 dark:text-slate-400">
+                Free Zakat calculator — private, live rates, no sign-up
+              </p>
+            </div>
+            <span id="heroCurrencyCode" class="stat-chip font-extrabold text-slate-800 dark:text-slate-100"
+              >USD</span
+            >
+          </div>
+
+          <div class="nisab-toggle mb-3.5" role="group" aria-label="Nisab standard">
+            <button type="button" class="nisab-toggle__btn" data-standard="silver" aria-pressed="true">
+              Silver nisab
+              <small>612.36 g · majority</small>
+            </button>
+            <button type="button" class="nisab-toggle__btn" data-standard="gold" aria-pressed="false">
+              Gold nisab
+              <small>87.48 g</small>
+            </button>
+          </div>
+
+          <p class="mb-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+            Zakat due · 2.5%
+          </p>
+          <p id="zakatAmount" class="zakat-amount mb-3" data-state="none" aria-live="polite">—</p>
+
+          <div
+            id="nisabMeter"
+            class="nisab-meter mb-1.5"
+            data-state="below"
+            role="progressbar"
+            aria-labelledby="nisabMeterLabel"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div id="nisabMeterFill" class="nisab-meter__fill"></div>
+          </div>
+          <p
+            id="nisabMeterLabel"
+            class="text-[0.72rem] font-semibold leading-snug text-slate-500 dark:text-slate-400"
+          >
+            Enter your assets below to see your nisab position.
+          </p>
+
+          <dl class="mt-3 grid grid-cols-2 gap-2">
+            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
+              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Net worth
+              </dt>
+              <dd id="netAssetsValue" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
+                —
+              </dd>
+            </div>
+            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
+              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Nisab value
+              </dt>
+              <dd id="nisabValueText" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
+                —
+              </dd>
+            </div>
+          </dl>
+
+          <!-- WhatsApp receipt: hidden until there is something to send. -->
+          <button
+            type="button"
+            id="whatsappShareBtn"
+            class="btn-whatsapp whatsapp-share-trigger mt-3 w-full"
+            onclick="window.ZakatDay && window.ZakatDay.openWhatsAppShare()"
+            hidden
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+            Send to WhatsApp
+          </button>
+        </section>
+        <!-- ================= Live rates ================= -->
+        <section class="rate-pill relative" aria-label="Live rates">
+          <span class="flex items-center gap-1.5">
+            <span id="ratesDot" class="rate-pill__dot" data-status="loading"></span>
+            <span class="rate-pill__k">Gold /g</span>
+            <span id="goldPerGramText" class="rate-pill__v">…</span>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="rate-pill__k">Silver /g</span>
+            <span id="silverPerGramText" class="rate-pill__v">…</span>
+          </span>
+          <span id="ratesStatusText" class="sr-only" aria-live="polite">Loading live rates</span>
+          <button
+            type="button"
+            id="editRatesBtn"
+            class="rate-edit-btn"
+            aria-expanded="false"
+            aria-controls="rateEditor"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+            Edit
+          </button>
+
+          <div id="rateEditor" class="rate-editor" role="dialog" aria-labelledby="rateEditorTitle" hidden>
+            <p id="rateEditorTitle" class="m-0 text-[0.78rem] font-extrabold text-slate-800 dark:text-slate-100">
+              Manual metal prices
+            </p>
+            <p class="mt-0.5 text-[0.66rem] font-medium leading-snug text-slate-500 dark:text-slate-400">
+              Use this if live feeds are blocked or your local market price differs.
+            </p>
+            <div class="rate-editor__row">
+              <label for="rateGoldInput">24K /g</label>
+              <input
+                id="rateGoldInput"
+                class="money-input"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="0.00"
+                aria-describedby="rateEditorHint"
+              />
+            </div>
+            <div class="rate-editor__row">
+              <label for="rateSilverInput">Silver /g</label>
+              <input
+                id="rateSilverInput"
+                class="money-input"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="0.00"
+              />
+            </div>
+            <p id="rateEditorHint" class="mt-1.5 text-[0.62rem] font-medium leading-snug text-slate-400 dark:text-slate-500">
+              Per gram of fine (24K) gold and fine silver.
+            </p>
+            <div class="rate-editor__actions">
+              <button type="button" id="resetRatesBtn" class="reset-btn">
+                <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                Use live rates
+              </button>
+              <button type="button" id="saveRatesBtn" class="btn-primary !px-3 !py-1.5 !text-[0.74rem]">
+                Save
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= Favourite currencies ================= -->
+        <section aria-label="Favourite currencies">
+          <div class="mb-1.5 flex items-baseline justify-between gap-2 px-0.5">
+            <h2 class="section-heading">Currency</h2>
+            <button
+              type="button"
+              id="manageCurrenciesBtn"
+              class="text-[0.7rem] font-bold text-sky-700 underline-offset-2 hover:underline dark:text-sky-300"
+            >
+              Manage
+            </button>
+          </div>
+          <div id="favPills" class="fav-pills" role="group" aria-label="Switch currency"></div>
+        </section>
+        <!-- ================= Assets ================= -->
+        <section class="space-y-2" aria-labelledby="assetsHeading">
+          <h2 id="assetsHeading" class="section-heading px-0.5 pt-1">Zakatable assets</h2>
+
+          <details class="asset-card" open>
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+              </span>
+              <span class="asset-card__title">
+                Cash &amp; bank
+                <span class="asset-card__hint">Cash at home, bank balances &amp; digital wallets</span>
+              </span>
+              <span id="cashTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="cashHeld">
+                <span class="money-field__label">Cash in hand</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="cashHeld"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="cash"
+                    data-field="held"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="cashBank">
+                <span class="money-field__label">Bank accounts</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="cashBank"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="cash"
+                    data-field="bank"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="cashDigital">
+                <span class="money-field__label">
+                  Digital wallets
+                  <span class="text-[0.62rem] font-medium text-slate-400">optional</span>
+                </span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="cashDigital"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="cash"
+                    data-field="digital"
+                  />
+                </span>
+              </label>
+            </div>
+          </details>
+
+          <details class="asset-card asset-card--metal">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">diamond</span>
+              </span>
+              <span class="asset-card__title">
+                Gold &amp; silver
+                <span class="asset-card__hint">Jewellery, coins &amp; bars — priced at live rates</span>
+              </span>
+              <span id="metalsTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <div class="metal-grid">
+                <label class="money-field" for="goldGrams">
+                  <span class="money-field__label">
+                    Gold
+                    <select id="goldUnit" class="mini-select" aria-label="Gold weight unit">
+                      <option value="g">grams</option>
+                      <option value="tola">tola</option>
+                      <option value="oz">oz</option>
+                    </select>
+                  </span>
+                  <span class="money-field__control">
+                    <input
+                      id="goldGrams"
+                      class="money-input"
+                      type="text"
+                      inputmode="decimal"
+                      autocomplete="off"
+                      spellcheck="false"
+                      placeholder="0"
+                      data-metal="gold"
+                    />
+                  </span>
+                </label>
+                <label class="money-field" for="goldKarat">
+                  <span class="money-field__label">Purity</span>
+                  <span class="money-field__control">
+                    <select id="goldKarat" class="mini-select w-full" data-metal="goldKarat">
+                      <option value="24">24K · 999</option>
+                      <option value="22">22K · 916</option>
+                      <option value="21">21K · 875</option>
+                      <option value="18">18K · 750</option>
+                      <option value="14">14K · 585</option>
+                    </select>
+                  </span>
+                </label>
+              </div>
+
+              <div class="metal-grid">
+                <label class="money-field" for="silverGrams">
+                  <span class="money-field__label">
+                    Silver
+                    <select id="silverUnit" class="mini-select" aria-label="Silver weight unit">
+                      <option value="g">grams</option>
+                      <option value="tola">tola</option>
+                      <option value="oz">oz</option>
+                    </select>
+                  </span>
+                  <span class="money-field__control">
+                    <input
+                      id="silverGrams"
+                      class="money-input"
+                      type="text"
+                      inputmode="decimal"
+                      autocomplete="off"
+                      spellcheck="false"
+                      placeholder="0"
+                      data-metal="silver"
+                    />
+                  </span>
+                </label>
+                <label class="money-field" for="silverPurity">
+                  <span class="money-field__label">Purity</span>
+                  <span class="money-field__control">
+                    <select id="silverPurity" class="mini-select w-full" data-metal="silverPurity">
+                      <option value="1">Fine · 999</option>
+                      <option value="0.958">958</option>
+                      <option value="0.925">Sterling · 925</option>
+                      <option value="0.8">800</option>
+                    </select>
+                  </span>
+                </label>
+              </div>
+
+              <div class="space-y-1">
+                <div class="karat-row">
+                  <span class="karat-row__label">Gold</span>
+                  <span id="goldWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
+                    >0 g fine</span
+                  >
+                  <span id="goldValueText" class="karat-row__value">—</span>
+                </div>
+                <div class="karat-row">
+                  <span class="karat-row__label">Silver</span>
+                  <span id="silverWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
+                    >0 g fine</span
+                  >
+                  <span id="silverValueText" class="karat-row__value">—</span>
+                </div>
+              </div>
+              <p class="inline-note">
+                Nisab uses the fine-metal weight shown above.
+                <a
+                  href="./faq/#gold-silver"
+                  class="font-bold text-sky-700 underline underline-offset-2 dark:text-sky-300"
+                  >How this works →</a
+                >
+              </p>
+            </div>
+          </details>
+
+          <details class="asset-card">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">trending_up</span>
+              </span>
+              <span class="asset-card__title">
+                Investments
+                <span class="asset-card__hint">Shares, funds, crypto &amp; pensions</span>
+              </span>
+              <span id="investmentsTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="invShares">
+                <span class="money-field__label">Shares &amp; funds</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="invShares"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="investments"
+                    data-field="shares"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="invCrypto">
+                <span class="money-field__label">Crypto</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="invCrypto"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="investments"
+                    data-field="crypto"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="invRetirement">
+                <span class="money-field__label">
+                  Retirement / pension
+                  <span class="text-[0.62rem] font-medium text-slate-400">if accessible</span>
+                </span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="invRetirement"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="investments"
+                    data-field="retirement"
+                  />
+                </span>
+              </label>
+            </div>
+          </details>
+
+          <details class="asset-card">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">storefront</span>
+              </span>
+              <span class="asset-card__title">
+                Business assets
+                <span class="asset-card__hint">Sale stock &amp; money owed to you</span>
+              </span>
+              <span id="businessTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="bizStock">
+                <span class="money-field__label">Stock for sale</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="bizStock"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="business"
+                    data-field="stock"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="bizReceivables">
+                <span class="money-field__label">
+                  Receivables
+                  <span class="text-[0.62rem] font-medium text-slate-400">likely to be repaid</span>
+                </span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="bizReceivables"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="business"
+                    data-field="receivables"
+                  />
+                </span>
+              </label>
+            </div>
+          </details>
+
+          <details class="asset-card asset-card--debt">
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">receipt_long</span>
+              </span>
+              <span class="asset-card__title">
+                Debts due now
+                <span class="asset-card__hint">Subtracted from your assets</span>
+              </span>
+              <span id="debtsTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="debtPayable">
+                <span class="money-field__label">Amounts you must pay</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="debtPayable"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="debts"
+                    data-field="payable"
+                  />
+                </span>
+              </label>
+              <p class="inline-note">
+                Include loans and bills due immediately. Long-term instalments are usually
+                deducted only for the coming year — ask a scholar about your situation.
+              </p>
+            </div>
+          </details>
+        </section>
+
+        <section id="howItWorks" class="how-it-works" aria-labelledby="howItWorksHeading">
+          <h2 id="howItWorksHeading" class="how-it-works__heading">How ZakatDay works</h2>
+          <p class="how-it-works__lede">
+            ZakatDay is a free, ad-free Zakat calculator for Muslims in the US, UK, Pakistan, UAE,
+            Saudi Arabia, Malaysia, Canada, India, Australia and the EU. Enter your wealth in your
+            own currency and it works out 2.5% of your net zakatable assets — entirely on your
+            device.
+          </p>
+
+          <dl class="how-it-works__list">
+            <div class="how-it-works__item">
+              <dt>Nisab in grams and tolas</dt>
+              <dd>
+                Zakat becomes due once your wealth reaches the nisab: 612.36&nbsp;g of silver
+                (52.5&nbsp;tola) or 87.48&nbsp;g of gold (7.5&nbsp;tola). ZakatDay multiplies that
+                weight by the live price per gram of the metal you pick, so the threshold
+                updates with the market instead of a fixed figure.
+              </dd>
+            </div>
+            <div class="how-it-works__item">
+              <dt>2.5% over one lunar year</dt>
+              <dd>
+                The zakat rate is 2.5% (1/40) of the wealth you have held for a full hawl — one
+                lunar year. The calculator applies that rate to your net assets, after debts.
+              </dd>
+            </div>
+            <div class="how-it-works__item">
+              <dt>Karat, tola and troy ounce support</dt>
+              <dd>
+                Market prices quote fine 24K gold, so a 22K item weighing 10&nbsp;g holds only
+                9.17&nbsp;g of pure gold. Enter jewellery by weight in grams, tola or troy ounces
+                and choose 14K, 18K, 21K, 22K or 24K — ZakatDay converts to fine metal before
+                valuing it.
+              </dd>
+            </div>
+            <div class="how-it-works__item">
+              <dt>150+ currencies, live rates</dt>
+              <dd>
+                Work in USD, GBP, EUR, PKR, INR, AED, SAR, MYR, CAD, AUD and more than 140 other
+                currencies. Switching currency converts your amounts with live cross-rates rather
+                than resetting what you typed.
+              </dd>
+            </div>
+            <div class="how-it-works__item">
+              <dt>Zero storage, zero sign-up</dt>
+              <dd>
+                No account, no cookies carrying your figures, no database. Amounts live only in
+                this tab's memory and disappear when you close it. Preferred standard and currency
+                are the only saved settings.
+              </dd>
+            </div>
+          </dl>
+
+          <p class="how-it-works__links">
+            <a href="./faq/" class="footer-link">Full Zakat guide &amp; FAQ</a>
+            <span aria-hidden="true">·</span>
+            <a href="./faq/#gold-silver" class="footer-link">Gold &amp; silver rules</a>
+            <span aria-hidden="true">·</span>
+            <a href="./faq/#privacy" class="footer-link">Privacy details</a>
+          </p>
+        </section>
+
+        <!-- ================= Breakdown ================= -->
+        <section class="section-card p-3.5 sm:p-4" aria-labelledby="breakdownHeading">
+          <div class="mb-2 flex items-center justify-between gap-2">
+            <h2 id="breakdownHeading" class="section-heading">Where your wealth sits</h2>
+            <span
+              id="breakdownTotal"
+              class="text-[0.72rem] font-extrabold tabular-nums text-slate-700 dark:text-slate-200"
+              >—</span
+            >
+          </div>
+          <div class="breakdown-bar" role="img" aria-labelledby="breakdownLegendTitle">
+            <span id="segCash" class="breakdown-bar__seg breakdown-bar__seg--cash" style="width: 0%"></span>
+            <span id="segMetals" class="breakdown-bar__seg breakdown-bar__seg--metals" style="width: 0%"></span>
+            <span
+              id="segInvestments"
+              class="breakdown-bar__seg breakdown-bar__seg--investments"
+              style="width: 0%"
+            ></span>
+            <span
+              id="segBusiness"
+              class="breakdown-bar__seg breakdown-bar__seg--business"
+              style="width: 0%"
+            ></span>
+            <span id="segDebts" class="breakdown-bar__seg breakdown-bar__seg--debts" style="width: 0%"></span>
+          </div>
+          <p id="breakdownLegendTitle" class="sr-only">Share of gross assets by category</p>
+          <div class="breakdown-legend">
+            <span><span class="breakdown-legend__dot" style="background: #0ea5e9"></span>Cash</span>
+            <span><span class="breakdown-legend__dot" style="background: #d99c1f"></span>Gold &amp; silver</span>
+            <span><span class="breakdown-legend__dot" style="background: #6366f1"></span>Investments</span>
+            <span><span class="breakdown-legend__dot" style="background: #14b8a6"></span>Business</span>
+            <span><span class="breakdown-legend__dot" style="background: #f43f5e"></span>Debts</span>
+          </div>
+        </section>
+
+        <!-- ================= Actions ================= -->
+        <section class="space-y-2" aria-label="Actions">
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              id="shareSummaryBtn"
+              class="btn-primary"
+              onclick="window.ZakatDay && window.ZakatDay.openSummary()"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">share</span>
+              Share summary
+            </button>
+            <button
+              type="button"
+              id="whatsappBtn"
+              class="btn-whatsapp"
+              onclick="window.ZakatDay && window.ZakatDay.shareWhatsApp()"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+              WhatsApp
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 px-0.5 pt-1">
+            <span class="privacy-badge">
+              <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+              <span>Nothing you type is sent or saved — no accounts, no cookies.</span>
+            </span>
+            <button type="button" id="resetBtn" class="reset-btn" data-confirm="false">
+              <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
+              <span id="resetBtnLabel">Reset</span>
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 px-2 text-[0.7rem] text-slate-500 dark:text-slate-400">
+        <a href="./faq/" class="footer-link !text-[0.75rem]">Zakat guide &amp; FAQ</a>
+        <span aria-hidden="true">·</span>
+        <a href="./faq/#privacy" class="footer-link !text-[0.75rem]">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <button type="button" id="feedbackBtn" class="footer-link !text-[0.75rem]">Feedback</button>
+        <span class="w-full text-center">© <span id="footerYear">2026</span> ZakatDay — estimates only; verify with a scholar.</span>
+      </footer>
+    </div>
+
+    <!-- ================= Bottom sheet: more menu ================= -->
+    <div
+      id="moreSheet"
+      class="more-sheet"
+      data-open="false"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="moreSheetTitle"
+      hidden
+    >
+      <button type="button" class="more-sheet__backdrop" data-sheet-close aria-label="Close menu"></button>
+      <div class="more-sheet__panel">
+        <div class="more-sheet__grab" data-sheet-drag aria-hidden="true">
+          <span class="more-sheet__handle"></span>
+        </div>
+        <div class="more-sheet__body">
+          <h2 id="moreSheetTitle" class="more-sheet__title">More</h2>
+
+          <button type="button" class="more-menu-item" data-more-action="currency">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">payments</span>
+            </span>
+            <span class="more-menu-item__label">Currency</span>
+            <span id="moreCurrencyValue" class="text-[0.76rem] font-bold text-slate-400 dark:text-slate-500"
+              >USD</span
+            >
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="rates">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">monitoring</span>
+            </span>
+            <span class="more-menu-item__label">Refresh live rates</span>
+            <span id="moreRatesDot" class="more-menu-item__dot" aria-hidden="true"></span>
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="theme">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">contrast</span>
+            </span>
+            <span class="more-menu-item__label">Toggle dark mode</span>
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="summary">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">receipt_long</span>
+            </span>
+            <span class="more-menu-item__label">View full summary</span>
+          </button>
+
+          <button type="button" class="more-menu-item" data-more-action="latest">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">auto_awesome</span>
+            </span>
+            <span class="more-menu-item__label">What's new</span>
+          </button>
+
+          <a class="more-menu-item" href="./faq/">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">menu_book</span>
+            </span>
+            <span class="more-menu-item__label">Zakat guide &amp; FAQ</span>
+          </a>
+
+          <button type="button" class="more-menu-item" data-more-action="feedback">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">mail</span>
+            </span>
+            <span class="more-menu-item__label">Send feedback</span>
+          </button>
+
+          <div class="more-menu-meta">
+            <p>
+              <strong class="text-slate-600 dark:text-slate-300">Zero-storage by design.</strong>
+              Your amounts are never transmitted, logged or written to this device. Only your
+              theme, currency and pinned currencies are remembered.
+            </p>
+            <p class="mt-1.5">ZakatDay · v2.0 · <a href="./faq/#privacy" class="underline underline-offset-2">Privacy</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= Bottom sheet: currency picker ================= -->
+    <div
+      id="currencySheet"
+      class="more-sheet"
+      data-open="false"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="currencySheetTitle"
+      hidden
+    >
+      <button type="button" class="more-sheet__backdrop" data-sheet-close aria-label="Close currency picker"></button>
+      <div class="more-sheet__panel">
+        <div class="more-sheet__grab" data-sheet-drag aria-hidden="true">
+          <span class="more-sheet__handle"></span>
+        </div>
+        <div class="more-sheet__body">
+          <h2 id="currencySheetTitle" class="more-sheet__title">Choose currency</h2>
+          <label class="picker-search mt-2 block" for="currencySearch">
+            <span class="material-symbols-outlined" aria-hidden="true">search</span>
+            <input
+              id="currencySearch"
+              type="search"
+              placeholder="Search 150+ currencies…"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Search currencies"
+            />
+          </label>
+          <div id="currencyList" class="pb-1" role="listbox" aria-labelledby="currencySheetTitle"></div>
+          <div class="picker-footer">
+            <label class="picker-footer__toggle">
+              <input type="checkbox" id="pinCurrentToggle" />
+              Pin current currency to the top row
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= Toast ================= -->
+    <div id="saveToast" class="save-toast" role="status" aria-live="polite" hidden>
+      <span id="saveToastText"></span>
+      <button type="button" id="saveToastAction" class="save-toast__action" hidden>Undo</button>
+    </div>
+
+    <!-- ================= Modal: what's new ================= -->
+    <div
+      id="updatesModal"
+      class="updates-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="updatesTitle"
+      hidden
+    >
+      <button type="button" class="updates-modal__backdrop" data-updates-close aria-label="Close"></button>
+      <div class="updates-modal__sheet">
+        <div class="updates-modal__header">
+          <h2 id="updatesTitle" class="updates-modal__title">What's new in ZakatDay</h2>
+          <button type="button" class="header-icon-btn" data-updates-close aria-label="Close">
+            <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">close</span>
+          </button>
+        </div>
+        <div class="updates-modal__cards">
+          <div class="updates-card updates-card--fade-in">
+            <span class="updates-card__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">lock</span>
+            </span>
+            <div class="updates-card__body">
+              <h3>Zero storage, for real</h3>
+              <p>
+                Amounts live only in this tab's memory. No database, no cookies, no analytics
+                events carrying your figures — close the tab and it is gone.
+              </p>
+            </div>
+          </div>
+          <div class="updates-card updates-card--fade-in">
+            <span class="updates-card__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">monitoring</span>
+            </span>
+            <div class="updates-card__body">
+              <h3>Live gold, silver &amp; FX</h3>
+              <p>
+                Nisab auto-prices from live metal rates in 150+ currencies, with manual
+                override whenever your local market differs.
+              </p>
+            </div>
+          </div>
+          <div class="updates-card updates-card--fade-in">
+            <span class="updates-card__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">diamond</span>
+            </span>
+            <div class="updates-card__body">
+              <h3>Grams, tola or ounces</h3>
+              <p>
+                Enter jewellery by weight and karat. Pure-metal weight drives both the value and
+                the nisab comparison.
+              </p>
+            </div>
+          </div>
+          <div class="updates-card updates-card--fade-in">
+            <span class="updates-card__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">payments</span>
+            </span>
+            <div class="updates-card__body">
+              <h3>Pinned currencies</h3>
+              <p>
+                Pin up to six currencies. Switching currency converts every amount with live
+                cross-rates instead of resetting your work.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="updates-modal__footer">
+          <button type="button" class="updates-modal__got-it" data-updates-close>Got it</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= Modal: summary ================= -->
+    <div
+      id="summaryModal"
+      class="updates-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="summaryTitle"
+      hidden
+    >
+      <button type="button" class="updates-modal__backdrop" data-summary-close aria-label="Close summary"></button>
+      <div class="updates-modal__sheet">
+        <div class="updates-modal__header">
+          <h2 id="summaryTitle" class="updates-modal__title">Your Zakat summary</h2>
+          <button type="button" class="header-icon-btn" data-summary-close aria-label="Close">
+            <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">close</span>
+          </button>
+        </div>
+        <div class="updates-modal__cards">
+          <pre id="summaryText" class="summary-pre" tabindex="0"></pre>
+          <label class="summary-option">
+            <input type="checkbox" id="summaryWithCode" />
+            Append the currency code after each amount
+          </label>
+        </div>
+        <div class="updates-modal__footer">
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" id="copySummaryBtn" class="btn-secondary">
+              <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+              Copy
+            </button>
+            <button type="button" id="summaryWhatsappBtn" class="btn-whatsapp">
+              <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+              WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= Modal: WhatsApp receipt ================= -->
+    <div
+      id="whatsappShareModal"
+      class="updates-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="whatsappShareTitle"
+      hidden
+    >
+      <button
+        type="button"
+        class="updates-modal__backdrop"
+        data-whatsapp-share-close
+        aria-label="Close share preview"
+      ></button>
+      <div class="updates-modal__sheet">
+        <div class="updates-modal__header">
+          <h2 id="whatsappShareTitle" class="updates-modal__title">Send to my WhatsApp</h2>
+          <button type="button" class="header-icon-btn" data-whatsapp-share-close aria-label="Close">
+            <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">close</span>
+          </button>
+        </div>
+
+        <div class="updates-modal__cards">
+          <fieldset class="share-privacy">
+            <legend class="share-privacy__legend">What to include</legend>
+            <label class="share-privacy__option" for="shareModeItemized">
+              <input type="radio" id="shareModeItemized" name="sharePrivacy" value="itemized" checked />
+              <span>
+                Include itemized breakdown
+                <small>Cash, metals, investments, business and debts — each figure shown.</small>
+              </span>
+            </label>
+            <label class="share-privacy__option" for="shareModeTotals">
+              <input type="radio" id="shareModeTotals" name="sharePrivacy" value="totals" />
+              <span>
+                Total Zakat &amp; Nisab only
+                <small>Hide asset figures — only the nisab and the amount due are shown.</small>
+              </span>
+            </label>
+          </fieldset>
+
+          <!-- Preview / capture target. Everything inside is rebuilt by app.js. -->
+          <div class="share-capture-host">
+            <div id="zakatShareCaptureRoot" class="share-card" data-theme="light" aria-hidden="true">
+              <div class="share-card__head">
+                <span class="receipt-brand-slot">
+                  <span class="receipt-brand-slot__mark"
+                    ><span class="text-gradient-solar">Zakat</span
+                    ><span class="share-card__brand-rest">Day</span></span
+                  >
+                </span>
+                <span id="shareCardDate" class="share-card__date">—</span>
+              </div>
+
+              <div class="share-card__meta">
+                <span id="shareCardCurrency" class="share-card__chip">USD</span>
+                <span id="shareCardStandard" class="share-card__chip">Silver nisab</span>
+              </div>
+
+              <dl id="shareCardBreakdown" class="share-card__rows">
+                <div class="share-card__row">
+                  <dt>Cash &amp; bank</dt>
+                  <dd id="shareCardCash">—</dd>
+                </div>
+                <div class="share-card__row">
+                  <dt>Gold &amp; silver</dt>
+                  <dd id="shareCardMetals">—</dd>
+                </div>
+                <div class="share-card__row">
+                  <dt>Investments</dt>
+                  <dd id="shareCardInvestments">—</dd>
+                </div>
+                <div class="share-card__row">
+                  <dt>Business assets</dt>
+                  <dd id="shareCardBusiness">—</dd>
+                </div>
+                <div class="share-card__row">
+                  <dt>Less debts</dt>
+                  <dd id="shareCardDebts">—</dd>
+                </div>
+                <div class="share-card__row share-card__row--total">
+                  <dt>Net zakatable</dt>
+                  <dd id="shareCardNet">—</dd>
+                </div>
+              </dl>
+
+              <p id="shareCardTotalsNote" class="share-card__note" hidden>
+                Asset figures hidden — this receipt shows the nisab and the total due only.
+              </p>
+
+              <div class="share-card__due">
+                <p class="share-card__due-label">Total Zakat due · 2.5%</p>
+                <p id="shareCardZakat" class="share-card__amount tabular-nums">—</p>
+                <p id="shareCardStatus" class="share-card__status">—</p>
+                <p class="share-card__nisab-line">
+                  Nisab (<span id="shareCardNisabStandard">silver</span>):
+                  <span id="shareCardNisab" class="tabular-nums">—</span>
+                </p>
+              </div>
+
+              <p class="share-card__foot">
+                zakatday.cc · estimate only — verify with a qualified scholar
+              </p>
+            </div>
+          </div>
+
+          <p class="share-hint">
+            <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+            <span
+              >The receipt is generated on your device and handed straight to WhatsApp. Nothing is
+              uploaded or saved.</span
+            >
+          </p>
+          <p id="whatsappShareStatus" class="share-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="updates-modal__footer">
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" class="btn-secondary" data-whatsapp-share-close>Cancel</button>
+            <button type="button" id="whatsappShareSend" class="btn-whatsapp">
+              <span class="material-symbols-outlined" aria-hidden="true">send</span>
+              <span id="whatsappShareSendLabel">Generate &amp; share</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./currency-service.js"></script>
+    <script src="./zakat-engine.js"></script>
+    <script src="./theme.js"></script>
+    <!-- Pinned rasteriser for the WhatsApp receipt image (lazy CDN asset). -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"
+      integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="./app.js"></script>
   </body>
 </html>

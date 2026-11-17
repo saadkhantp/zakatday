@@ -1,0 +1,39 @@
+
+    <!-- ================= Bottom sheet: currency picker ================= -->
+    <div
+      id="currencySheet"
+      class="more-sheet"
+      data-open="false"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="currencySheetTitle"
+      hidden
+    >
+      <button type="button" class="more-sheet__backdrop" data-sheet-close aria-label="Close currency picker"></button>
+      <div class="more-sheet__panel">
+        <div class="more-sheet__grab" data-sheet-drag aria-hidden="true">
+          <span class="more-sheet__handle"></span>
+        </div>
+        <div class="more-sheet__body">
+          <h2 id="currencySheetTitle" class="more-sheet__title">Choose currency</h2>
+          <label class="picker-search mt-2 block" for="currencySearch">
+            <span class="material-symbols-outlined" aria-hidden="true">search</span>
+            <input
+              id="currencySearch"
+              type="search"
+              placeholder="Search 150+ currencies…"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Search currencies"
+            />
+          </label>
+          <div id="currencyList" class="pb-1" role="listbox" aria-labelledby="currencySheetTitle"></div>
+          <div class="picker-footer">
+            <label class="picker-footer__toggle">
+              <input type="checkbox" id="pinCurrentToggle" />
+              Pin current currency to the top row
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>

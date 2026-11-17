@@ -1,0 +1,1103 @@
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  html {
+    @apply font-sans antialiased;
+    font-family: "Mulish", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .theme {
+    --font-heading: var(--font-sans);
+    --font-sans: "Mulish", sans-serif;
+  }
+
+  body {
+    @apply text-foreground antialiased;
+    font-family: "Mulish", sans-serif;
+  }
+
+  .app-body {
+    /* The gradient is painted on the root so it covers the full document
+       instead of just the viewport when the page scrolls. */
+    background-color: hsl(var(--app-bg-bottom));
+  }
+
+  html {
+    background: radial-gradient(
+      ellipse 120% 60% at 50% 0%,
+      hsl(var(--app-bg-top)),
+      hsl(var(--app-bg-bottom)) 70%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Money / weights never jitter while typing */
+  .money-input,
+  .tabular-nums,
+  output {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :focus-visible {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  /* Plain CSS (not @apply) so cssnano never inlines it away — the markup uses
+     this class directly on every card. */
+  .glass-card {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(14 165 233 / 0.25);
+    background-color: rgb(255 255 255 / 0.85);
+    box-shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .dark .glass-card {
+    border-color: rgb(14 165 233 / 0.2);
+    background-color: rgb(255 255 255 / 0.05);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+  }
+
+  /* Plain CSS: cssnano inlines @apply-only rules, and the markup uses these classes. */
+  .font-logo {
+    font-family: "Mulish", sans-serif;
+    font-weight: 1000;
+    font-variation-settings: "wght" 1000;
+    letter-spacing: -0.02em;
+  }
+
+  .app-tagline {
+    color: #64748b;
+  }
+
+  .dark .app-tagline {
+    color: #ffb834;
+  }
+
+  /* Brand gradient: #00B0FF → #008AC8 with a #09DD97 accent in the corner. */
+  .text-gradient-solar {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image:
+      radial-gradient(
+        ellipse 26% 36% at 100% 100%,
+        #09dd97 0%,
+        transparent 68%
+      ),
+      linear-gradient(112deg, #00b0ff 0%, #008ac8 82%);
+  }
+
+  .text-gradient-zakat {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(112deg, #09dd97 0%, #10b981 70%);
+  }
+
+  .emoji-flag {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
+      sans-serif;
+    line-height: 1;
+  }
+
+  .disabled {
+    @apply pointer-events-none opacity-40;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+
+@layer components {
+  /* ---------- Header ---------- */
+  .header-bar {
+    @apply flex items-center justify-between gap-3;
+  }
+
+  .header-actions {
+    @apply flex shrink-0 items-center gap-2 overflow-visible sm:gap-2.5;
+  }
+
+  .header-icon-btn {
+    @apply relative inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-transparent bg-transparent p-0 text-slate-600 transition-[color,background-color,border-color,transform] duration-ui ease-smooth hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 dark:text-slate-300/90 dark:hover:bg-white/10 dark:hover:text-slate-100 dark:focus-visible:ring-sky-400/40;
+  }
+
+  .header-icon-btn__glyph {
+    @apply text-[1.25rem] leading-none;
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 20;
+  }
+
+  /** Currency trigger in the header (flag/ISO + symbol) */
+  .currency-trigger {
+    @apply inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-300/70 bg-white/80 px-2.5 text-[0.8rem] font-bold leading-none text-slate-800 backdrop-blur-md transition-[border-color,box-shadow,background-color] duration-200 ease-smooth hover:border-slate-400/80 hover:bg-white focus-visible:border-sky-500/80 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky-500/25 dark:border-slate-400/35 dark:bg-slate-950/65 dark:text-slate-100 dark:hover:border-slate-400/55 dark:hover:bg-slate-950/80;
+  }
+
+  .emoji-flag {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
+      sans-serif;
+    @apply leading-none;
+  }
+
+  .currency-trigger__symbol {
+    @apply text-[0.72rem] font-semibold text-slate-500 dark:text-slate-400;
+  }
+
+  /* ---------- Cards & section chrome ---------- */
+  .section-card {
+    @apply glass-card rounded-2xl;
+  }
+
+  .section-heading {
+    @apply text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400;
+  }
+}
+
+@layer components {
+  /* ---------- Nisab hero ---------- */
+  .nisab-toggle {
+    @apply inline-flex w-full items-center gap-1 rounded-xl border border-slate-200/80 bg-slate-100/70 p-1 dark:border-white/10 dark:bg-white/5;
+  }
+
+  .nisab-toggle__btn {
+    @apply flex-1 cursor-pointer rounded-lg border border-transparent px-2.5 py-2 text-center text-[0.78rem] font-bold leading-tight text-slate-600 transition-[colors,box-shadow,background-color] duration-ui ease-smooth hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 dark:text-slate-300 dark:hover:text-white;
+  }
+
+  .nisab-toggle__btn[aria-pressed="true"] {
+    @apply border-slate-200/90 bg-white text-slate-900 shadow-sm dark:border-white/15 dark:bg-white/15 dark:text-white;
+  }
+
+  .nisab-toggle__btn small {
+    @apply mt-0.5 block text-[0.62rem] font-semibold uppercase tracking-wide opacity-70;
+  }
+
+  .nisab-meter {
+    @apply relative h-2.5 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-white/10;
+  }
+
+  .nisab-meter__fill {
+    @apply absolute inset-y-0 left-0 rounded-full transition-[width,background-color,box-shadow] duration-500 ease-smooth;
+    width: 0;
+    background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+  }
+
+  .nisab-meter[data-state="due"] .nisab-meter__fill {
+    background: linear-gradient(90deg, #09dd97 0%, #10b981 100%);
+    box-shadow: 0 0 14px 1px rgba(9, 221, 151, 0.55);
+  }
+
+  .zakat-amount {
+    @apply font-logo text-[2.4rem] leading-none tracking-tight tabular-nums text-slate-400 transition-colors duration-ui ease-smooth sm:text-[2.9rem] dark:text-slate-500;
+  }
+
+  .zakat-amount[data-state="due"] {
+    @apply text-gradient-zakat;
+  }
+
+  /* ---------- Privacy ---------- */
+  .privacy-badge {
+    @apply inline-flex items-start gap-1.5 rounded-lg border border-emerald-500/25 bg-emerald-500/5 px-2.5 py-1.5 text-[0.68rem] font-semibold leading-snug text-emerald-800 dark:border-emerald-400/25 dark:bg-emerald-500/10 dark:text-emerald-200;
+  }
+
+  .privacy-badge .material-symbols-outlined {
+    @apply text-[0.95rem] leading-none;
+  }
+
+  .reset-btn {
+    @apply inline-flex items-center gap-1 rounded-lg border border-slate-300/80 bg-white/80 px-2.5 py-1.5 text-[0.72rem] font-bold text-slate-600 transition-[colors,background-color,border-color] duration-ui ease-smooth hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400/50 dark:border-white/15 dark:bg-white/5 dark:text-slate-300 dark:hover:border-rose-400/40 dark:hover:bg-rose-500/15 dark:hover:text-rose-200;
+  }
+
+  .reset-btn[data-confirm="true"] {
+    @apply border-rose-500/60 bg-rose-500 text-white hover:bg-rose-600 hover:text-white dark:border-rose-400/60 dark:bg-rose-500 dark:text-white;
+  }
+
+  .reset-btn .material-symbols-outlined {
+    @apply text-[0.95rem] leading-none;
+  }
+
+  /* ---------- Favorite currency pills ---------- */
+  .fav-pills {
+    @apply flex snap-x gap-1.5 overflow-x-auto pb-1;
+    scrollbar-width: none;
+  }
+
+  .fav-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fav-pill {
+    @apply inline-flex shrink-0 snap-start items-center gap-1.5 rounded-full border border-slate-300/70 bg-white/80 px-3 py-1.5 text-[0.75rem] font-bold text-slate-700 backdrop-blur-md transition-[colors,background-color,border-color,transform] duration-ui ease-smooth hover:-translate-y-px hover:border-sky-400/60 hover:text-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:border-sky-400/40 dark:hover:text-sky-100;
+  }
+
+  .fav-pill[aria-pressed="true"] {
+    @apply border-sky-500/60 bg-sky-500/15 text-sky-900 ring-1 ring-sky-500/30 dark:border-sky-400/50 dark:bg-sky-400/15 dark:text-sky-100;
+  }
+}
+
+
+
+@layer components {
+  /* ---------- Live rate pill ---------- */
+  .rate-pill {
+    @apply flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-slate-200/80 bg-white/70 px-3 py-2 text-[0.72rem] font-semibold text-slate-600 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300;
+  }
+
+  .rate-pill__k {
+    @apply mr-1 text-[0.62rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500;
+  }
+
+  .rate-pill__v {
+    @apply tabular-nums text-slate-800 dark:text-slate-100;
+  }
+
+  .rate-pill__dot {
+    @apply inline-block size-1.5 rounded-full bg-slate-400;
+  }
+
+  .rate-pill__dot[data-status="live"] {
+    @apply bg-emerald-500;
+  }
+
+  .rate-pill__dot[data-status="cached"],
+  .rate-pill__dot[data-status="loading"] {
+    @apply bg-amber-500;
+  }
+
+  .rate-pill__dot[data-status="offline"],
+  .rate-pill__dot[data-status="error"] {
+    @apply bg-rose-500;
+  }
+
+  .rate-pill__dot[data-status="override"] {
+    @apply bg-sky-500;
+  }
+
+  .rate-edit-btn {
+    @apply ml-auto inline-flex items-center gap-1 rounded-md border-0 bg-transparent px-1.5 py-0.5 text-[0.7rem] font-bold text-sky-700 transition hover:bg-sky-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 dark:text-sky-300 dark:hover:bg-sky-400/10;
+  }
+
+  .rate-edit-btn .material-symbols-outlined {
+    @apply text-[0.9rem] leading-none;
+  }
+
+  /* ---------- Money inputs ---------- */
+  .money-field {
+    @apply block;
+  }
+
+  .money-field__label {
+    @apply mb-1 flex items-center justify-between gap-2 text-[0.78rem] font-semibold text-slate-600 dark:text-slate-300;
+  }
+
+  .money-field__control {
+    @apply relative flex items-center;
+  }
+
+  .money-field__prefix,
+  .money-field__suffix {
+    @apply pointer-events-none absolute z-[1] text-[0.78rem] font-bold text-slate-400 dark:text-slate-500;
+  }
+
+  .money-field__prefix {
+    @apply left-2.5;
+  }
+
+  .money-field__suffix {
+    @apply right-3;
+  }
+
+  .money-input {
+    @apply w-full rounded-lg border border-slate-200/90 bg-white/90 py-2 pl-2.5 pr-2.5 text-[0.95rem] font-semibold tabular-nums text-slate-900 shadow-none transition-[border-color,box-shadow,background-color] duration-200 ease-smooth placeholder:font-normal placeholder:text-slate-400 focus-visible:border-sky-500/80 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky-500/20 dark:border-white/10 dark:bg-slate-950/50 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus-visible:border-sky-400/70;
+  }
+
+  .money-input--prefix {
+    @apply pl-8;
+  }
+
+  .money-input--suffix {
+    @apply pr-14;
+  }
+
+  .mini-select {
+    @apply cursor-pointer rounded-lg border border-slate-200/90 bg-white/90 px-2 py-2 text-[0.78rem] font-bold text-slate-700 transition-colors hover:border-slate-300 focus-visible:border-sky-500/80 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky-500/20 dark:border-white/10 dark:bg-slate-950/50 dark:text-slate-200;
+  }
+
+  .inline-note {
+    @apply text-[0.68rem] font-medium leading-relaxed text-slate-500 dark:text-slate-400;
+  }
+
+  .metal-grid {
+    @apply grid grid-cols-2 gap-2;
+  }
+
+  .karat-row {
+    @apply grid grid-cols-[3.2rem_1fr_auto] items-center gap-2 rounded-lg bg-slate-100/60 px-2 py-1.5 dark:bg-white/5;
+  }
+
+  .karat-row__label {
+    @apply text-[0.72rem] font-extrabold text-slate-600 dark:text-slate-300;
+  }
+
+  .karat-row__value {
+    @apply whitespace-nowrap text-right text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400;
+  }
+}
+
+@layer components {
+  /* ---------- Asset accordions ---------- */
+  .asset-card {
+    @apply glass-card overflow-hidden rounded-2xl transition-colors duration-ui ease-smooth;
+  }
+
+  .asset-card__summary {
+    @apply flex cursor-pointer list-none items-center gap-3 px-3.5 py-3.5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-500/40 sm:px-4;
+  }
+
+  .asset-card__icon {
+    @apply grid size-9 shrink-0 place-items-center rounded-xl bg-solar-blue-500/10 text-solar-blue-700 dark:bg-solar-blue-400/15 dark:text-solar-blue-200;
+  }
+
+  .asset-card__icon .material-symbols-outlined {
+    @apply text-[1.15rem] leading-none;
+  }
+
+  .asset-card__title {
+    @apply min-w-0 flex-1 text-[0.9rem] font-bold leading-tight text-slate-800 dark:text-slate-100;
+  }
+
+  .asset-card__hint {
+    @apply mt-0.5 block text-[0.68rem] font-medium leading-snug text-slate-500 dark:text-slate-400;
+  }
+
+  .asset-card__total {
+    @apply shrink-0 text-right text-[0.82rem] font-bold tabular-nums text-slate-700 dark:text-slate-200;
+  }
+
+  .asset-card__chev {
+    @apply shrink-0 text-[1.1rem] leading-none text-slate-400 transition-transform duration-200 ease-smooth;
+  }
+
+  .asset-card[open] .asset-card__chev {
+    @apply rotate-180;
+  }
+
+  .asset-card__body {
+    @apply space-y-3 border-t border-slate-200/70 px-3.5 pb-4 pt-3.5 sm:px-4 dark:border-white/10;
+  }
+
+  .asset-card--debt .asset-card__icon {
+    @apply bg-rose-500/10 text-rose-600 dark:bg-rose-400/15 dark:text-rose-300;
+  }
+
+  .asset-card--debt .asset-card__total {
+    @apply text-rose-600 dark:text-rose-300;
+  }
+
+  .asset-card--metal .asset-card__icon {
+    @apply bg-solar-gold/15 text-[#a97a12] dark:bg-solar-gold/20 dark:text-solar-gold;
+  }
+
+  /* ---------- Breakdown bar ---------- */
+  .breakdown-bar {
+    @apply flex h-3 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-white/10;
+  }
+
+  .breakdown-bar__seg {
+    @apply h-full transition-[width] duration-500 ease-smooth;
+  }
+
+  .breakdown-bar__seg--cash {
+    background: #0ea5e9;
+  }
+
+  .breakdown-bar__seg--metals {
+    background: #d99c1f;
+  }
+
+  .breakdown-bar__seg--investments {
+    background: #6366f1;
+  }
+
+  .breakdown-bar__seg--business {
+    background: #14b8a6;
+  }
+
+  .breakdown-bar__seg--debts {
+    background: #f43f5e;
+  }
+
+  .breakdown-legend {
+    @apply mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] font-semibold text-slate-600 dark:text-slate-300;
+  }
+
+  .breakdown-legend__dot {
+    @apply mr-1 inline-block size-2 rounded-full align-middle;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-transparent bg-gradient-to-br from-sky-500 to-sky-600 px-4 py-2.5 text-[0.85rem] font-bold text-white shadow-sm transition-[background-color,transform,box-shadow] duration-ui ease-smooth hover:from-sky-600 hover:to-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-px dark:focus-visible:ring-offset-slate-950;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300/80 bg-white/80 px-3.5 py-2.5 text-[0.82rem] font-bold text-slate-700 transition-[colors,background-color,border-color] duration-ui ease-smooth hover:border-slate-400/70 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/25 dark:hover:bg-white/10;
+  }
+
+  /** Same greens as ayahday ResultsSidebar WhatsApp CTA */
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-xl border border-transparent bg-[#075E54] px-3.5 py-2.5 text-[0.82rem] font-bold text-white transition-[colors,background-color] duration-ui ease-smooth hover:bg-[#0d8073] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 active:bg-[#054942];
+  }
+
+  .btn-primary .material-symbols-outlined,
+  .btn-secondary .material-symbols-outlined,
+  .btn-whatsapp .material-symbols-outlined {
+    @apply text-[1.05rem] leading-none;
+  }
+
+  .footer-link {
+    @apply cursor-pointer border-0 bg-transparent text-sm text-slate-600 underline underline-offset-2 transition hover:text-cyan-700 dark:text-slate-300 dark:hover:text-cyan-200;
+  }
+
+  .stat-chip {
+    @apply rounded-lg border border-slate-200/80 bg-white/70 px-2.5 py-1.5 text-[0.72rem] font-semibold text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300;
+  }
+
+  .stat-chip strong {
+    @apply tabular-nums text-slate-900 dark:text-slate-50;
+  }
+}
+
+
+@layer components {
+  /* ---------- Bottom sheets (AyahDay more-sheet pattern) ---------- */
+  .more-menu {
+    @apply relative;
+  }
+
+  .more-sheet {
+    @apply fixed inset-0 z-[80];
+  }
+
+  .more-sheet[hidden] {
+    display: none !important;
+  }
+
+  .more-sheet__backdrop {
+    @apply absolute inset-0 border-0 bg-slate-900/45 p-0 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 ease-smooth dark:bg-slate-950/70;
+  }
+
+  .more-sheet[data-open="true"] .more-sheet__backdrop {
+    @apply opacity-100;
+  }
+
+  .more-sheet__panel {
+    @apply absolute inset-x-0 bottom-0 mx-auto flex w-full max-w-lg flex-col overflow-hidden rounded-t-3xl border border-b-0 border-slate-200/80 bg-white/95 shadow-[0_-16px_48px_rgba(15,23,42,0.18)] backdrop-blur-md dark:border-white/15 dark:bg-slate-900/95 dark:shadow-[0_-16px_48px_rgba(0,0,0,0.5)];
+    max-height: min(82dvh, 38rem);
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    transform: translateY(110%);
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    touch-action: none;
+    user-select: none;
+  }
+
+  .more-sheet[data-open="true"] .more-sheet__panel {
+    transform: translateY(0);
+  }
+
+  .more-sheet__panel--dragging {
+    transition: none;
+  }
+
+  .more-sheet__grab {
+    @apply flex shrink-0 touch-none cursor-grab items-center justify-center pb-1 pt-3;
+    min-height: 2.75rem;
+  }
+
+  .more-sheet__handle {
+    @apply h-1 w-10 rounded-full bg-slate-300 dark:bg-slate-600;
+  }
+
+  .more-sheet__body {
+    @apply min-h-0 overflow-y-auto overscroll-contain pb-2;
+    touch-action: pan-y;
+    user-select: text;
+  }
+
+  .more-sheet__title {
+    @apply m-0 px-4 pb-1 text-base font-bold text-slate-900 dark:text-slate-100;
+  }
+
+  .more-menu-item {
+    @apply flex w-full items-center gap-3 border-0 border-b border-slate-200/70 bg-transparent px-4 py-3 text-left text-[0.88rem] font-semibold text-slate-700 transition hover:text-cyan-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-500/40 dark:border-white/10 dark:text-slate-200 dark:hover:text-cyan-100;
+  }
+
+  .more-menu-item:last-of-type {
+    @apply border-b-0;
+  }
+
+  .more-menu-item__icon {
+    @apply grid size-8 shrink-0 place-items-center rounded-lg bg-slate-100/80 text-slate-600 dark:bg-white/10 dark:text-slate-300;
+  }
+
+  .more-menu-item__icon .material-symbols-outlined {
+    @apply text-[1.1rem] leading-none;
+  }
+
+  .more-menu-item__label {
+    @apply min-w-0 flex-1;
+  }
+
+  .more-menu-item__dot {
+    @apply size-1.5 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-400;
+  }
+
+  .more-menu-item__dot[hidden] {
+    display: none;
+  }
+
+  .more-menu-meta {
+    @apply mx-3 mt-1 border-t border-slate-200/80 px-1 pb-1 pt-3 text-[11px] leading-relaxed text-slate-500 dark:border-white/10 dark:text-slate-400;
+  }
+
+  .more-menu-meta p {
+    @apply m-0;
+  }
+}
+
+
+@layer components {
+  /* ---------- Currency picker ---------- */
+  .picker-search {
+    @apply relative px-4 pb-2;
+  }
+
+  .picker-search .material-symbols-outlined {
+    @apply pointer-events-none absolute left-7 top-1/2 -translate-y-1/2 text-[1.05rem] leading-none text-slate-400;
+  }
+
+  .picker-search input {
+    @apply w-full rounded-xl border border-slate-200/90 bg-white/90 py-2.5 pl-9 pr-3 text-[0.88rem] font-semibold text-slate-900 placeholder:font-normal placeholder:text-slate-400 focus-visible:border-sky-500/80 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky-500/20 dark:border-white/10 dark:bg-slate-950/50 dark:text-slate-50 dark:placeholder:text-slate-500;
+  }
+
+  .picker-section-label {
+    @apply sticky top-0 z-[1] bg-white/95 px-4 pb-1.5 pt-2 text-[0.62rem] font-extrabold uppercase tracking-[0.14em] text-slate-400 backdrop-blur-md dark:bg-slate-900/95 dark:text-slate-500;
+  }
+
+  .currency-option {
+    @apply flex w-full items-center gap-2.5 border-0 border-b border-slate-200/60 bg-transparent px-4 py-2.5 text-left transition hover:bg-slate-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-500/40 dark:border-white/5 dark:hover:bg-white/5;
+  }
+
+  .currency-option[aria-checked="true"] {
+    @apply bg-sky-500/10 dark:bg-sky-400/10;
+  }
+
+  .currency-option__flag {
+    @apply shrink-0 text-[1.1rem];
+  }
+
+  .currency-option__code {
+    @apply w-[3.1rem] shrink-0 text-[0.82rem] font-extrabold text-slate-800 dark:text-slate-100;
+  }
+
+  .currency-option__name {
+    @apply min-w-0 flex-1 truncate text-[0.78rem] font-medium text-slate-500 dark:text-slate-400;
+  }
+
+  .currency-option__symbol {
+    @apply shrink-0 text-[0.78rem] font-bold tabular-nums text-slate-400 dark:text-slate-500;
+  }
+
+  .currency-option__star {
+    @apply inline-flex size-8 shrink-0 items-center justify-center rounded-md border-0 bg-transparent text-slate-300 transition hover:bg-amber-500/10 hover:text-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50 dark:text-slate-600 dark:hover:text-amber-300;
+  }
+
+  .currency-option__star .material-symbols-outlined {
+    @apply text-[1.05rem] leading-none;
+  }
+
+  .currency-option__star[aria-pressed="true"] {
+    @apply text-amber-500 dark:text-amber-300;
+  }
+
+  .currency-option__star[aria-pressed="true"] .material-symbols-outlined {
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 500,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+
+  .picker-empty {
+    @apply px-4 py-8 text-center text-[0.82rem] font-medium text-slate-500 dark:text-slate-400;
+  }
+
+  .picker-footer {
+    @apply mt-1 border-t border-slate-200/80 px-4 py-3 dark:border-white/10;
+  }
+
+  .picker-footer__toggle {
+    @apply cursor-pointer select-none text-[0.75rem] font-semibold text-slate-600 dark:text-slate-300;
+  }
+
+  .picker-footer__toggle input {
+    @apply mr-2 size-4 cursor-pointer accent-sky-600 align-middle;
+  }
+
+  /* ---------- Rate editor popover ---------- */
+  .rate-editor {
+    @apply absolute right-0 top-[calc(100%+0.5rem)] z-40 w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-slate-200/80 bg-white p-3 text-left shadow-[0_12px_36px_rgba(15,23,42,0.12)] dark:border-slate-400/30 dark:bg-slate-950 dark:shadow-[0_12px_36px_rgba(2,6,23,0.45)];
+    user-select: text;
+  }
+
+  .rate-editor[hidden] {
+    display: none !important;
+  }
+
+  .rate-editor__row {
+    @apply mt-2 grid grid-cols-[3.4rem_1fr] items-center gap-2;
+  }
+
+  .rate-editor__row label {
+    @apply text-[0.72rem] font-bold text-slate-600 dark:text-slate-300;
+  }
+
+  .rate-editor__actions {
+    @apply mt-3 flex items-center justify-between gap-2;
+  }
+
+  /* ---------- Toast ---------- */
+  .save-toast {
+    @apply pointer-events-none fixed bottom-6 left-1/2 z-[400] max-w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 rounded-lg border border-slate-200/80 bg-white/95 px-4 py-2.5 text-center text-sm text-slate-800 shadow-lg backdrop-blur-md transition-opacity duration-300 dark:border-white/15 dark:bg-slate-900/95 dark:text-slate-100;
+  }
+
+  .save-toast[hidden] {
+    @apply opacity-0;
+  }
+
+  .save-toast:not([hidden]) {
+    @apply opacity-100;
+  }
+
+  .save-toast__action {
+    @apply ml-2 rounded-md border-0 bg-transparent px-1.5 py-0.5 text-[0.78rem] font-extrabold text-sky-700 underline underline-offset-2 hover:text-sky-900 dark:text-sky-300 dark:hover:text-sky-100;
+  }
+}
+
+@layer components {
+  /* ---------- Full-page modals (What's New / Summary) ---------- */
+  .updates-modal {
+    @apply fixed inset-0 z-[350] flex items-center justify-center p-3 sm:p-6;
+  }
+
+  .updates-modal[hidden] {
+    display: none !important;
+  }
+
+  .updates-modal__backdrop {
+    @apply absolute inset-0 border-0 bg-slate-900/50 p-0 backdrop-blur-md dark:bg-slate-950/90;
+  }
+
+  .updates-modal__sheet {
+    @apply relative z-10 flex max-h-[min(88dvh,40rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.18)] dark:border-white/15 dark:bg-slate-900 dark:shadow-[0_18px_50px_rgba(0,0,0,0.5)];
+    animation: modalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .updates-modal__header {
+    @apply flex shrink-0 items-center justify-between gap-3 border-b border-slate-200/80 px-4 py-3.5 sm:px-5 dark:border-white/10;
+  }
+
+  .updates-modal__title {
+    @apply m-0 text-base font-bold text-slate-900 sm:text-lg dark:text-slate-100;
+  }
+
+  .updates-modal__cards {
+    @apply flex-1 space-y-3 overflow-y-auto px-4 py-4 sm:px-5;
+  }
+
+  .updates-modal__footer {
+    @apply shrink-0 border-t border-slate-200/80 px-4 py-3 sm:px-5 dark:border-white/10;
+  }
+
+  .updates-modal__got-it {
+    @apply inline-flex w-full items-center justify-center rounded-xl border border-cyan-500/35 bg-cyan-500/10 px-4 py-2.5 text-sm font-bold text-cyan-800 transition-[colors,background-color] duration-ui ease-smooth hover:bg-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 dark:border-cyan-400/35 dark:bg-cyan-500/15 dark:text-cyan-100 dark:hover:bg-cyan-500/25;
+  }
+
+  .updates-card {
+    @apply flex gap-3 rounded-xl border border-slate-200/80 bg-white/70 p-3.5 ring-1 ring-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-white/5 dark:ring-white/5;
+  }
+
+  .updates-card--fade-in {
+    @apply animate-card-fade-in;
+  }
+
+  .updates-card__icon {
+    @apply grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-500/15 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300;
+  }
+
+  .updates-card__icon .material-symbols-outlined {
+    @apply text-[1.2rem] leading-none;
+  }
+
+  .updates-card__body h3 {
+    @apply m-0 text-[0.85rem] font-extrabold text-slate-900 dark:text-slate-100;
+  }
+
+  .updates-card__body p {
+    @apply mt-1 text-[0.78rem] leading-relaxed text-slate-600 dark:text-slate-300;
+  }
+
+  .summary-pre {
+    @apply max-h-[36dvh] overflow-auto whitespace-pre-wrap break-words rounded-xl border border-slate-200/80 bg-slate-50/80 p-3 font-mono text-[0.74rem] leading-relaxed text-slate-700 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-200;
+    user-select: text;
+    direction: ltr;
+  }
+
+  .summary-option {
+    @apply mt-3 flex items-start gap-2 rounded-lg border border-slate-200/80 bg-white/70 p-2.5 text-[0.75rem] font-semibold leading-snug text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300;
+  }
+
+  .summary-option input {
+    @apply mt-0.5 size-4 shrink-0 cursor-pointer accent-emerald-600;
+  }
+
+  /* ---------- FAQ page ---------- */
+  .faq-item {
+    @apply rounded-xl border border-slate-200/80 bg-white/70 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.03];
+  }
+
+  .faq-item__summary {
+    @apply flex cursor-pointer list-none items-start justify-between gap-3 px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100;
+  }
+
+  .faq-item__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__chev {
+    @apply mt-0.5 shrink-0 text-base leading-none text-cyan-500 transition-transform duration-200 group-open:rotate-180 dark:text-cyan-300/80;
+  }
+
+  .faq-item__body {
+    @apply border-t border-slate-200/80 px-4 pb-4 pt-3 text-xs leading-relaxed text-slate-600 dark:border-white/10 dark:text-slate-400;
+  }
+
+  .faq-item__body p + p {
+    @apply mt-2;
+  }
+
+  .faq-item__body ul {
+    @apply mt-2 list-disc space-y-1 pl-5;
+  }
+
+  .faq-grid {
+    @apply grid grid-cols-1 gap-2;
+  }
+}
+
+/* -------------------------------------------------------------------- */
+/* Brand slots, "How it works" copy and the WhatsApp receipt            */
+/* Kept outside @layer components so the flat selectors survive         */
+/* cssnano unchanged (see scripts/check-css-coverage.cjs).              */
+/* -------------------------------------------------------------------- */
+
+/* ---------- Brand slots (wordmark now, artwork later) ---------- */
+.brand-logo-slot {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-logo-slot:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 3px;
+}
+
+.brand-logo-slot__mark {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.brand-logo-slot img,
+.brand-logo-slot svg {
+  display: block;
+  height: 1.9rem;
+  width: auto;
+}
+
+/* ---------- How ZakatDay works ---------- */
+.how-it-works {
+  @apply section-card p-4;
+}
+
+.how-it-works__heading {
+  @apply section-heading;
+}
+
+.how-it-works__lede {
+  @apply mt-1.5 text-[0.8rem] leading-relaxed text-slate-600 dark:text-slate-300;
+}
+
+.how-it-works__list {
+  @apply mt-3 grid grid-cols-1 gap-2.5;
+}
+
+.how-it-works__item dt {
+  @apply text-[0.8rem] font-extrabold text-slate-900 dark:text-slate-100;
+}
+
+.how-it-works__item dd {
+  @apply mt-0.5 text-[0.76rem] leading-relaxed text-slate-600 dark:text-slate-400;
+}
+
+.how-it-works__links {
+  @apply mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.76rem] text-slate-500 dark:text-slate-400;
+}
+
+.how-it-works__links .footer-link {
+  @apply text-[0.76rem];
+}
+
+/* ---------- Share modal ---------- */
+.whatsapp-share-trigger {
+  @apply text-[0.8rem];
+}
+
+.share-privacy {
+  @apply m-0 grid grid-cols-1 gap-1.5 rounded-xl border border-slate-200/80 bg-white/70 p-2.5 dark:border-white/10 dark:bg-white/5;
+}
+
+.share-privacy__legend {
+  @apply mb-1 px-0.5 text-[0.72rem] font-extrabold uppercase tracking-wide text-slate-500 dark:text-slate-400;
+}
+
+.share-privacy__option {
+  @apply flex cursor-pointer items-start gap-2 text-[0.78rem] font-semibold text-slate-700 dark:text-slate-200;
+}
+
+.share-privacy__option input {
+  @apply mt-0.5 size-4 shrink-0 cursor-pointer accent-emerald-600;
+}
+
+.share-privacy__option small {
+  @apply mt-0.5 block text-[0.72rem] font-medium leading-snug text-slate-500 dark:text-slate-400;
+}
+
+.share-capture-host {
+  @apply mt-2.5 flex justify-center overflow-hidden rounded-xl bg-slate-100 p-2 dark:bg-slate-900;
+}
+
+.share-hint {
+  @apply mt-2 flex items-start gap-1.5 text-[0.72rem] leading-snug text-slate-500 dark:text-slate-400;
+}
+
+.share-hint .material-symbols-outlined {
+  @apply text-[0.95rem] leading-none text-emerald-600 dark:text-emerald-400;
+}
+
+.share-status {
+  @apply mt-1.5 min-h-[1rem] text-[0.72rem] font-semibold text-slate-500 dark:text-slate-400;
+}
+
+.share-status[data-state="error"] {
+  @apply text-rose-600 dark:text-rose-400;
+}
+
+/* ---------- The receipt itself (always light, so the PNG is legible) ---------- */
+.share-card {
+  width: 300px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  font-family: "Mulish", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+.share-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.receipt-brand-slot__mark {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.share-card__brand-rest {
+  color: #0f172a;
+}
+
+.share-card__date {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.share-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.share-card__chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.share-card__rows {
+  margin: 10px 0 0;
+}
+
+.share-card__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 0.72rem;
+}
+
+.share-card__row dt {
+  color: #475569;
+  font-weight: 600;
+}
+
+.share-card__row dd {
+  margin: 0;
+  color: #0f172a;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.share-card__row--total {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.share-card__note {
+  margin: 8px 0 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.64rem;
+  line-height: 1.4;
+}
+
+.share-card__due {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ecfdf3 0%, #e0f2fe 100%);
+  text-align: center;
+}
+
+.share-card__due-label {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #047857;
+}
+
+.share-card__amount {
+  margin: 2px 0 0;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.share-card__status {
+  margin: 2px 0 0;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+.share-card__nisab-line {
+  margin: 6px 0 0;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.share-card__foot {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed #cbd5e1;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: #94a3b8;
+  text-align: center;
+}

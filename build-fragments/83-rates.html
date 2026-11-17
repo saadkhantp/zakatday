@@ -1,0 +1,84 @@
+        <!-- ================= Live rates ================= -->
+        <section class="rate-pill relative" aria-label="Live rates">
+          <span class="flex items-center gap-1.5">
+            <span id="ratesDot" class="rate-pill__dot" data-status="loading"></span>
+            <span class="rate-pill__k">Gold /g</span>
+            <span id="goldPerGramText" class="rate-pill__v">…</span>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="rate-pill__k">Silver /g</span>
+            <span id="silverPerGramText" class="rate-pill__v">…</span>
+          </span>
+          <span id="ratesStatusText" class="sr-only" aria-live="polite">Loading live rates</span>
+          <button
+            type="button"
+            id="editRatesBtn"
+            class="rate-edit-btn"
+            aria-expanded="false"
+            aria-controls="rateEditor"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+            Edit
+          </button>
+
+          <div id="rateEditor" class="rate-editor" role="dialog" aria-labelledby="rateEditorTitle" hidden>
+            <p id="rateEditorTitle" class="m-0 text-[0.78rem] font-extrabold text-slate-800 dark:text-slate-100">
+              Manual metal prices
+            </p>
+            <p class="mt-0.5 text-[0.66rem] font-medium leading-snug text-slate-500 dark:text-slate-400">
+              Use this if live feeds are blocked or your local market price differs.
+            </p>
+            <div class="rate-editor__row">
+              <label for="rateGoldInput">24K /g</label>
+              <input
+                id="rateGoldInput"
+                class="money-input"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="0.00"
+                aria-describedby="rateEditorHint"
+              />
+            </div>
+            <div class="rate-editor__row">
+              <label for="rateSilverInput">Silver /g</label>
+              <input
+                id="rateSilverInput"
+                class="money-input"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="0.00"
+              />
+            </div>
+            <p id="rateEditorHint" class="mt-1.5 text-[0.62rem] font-medium leading-snug text-slate-400 dark:text-slate-500">
+              Per gram of fine (24K) gold and fine silver.
+            </p>
+            <div class="rate-editor__actions">
+              <button type="button" id="resetRatesBtn" class="reset-btn">
+                <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                Use live rates
+              </button>
+              <button type="button" id="saveRatesBtn" class="btn-primary !px-3 !py-1.5 !text-[0.74rem]">
+                Save
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= Favourite currencies ================= -->
+        <section aria-label="Favourite currencies">
+          <div class="mb-1.5 flex items-baseline justify-between gap-2 px-0.5">
+            <h2 class="section-heading">Currency</h2>
+            <button
+              type="button"
+              id="manageCurrenciesBtn"
+              class="text-[0.7rem] font-bold text-sky-700 underline-offset-2 hover:underline dark:text-sky-300"
+            >
+              Manage
+            </button>
+          </div>
+          <div id="favPills" class="fav-pills" role="group" aria-label="Switch currency"></div>
+        </section>

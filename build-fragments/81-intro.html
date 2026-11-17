@@ -1,0 +1,65 @@
+
+    <div class="mx-auto w-full max-w-[34rem] px-3 pb-10 pt-3 sm:px-5 sm:pt-5">
+      <header class="header-bar mb-2">
+        <div class="flex items-center gap-2">
+          <a href="/" id="brandLogo" class="brand-logo-slot" aria-label="ZakatDay home">
+            <span class="brand-logo-slot__mark font-logo text-[1.45rem] leading-none">
+              <span class="text-gradient-solar">Zakat</span
+              ><span class="text-slate-900 dark:text-white">Day</span>
+            </span>
+          </a>
+          <span
+            class="hidden rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[0.56rem] font-extrabold uppercase tracking-wider text-emerald-700 sm:inline-block dark:border-emerald-400/30 dark:text-emerald-300"
+            >Zero storage</span
+          >
+        </div>
+
+        <div class="header-actions">
+          <button
+            type="button"
+            id="currencyTrigger"
+            class="currency-trigger"
+            aria-haspopup="dialog"
+            aria-controls="currencySheet"
+            aria-expanded="false"
+            aria-label="Change currency (currently USD)"
+          >
+            <span id="currencyTriggerFlag" class="emoji-flag text-[0.95rem]" aria-hidden="true">🇺🇸</span>
+            <span id="currencyTriggerCode" class="text-[0.78rem]">USD</span>
+            <span id="currencyTriggerSymbol" class="currency-trigger__symbol" aria-hidden="true">$</span>
+            <span class="material-symbols-outlined text-[1rem] leading-none text-slate-400" aria-hidden="true"
+              >expand_more</span
+            >
+          </button>
+
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="header-icon-btn"
+            aria-label="Switch to dark mode"
+            title="Dark mode"
+          >
+            <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">dark_mode</span>
+          </button>
+
+          <div class="more-menu">
+            <button
+              type="button"
+              id="moreMenuBtn"
+              class="header-icon-btn"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="moreSheet"
+              aria-label="More options"
+            >
+              <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">more_vert</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <p class="app-tagline mb-3 px-0.5 text-[0.74rem] font-semibold leading-snug">
+        Live gold, silver &amp; currency rates — everything is calculated on your device.
+      </p>
+
+      <main id="calculator" class="space-y-3">

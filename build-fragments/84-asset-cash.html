@@ -1,0 +1,73 @@
+        <!-- ================= Assets ================= -->
+        <section class="space-y-2" aria-labelledby="assetsHeading">
+          <h2 id="assetsHeading" class="section-heading px-0.5 pt-1">Zakatable assets</h2>
+
+          <details class="asset-card" open>
+            <summary class="asset-card__summary">
+              <span class="asset-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+              </span>
+              <span class="asset-card__title">
+                Cash &amp; bank
+                <span class="asset-card__hint">Cash at home, bank balances &amp; digital wallets</span>
+              </span>
+              <span id="cashTotal" class="asset-card__total">0</span>
+              <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="asset-card__body">
+              <label class="money-field" for="cashHeld">
+                <span class="money-field__label">Cash in hand</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="cashHeld"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="cash"
+                    data-field="held"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="cashBank">
+                <span class="money-field__label">Bank accounts</span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="cashBank"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="cash"
+                    data-field="bank"
+                  />
+                </span>
+              </label>
+              <label class="money-field" for="cashDigital">
+                <span class="money-field__label">
+                  Digital wallets
+                  <span class="text-[0.62rem] font-medium text-slate-400">optional</span>
+                </span>
+                <span class="money-field__control">
+                  <span class="money-field__prefix" data-symbol>$</span>
+                  <input
+                    id="cashDigital"
+                    class="money-input money-input--prefix"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="0"
+                    data-group="cash"
+                    data-field="digital"
+                  />
+                </span>
+              </label>
+            </div>
+          </details>

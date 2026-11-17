@@ -1,21 +1,33 @@
 {
+  "name": "ZakatDay — Private Global Zakat Calculator",
   "short_name": "ZakatDay",
-  "name": "ZakatDay - Simple Zakat Calculator",
+  "description": "Simple, private global Zakat calculator with live gold, silver, and currency rates.",
   "icons": [
     {
-      "src": "./zakat-day-logo-192.png",
+      "src": "/assets/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "./zakat-day-logo-512.png",
+      "src": "/assets/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#001001",
-  "theme_color": "#CB9B69"
+  "background_color": "#f8fafc",
+  "theme_color": "#008ac8",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["finance", "productivity"]
 }
