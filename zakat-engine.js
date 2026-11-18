@@ -1,5 +1,5 @@
 /**
- * ZakatDay calculation engine — pure functions only.
+ * ZakatDay calculation engine: pure functions only.
  *
  * No DOM, no storage, no network: the same code powers the UI and the tests.
  * Amounts are held in the user's display currency; metal weights stay in grams
@@ -214,7 +214,7 @@
     };
     var lines = [];
 
-    lines.push("ZakatDay — Zakat summary");
+    lines.push("ZakatDay. Zakat summary");
     lines.push("Currency: " + summary.currency);
     lines.push("Nisab standard: " + summary.standardLabel);
     lines.push("");
@@ -234,7 +234,7 @@
     }
     lines.push("  • Gross assets: " + money(summary.grossAssets));
     if (summary.debts > 0) {
-      lines.push("  • Less debts due: −" + money(summary.debts));
+      lines.push("  • Less debts due: -" + money(summary.debts));
     }
     lines.push("  • Net zakatable: " + money(summary.netAssets));
     lines.push("");
@@ -245,15 +245,15 @@
     );
     lines.push(
       summary.due
-        ? "Status: above nisab — Zakat is due (2.5%)"
+        ? "Status: above nisab. Zakat is due (2.5%)"
         : summary.netAssets > 0
-          ? "Status: below nisab — no Zakat due"
+          ? "Status: below nisab, no Zakat due"
           : "Status: no zakatable assets entered",
     );
     lines.push("");
     lines.push("ZAKAT DUE (2.5%): " + money(summary.zakat));
     lines.push("");
-    lines.push("Estimate only — please verify with a qualified scholar.");
+    lines.push("Estimate only. Verify with a qualified scholar.");
     lines.push("Calculated with ZakatDay · www.zakatday.cc");
     return lines.join("\n");
   }

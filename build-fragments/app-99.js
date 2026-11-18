@@ -20,6 +20,8 @@
     bindMetals();
     bindRateEditor();
     bindReset();
+    bindAboutModal();
+    bindCheckDue();
     bindSheetsAndModals();
     bindShare();
     bindWhatsAppShare();
@@ -31,10 +33,11 @@
     renderFavPills();
     syncPinToggle();
     render();
+    revealOnScroll();
 
     refreshRates({ announce: false, force: true }).then(function () {
       if (!live.metals) {
-        showToast("Live rates unavailable — tap Edit to enter gold and silver prices.", {
+        showToast("Live rates unavailable. Tap Edit to enter gold and silver prices.", {
           duration: 7000,
         });
       }

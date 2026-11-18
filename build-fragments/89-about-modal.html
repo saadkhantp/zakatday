@@ -1,0 +1,80 @@
+
+        <!-- ================= Modal: about / how it works ================= -->
+        <div
+          id="aboutModal"
+          class="updates-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="aboutModalTitle"
+          hidden
+        >
+          <button type="button" class="updates-modal__backdrop" data-about-close aria-label="Close"></button>
+          <div class="updates-modal__sheet">
+            <div class="updates-modal__header">
+              <h2 id="aboutModalTitle" class="updates-modal__title">How ZakatDay works</h2>
+              <button type="button" class="header-icon-btn" data-about-close aria-label="Close">
+                <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">close</span>
+              </button>
+            </div>
+            <div id="aboutModalBody" class="updates-modal__cards">
+              <p class="about-modal__lede">
+                ZakatDay is a free, ad-free Zakat calculator for Muslims in the US, UK, Pakistan,
+                UAE, Saudi Arabia, Malaysia, Canada, India, Australia and the EU. Enter your wealth
+                in your own currency and it works out 2.5% of your net zakatable assets, entirely
+                on your device.
+              </p>
+
+              <dl class="how-it-works__list">
+                <div class="how-it-works__item">
+                  <dt>Nisab in grams and tolas</dt>
+                  <dd>
+                    Zakat becomes due once your wealth reaches the nisab: 612.36&nbsp;g of silver
+                    (52.5&nbsp;tola) or 87.48&nbsp;g of gold (7.5&nbsp;tola). ZakatDay multiplies
+                    that weight by the live price per gram of the metal you pick, so the threshold
+                    updates with the market instead of a fixed figure.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>2.5% over one lunar year</dt>
+                  <dd>
+                    The zakat rate is 2.5% (1/40) of the wealth you have held for a full hawl, one
+                    lunar year. The calculator applies that rate to your net assets, after debts.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>Karat, tola and troy ounce support</dt>
+                  <dd>
+                    Market prices quote fine 24K gold, so a 22K item weighing 10&nbsp;g holds only
+                    9.17&nbsp;g of pure gold. Enter jewellery by weight in grams, tola or troy
+                    ounces and choose 14K, 18K, 21K, 22K or 24K. ZakatDay converts to fine metal
+                    before valuing it.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>150+ currencies, live rates</dt>
+                  <dd>
+                    Work in USD, GBP, EUR, PKR, INR, AED, SAR, MYR, CAD, AUD and more than 140
+                    other currencies. Switching currency converts your amounts with live
+                    cross-rates rather than resetting what you typed.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>Zero storage, zero sign-up</dt>
+                  <dd>
+                    No account, no cookies carrying your figures, no database. Amounts live only
+                    in this tab's memory and disappear when you close it. Preferred standard and
+                    currency are the only saved settings.
+                  </dd>
+                </div>
+              </dl>
+
+              <p class="how-it-works__links">
+                <a href="./faq/" class="footer-link">Full Zakat guide &amp; FAQ</a>
+                <span aria-hidden="true">·</span>
+                <a href="./faq/#gold-silver" class="footer-link">Gold &amp; silver rules</a>
+                <span aria-hidden="true">·</span>
+                <a href="./faq/#privacy" class="footer-link">Privacy details</a>
+              </p>
+            </div>
+          </div>
+        </div>

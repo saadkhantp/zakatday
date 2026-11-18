@@ -3,7 +3,7 @@
  *
  * Owns DOM wiring only: all maths lives in zakat-engine.js, all rates and
  * formatting in currency-service.js. Nothing the user types is transmitted or
- * persisted — amounts exist only in the `state` object for this tab's lifetime.
+ * persisted. Amounts exist only in the `state` object for this tab's lifetime.
  */
 (function () {
   "use strict";
@@ -268,6 +268,201 @@
       undoAction = null;
     }, opts.duration || 4200);
   }
+/* ------------------------------------------------------------------ */
+  /* Motion + interaction polish                                        */
+  /* Scroll reveal, value fades and the "Check your Zakat" hand-off.    */
+  /* Everything here degrades to a static page without JS or motion.    */
+  /* ------------------------------------------------------------------ */
+
+  var motionQuery =
+    typeof window.matchMedia === "function"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)")
+      : null;
+
+  /** True when animation is wanted: motion-in is set by theme-init.js. */
+  function motionOn() {
+    if (motionQuery && motionQuery.matches) return false;
+    return document.documentElement.classList.contains("motion-in");
+  }
+
+  function scrollBehavior() {
+    return motionOn() ? "smooth" : "auto";
+  }
+
+  /**
+   * Staggered fade-up for items a user just asked for (modal bodies, toast
+   * cards). Only elements carrying `data-reveal` are touched, so ordinary
+   * content is never hidden.
+   */
+  function revealChildren(host, options) {
+    if (!host) return;
+    var opts = options || {};
+    var step = opts.step === undefined ? 40 : opts.step;
+    var nodes = host.querySelectorAll("[data-reveal]");
+    Array.prototype.forEach.call(nodes, function (node) {
+      node.removeAttribute("data-revealed");
+      if (!motionOn()) {
+        node.setAttribute("data-revealed", "true");
+        return;
+      }
+      node.style.setProperty("--reveal-delay", (opts.index || 0) * step + "ms");
+    });
+    /* Force the pre-reveal frame, then flip the attribute so the CSS
+       transition has a start value to animate from. */
+    void host.offsetWidth;
+    requestAnimationFrame(function () {
+      Array.prototype.forEach.call(nodes, function (node) {
+        node.setAttribute("data-revealed", "true");
+      });
+    });
+  }
+
+  /** Fade a value that just changed (stat numbers, summary lines). */
+  function flashText(node) {
+    if (!node || !motionOn()) return;
+    node.classList.remove("motion-fade");
+    void node.offsetWidth;
+    node.classList.add("motion-fade");
+  }
+
+
+  /** Reveal section cards as they enter the viewport, once each. */
+  function revealOnScroll() {
+    if (!motionOn()) return;
+    var targets = document.querySelectorAll("main > section");
+    if (!targets.length) return;
+
+    var viewport = window.innerHeight || 0;
+    var candidates = [];
+    Array.prototype.forEach.call(targets, function (node, index) {
+      /* Anything already on the first screen stays untouched, so the initial
+         paint and largest-contentful-paint are unaffected. */
+      if (node.getBoundingClientRect().top < viewport * 0.9) return;
+      node.setAttribute("data-reveal", "");
+      node.style.setProperty("--reveal-delay", Math.min(index, 4) * 30 + "ms");
+      candidates.push(node);
+    });
+    if (!candidates.length) return;
+
+    if (typeof window.IntersectionObserver !== "function") {
+      candidates.forEach(function (node) {
+        node.setAttribute("data-revealed", "true");
+      });
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.setAttribute("data-revealed", "true");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+    );
+
+    candidates.forEach(function (node) {
+      observer.observe(node);
+    });
+  }
+
+  /** Smooth in-page jump used by "Check Your Due Zakat". */
+  function scrollToNode(node, offset) {
+    if (!node) return;
+    var top = node.getBoundingClientRect().top + (window.pageYOffset || 0) - (offset || 12);
+    window.scrollTo({ top: Math.max(0, top), behavior: scrollBehavior() });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* About / How it works                                               */
+  /* ------------------------------------------------------------------ */
+
+  var aboutReturnFocus = null;
+
+  function openAbout(returnFocus) {
+    var modal = $("aboutModal");
+    if (!modal) return;
+    aboutReturnFocus = returnFocus || null;
+    openModal(modal);
+    var body = $("aboutModalBody");
+    if (body) revealChildren(body, { step: 35 });
+    var closeBtn = modal.querySelector(".header-icon-btn");
+    if (closeBtn) {
+      setTimeout(function () {
+        closeBtn.focus({ preventScroll: true });
+      }, 60);
+    }
+  }
+
+  function bindAboutModal() {
+    var trigger = $("aboutBtn");
+    var modal = $("aboutModal");
+    if (!modal) return;
+
+    function close() {
+      closeModal(modal);
+      if (aboutReturnFocus && aboutReturnFocus.focus) {
+        aboutReturnFocus.focus({ preventScroll: true });
+      }
+    }
+
+    if (trigger) {
+      trigger.addEventListener("click", function () {
+        openAbout(trigger);
+      });
+    }
+
+    each("[data-about-close]", function (node) {
+      node.addEventListener("click", close);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !modal.hidden) close();
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* "Check Your Due Zakat"                                             */
+  /* ------------------------------------------------------------------ */
+
+  /**
+   * The results card sits below the inputs, so the button stays disabled until
+   * there is something to check, then hands the user straight to the result.
+   */
+  function bindCheckDue() {
+    var btn = $("checkDueBtn");
+    var card = $("zakatCard");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      if (btn.disabled) return;
+      render();
+      scrollToNode(card, 12);
+      if (card) {
+        card.classList.remove("is-flashing");
+        void card.offsetWidth;
+        card.classList.add("is-flashing");
+        setTimeout(function () {
+          card.classList.remove("is-flashing");
+        }, 1000);
+        if (card.hasAttribute("tabindex")) card.focus({ preventScroll: true });
+      }
+      flashText($("zakatAmount"));
+      var hint = $("checkDueHint");
+      if (hint) hint.hidden = true;
+    });
+  }
+
+  /** Enable the check button as soon as any asset weighs in. */
+  function syncCheckDue(summary) {
+    var btn = $("checkDueBtn");
+    var hint = $("checkDueHint");
+    if (!btn) return;
+    var ready = Boolean(summary) && summary.netAssets > 0;
+    btn.disabled = !ready;
+    if (hint) hint.hidden = ready;
+  }
 
   /* ------------------------------------------------------------------ */
   /* Rates                                                              */
@@ -334,7 +529,7 @@
         if (result.metals) {
           showToast("Live gold &amp; silver prices updated".replace("&amp;", "&"), { duration: 2600 });
         } else if (result.rates) {
-          showToast("Currency rates updated — metal prices unavailable, enter them manually.", {
+          showToast("Currency rates updated, but metal prices are unavailable. Enter them manually.", {
             duration: 5200,
           });
         } else {
@@ -365,7 +560,7 @@
   }
 
   function priceLabel(value) {
-    if (!value) return "—";
+    if (!value) return "-";
     var currency = CS.getCurrency(state.currency);
     var digits = value < 10 ? 3 : 2;
     return CS.formatMoney(value, state.currency, { decimals: digits }) +
@@ -413,8 +608,6 @@
     syncMetals();
     var summary = Engine.compute(state);
 
-    /* Hero */
-    setText($("heroCurrencyCode"), state.currency);
     setText($("currencyTriggerCode"), state.currency);
     setText($("currencyTriggerSymbol"), symbolFor(state.currency));
     var flag = $("currencyTriggerFlag");
@@ -429,8 +622,9 @@
     if (amount) {
       var hasInput = summary.netAssets > 0;
       amount.setAttribute("data-state", !hasInput ? "none" : summary.due ? "due" : "below");
-      setText(amount, hasInput ? fmtCompact(summary.zakat) : "—");
+      setText(amount, hasInput ? fmtCompact(summary.zakat) : "-");
     }
+    syncCheckDue(summary);
 
     var meter = $("nisabMeter");
     var fill = $("nisabMeterFill");
@@ -445,9 +639,9 @@
     if (meterLabel) {
       var text;
       if (summary.netAssets <= 0) {
-        text = "Enter your assets below to see your nisab position.";
+        text = "Add your assets in the cards above to see your nisab position.";
       } else if (!summary.hasNisabPrice) {
-        text = "Metal price missing — add a gold or silver price to check the nisab.";
+        text = "Metal price missing. Add a gold or silver price to check the nisab.";
       } else if (summary.due) {
         text = "Above nisab by " + fmtCompact(summary.netAssets - summary.nisabValue) + " · Zakat is due.";
       } else {
@@ -456,7 +650,7 @@
       setText(meterLabel, text);
     }
 
-    setText($("netAssetsValue"), summary.netAssets > 0 ? fmtCompact(summary.netAssets) : "—");
+    setText($("netAssetsValue"), summary.netAssets > 0 ? fmtCompact(summary.netAssets) : "-");
     setText(
       $("nisabValueText"),
       summary.hasNisabPrice ? fmtCompact(summary.nisabValue) : "set price",
@@ -470,8 +664,8 @@
     /* Metal rows inside the asset card */
     setText($("goldWeightText"), CS.formatNumber(state.gold.grams, 2) + " g fine");
     setText($("silverWeightText"), CS.formatNumber(state.silver.grams, 2) + " g fine");
-    setText($("goldValueText"), state.gold.value > 0 ? fmt(state.gold.value) : "—");
-    setText($("silverValueText"), state.silver.value > 0 ? fmt(state.silver.value) : "—");
+    setText($("goldValueText"), state.gold.value > 0 ? fmt(state.gold.value) : "-");
+    setText($("silverValueText"), state.silver.value > 0 ? fmt(state.silver.value) : "-");
 
     /* Card totals */
     setText($("cashTotal"), fmtCompact(summary.cash));
@@ -514,7 +708,7 @@
       var width = base > 0 ? Math.min(100, (value / base) * 100) : 0;
       node.style.width = width.toFixed(2) + "%";
     });
-    setText($("breakdownTotal"), base > 0 ? fmtCompact(base) + " total" : "—");
+    setText($("breakdownTotal"), base > 0 ? fmtCompact(base) + " total" : "-");
   }
 
   /* ------------------------------------------------------------------ */
@@ -522,36 +716,7 @@
   /* ------------------------------------------------------------------ */
 
   function renderFavPills() {
-    var wrap = $("favPills");
-    if (!wrap) return;
-    var favorites = CS.getFavorites();
-    if (favorites.indexOf(state.currency) === -1) {
-      favorites = [state.currency].concat(favorites).slice(0, CS.MAX_FAVORITES);
-    }
-    wrap.textContent = "";
-    favorites.forEach(function (code) {
-      var meta = CS.getCurrency(code);
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "fav-pill";
-      btn.dataset.currency = code;
-      btn.setAttribute("aria-pressed", code === state.currency ? "true" : "false");
-      btn.setAttribute("aria-label", meta.name + " (" + code + ")");
-
-      var flag = document.createElement("span");
-      flag.className = "emoji-flag";
-      flag.setAttribute("aria-hidden", "true");
-      flag.textContent = CS.flagFor(meta.country);
-      var label = document.createElement("span");
-      label.textContent = code;
-      btn.appendChild(flag);
-      btn.appendChild(label);
-
-      btn.addEventListener("click", function () {
-        changeCurrency(code);
-      });
-      wrap.appendChild(btn);
-    });
+    /* Favourite pills were removed. Currency is chosen from the header. */
   }
 
   function renderCurrencyList(query) {
@@ -730,11 +895,11 @@
     render();
     if (!live.rates) {
       showToast(
-        "Rates offline — amounts re-labelled as " + next + " without conversion.",
+        "Rates offline. Amounts re-labelled as " + next + " without conversion.",
         { duration: 5600 },
       );
     } else {
-      showToast("Switched to " + next + " — amounts converted at live rates.", { duration: 2600 });
+      showToast("Switched to " + next + ". Amounts converted at live rates.", { duration: 2600 });
     }
   }
 
@@ -845,14 +1010,14 @@
   /** Two-step reset: first click arms, second click clears everything. */
   function bindReset() {
     var btn = $("resetBtn");
-    var label = $("resetBtnLabel");
     if (!btn) return;
     var timer = null;
 
     function disarm() {
       resetArmed = false;
       btn.setAttribute("data-confirm", "false");
-      setText(label, "Reset");
+      btn.setAttribute("aria-label", "Reset all amounts");
+      btn.setAttribute("title", "Reset all amounts");
       if (timer) clearTimeout(timer);
     }
 
@@ -860,8 +1025,10 @@
       if (!resetArmed) {
         resetArmed = true;
         btn.setAttribute("data-confirm", "true");
-        setText(label, "Sure? Tap again");
+        btn.setAttribute("aria-label", "Tap again to clear every amount");
+        btn.setAttribute("title", "Tap again to clear every amount");
         timer = setTimeout(disarm, 4000);
+        showToast("Tap reset once more to clear every amount.", { duration: 4000 });
         return;
       }
       disarm();
@@ -957,7 +1124,7 @@
         closeRateEditor();
         render();
         showToast(
-          live.metals ? "Back to live metal prices." : "Live prices unavailable — enter a price.",
+          live.metals ? "Back to live metal prices." : "Live prices unavailable. Enter a price.",
           { duration: 3200 },
         );
       });
@@ -1032,7 +1199,7 @@
       });
     }
     return copyText(text).then(function (ok) {
-      showToast(ok ? "Summary copied to clipboard." : "Could not copy — select the text instead.", {
+      showToast(ok ? "Summary copied to clipboard." : "Could not copy. Select the text instead.", {
         duration: 3200,
       });
       return ok;
@@ -1053,7 +1220,7 @@
 
   /** Format a category value for the receipt; em dash when nothing is entered. */
   function receiptMoney(value, summary) {
-    if (!(value > 0)) return "—";
+    if (!(value > 0)) return "-";
     return CS.formatMoney(value, state.currency, { decimals: summary.zakat >= 1000 ? 0 : 2 });
   }
 
@@ -1090,19 +1257,19 @@
     setText($("shareCardBusiness"), receiptMoney(summary.business, summary));
     setText(
       $("shareCardDebts"),
-      summary.debts > 0 ? "−" + CS.formatMoney(summary.debts, state.currency, { decimals: 0 }) : "—",
+      summary.debts > 0 ? "-" + CS.formatMoney(summary.debts, state.currency, { decimals: 0 }) : "-",
     );
     setText($("shareCardNet"), receiptMoney(summary.netAssets, summary));
     show($("shareCardTotalsNote"), !itemized);
 
-    setText($("shareCardZakat"), summary.due ? CS.formatMoney(summary.zakat, state.currency) : "—");
-    setText($("shareCardNisab"), summary.hasNisabPrice ? fmt(summary.nisabValue) : "—");
+    setText($("shareCardZakat"), summary.due ? CS.formatMoney(summary.zakat, state.currency) : "-");
+    setText($("shareCardNisab"), summary.hasNisabPrice ? fmt(summary.nisabValue) : "-");
 
     var status;
     if (summary.netAssets <= 0) {
       status = "No assets entered yet";
     } else if (!summary.hasNisabPrice) {
-      status = "Metal price missing — nisab not checked";
+      status = "Metal price missing, nisab not checked";
     } else if (summary.due) {
       status = "Above nisab · Zakat is due";
     } else {
@@ -1113,10 +1280,8 @@
     return summary;
   }
 
-  function syncShareTrigger(summary) {
-    var trigger = $("whatsappShareBtn");
-    if (!trigger) return;
-    show(trigger, Boolean(summary) && summary.netAssets > 0);
+  function syncShareTrigger() {
+    /* The receipt opens from the action-row icon, which stays available. */
   }
 
   function setShareStatus(message, isError) {
@@ -1145,12 +1310,12 @@
     if (summary.due) {
       due = "Zakat due (2.5%): " + fmt(summary.zakat);
     } else if (summary.netAssets > 0) {
-      due = "Zakat due (2.5%): none — net wealth is below the nisab.";
+      due = "Zakat due (2.5%): none, net wealth is below the nisab.";
     } else {
-      due = "Zakat due (2.5%): none — no assets entered.";
+      due = "Zakat due (2.5%): none, no assets entered.";
     }
     return [
-      "ZakatDay — Zakat summary",
+      "ZakatDay. Zakat summary",
       "",
       "Currency: " + state.currency,
       "Nisab standard: " + summary.standardLabel,
@@ -1159,7 +1324,7 @@
       due,
       "",
       "Asset figures hidden by choice.",
-      "Calculated at zakatday.cc — estimate only, verify with a qualified scholar.",
+      "Calculated at zakatday.cc. Estimate only, verify with a qualified scholar.",
     ].join("\n");
   }
 
@@ -1201,7 +1366,7 @@
     return loadHtml2Canvas().then(function (h2c) {
       if (!h2c) return null;
       return h2c(node, {
-        backgroundColor: "#ffffff",
+        backgroundColor: readTokenColor("--white"),
         scale: Math.min(3, Math.max(2, window.devicePixelRatio || 2)),
         logging: false,
         useCORS: true,
@@ -1246,12 +1411,16 @@
     }, 4000);
   }
 
-  /** File sharing via the Web Share API; resolves "unsupported" when unavailable. */
-  function webShareFiles(file, text) {
+  /**
+   * File sharing via the Web Share API; resolves "unsupported" when unavailable.
+   * The caption is omitted on purpose: sharing a file together with text makes
+   * macOS and Chrome copy the same PNG onto the clipboard twice.
+   */
+  function webShareFiles(file) {
     if (!navigator.share || !navigator.canShare) return Promise.resolve("unsupported");
     if (!navigator.canShare({ files: [file] })) return Promise.resolve("unsupported");
     return navigator
-      .share({ files: [file], title: "My Zakat receipt", text: text })
+      .share({ files: [file] })
       .then(function () {
         return "shared";
       })
@@ -1297,7 +1466,7 @@
         if (!canvas) return "no-capture";
         return canvasToPngFile(canvas).then(function (file) {
           if (!file) return "no-file";
-          return webShareFiles(file, text).then(function (outcome) {
+          return webShareFiles(file).then(function (outcome) {
             if (outcome === "shared" || outcome === "cancelled") return outcome;
             downloadBlob(file, file.name);
             return "downloaded";
@@ -1311,17 +1480,17 @@
           setTimeout(closeShare, 500);
         } else if (outcome === "cancelled") {
           setShareBusy(false);
-          finish("Share cancelled — nothing was sent.", false);
+          finish("Share cancelled. Nothing was sent.", false);
         } else if (outcome === "downloaded") {
           goText("Receipt PNG saved to your device. Attach it in WhatsApp, then send the text.");
         } else if (outcome === "no-file") {
-          goText("Could not encode the image — sent the text summary instead.");
+          goText("Could not encode the image. Sent the text summary instead.");
         } else {
-          goText("Image generator unavailable — sent the text summary instead.");
+          goText("Image generator unavailable. Sent the text summary instead.");
         }
       })
       .catch(function () {
-        goText("Could not build the image — sent the text summary instead.");
+        goText("Could not build the image. Sent the text summary instead.");
       });
   }
 
@@ -1337,7 +1506,7 @@
   }
 
   function bindWhatsAppShare() {
-    var trigger = $("whatsappShareBtn");
+    var trigger = $("whatsappBtn");
     if (trigger) {
       trigger.addEventListener("click", function () {
         openWhatsAppShare();
@@ -1395,14 +1564,6 @@
       });
     }
 
-    var manage = $("manageCurrenciesBtn");
-    if (manage) {
-      manage.addEventListener("click", function () {
-        refreshPickerViews();
-        openSheetEl($("currencySheet"), manage);
-      });
-    }
-
     each("[data-sheet-close]", function (node) {
       node.addEventListener("click", function () {
         closeSheetEl(node.closest(".more-sheet"));
@@ -1414,7 +1575,13 @@
         var action = node.dataset.moreAction;
         closeSheetEl($("moreSheet"));
         setTimeout(function () {
-          if (action === "currency") {
+          if (action === "about") {
+            /* The sheet returns focus to the menu button as it finishes
+               closing. Open after that so the dialog keeps the focus. */
+            setTimeout(function () {
+              openAbout($("moreMenuBtn"));
+            }, 200);
+          } else if (action === "currency") {
             refreshPickerViews();
             openSheetEl($("currencySheet"), $("currencyTrigger"));
           } else if (action === "rates") {
@@ -1501,18 +1668,12 @@
         shareText(summaryForShare());
       });
     }
-    var whatsapp = $("whatsappBtn");
-    if (whatsapp) {
-      whatsapp.addEventListener("click", function () {
-        window.open(whatsappUrl(summaryForShare()), "_blank", "noopener,noreferrer");
-      });
-    }
     var copy = $("copySummaryBtn");
     if (copy) {
       copy.addEventListener("click", function () {
         var text = $("summaryText") ? $("summaryText").textContent : "";
         copyText(text).then(function (ok) {
-          showToast(ok ? "Summary copied." : "Copy failed — select the text manually.", {
+          showToast(ok ? "Summary copied." : "Copy failed. Select the text manually.", {
             duration: 2600,
           });
         });
@@ -1568,6 +1729,8 @@
     bindMetals();
     bindRateEditor();
     bindReset();
+    bindAboutModal();
+    bindCheckDue();
     bindSheetsAndModals();
     bindShare();
     bindWhatsAppShare();
@@ -1579,10 +1742,11 @@
     renderFavPills();
     syncPinToggle();
     render();
+    revealOnScroll();
 
     refreshRates({ announce: false, force: true }).then(function () {
       if (!live.metals) {
-        showToast("Live rates unavailable — tap Edit to enter gold and silver prices.", {
+        showToast("Live rates unavailable. Tap Edit to enter gold and silver prices.", {
           duration: 7000,
         });
       }

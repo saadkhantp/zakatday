@@ -18,7 +18,7 @@ function check(label, actual, expected) {
     console.log("  ok   " + label);
   } else {
     failures += 1;
-    console.log("  FAIL " + label + " → got " + JSON.stringify(actual));
+    console.log("  FAIL " + label + " -> got " + JSON.stringify(actual));
   }
 }
 
@@ -212,7 +212,7 @@ console.log("currency-service");
   const text = E.toSummaryText(s1, (v) => "Rs " + Math.round(v));
   check("summary mentions zakat due", text.indexOf("ZAKAT DUE (2.5%): Rs 1544") !== -1, true);
   check("summary includes standard", text.indexOf("Silver (612.36 g)") !== -1, true);
-  check("summary includes disclaimer", text.indexOf("verify with a qualified scholar") !== -1, true);
+  check("summary includes disclaimer", /verify with a qualified scholar/i.test(text), true);
   const lowState = E.createState({ goldPerGram: 100, silverPerGram: 1.2 });
   lowState.cash.held = 500;
   const lowSummary = E.compute(lowState);

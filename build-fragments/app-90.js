@@ -54,7 +54,7 @@
       });
     }
     return copyText(text).then(function (ok) {
-      showToast(ok ? "Summary copied to clipboard." : "Could not copy — select the text instead.", {
+      showToast(ok ? "Summary copied to clipboard." : "Could not copy. Select the text instead.", {
         duration: 3200,
       });
       return ok;

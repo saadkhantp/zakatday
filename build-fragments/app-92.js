@@ -9,7 +9,7 @@
 
   /** Format a category value for the receipt; em dash when nothing is entered. */
   function receiptMoney(value, summary) {
-    if (!(value > 0)) return "—";
+    if (!(value > 0)) return "-";
     return CS.formatMoney(value, state.currency, { decimals: summary.zakat >= 1000 ? 0 : 2 });
   }
 
@@ -46,19 +46,19 @@
     setText($("shareCardBusiness"), receiptMoney(summary.business, summary));
     setText(
       $("shareCardDebts"),
-      summary.debts > 0 ? "−" + CS.formatMoney(summary.debts, state.currency, { decimals: 0 }) : "—",
+      summary.debts > 0 ? "-" + CS.formatMoney(summary.debts, state.currency, { decimals: 0 }) : "-",
     );
     setText($("shareCardNet"), receiptMoney(summary.netAssets, summary));
     show($("shareCardTotalsNote"), !itemized);
 
-    setText($("shareCardZakat"), summary.due ? CS.formatMoney(summary.zakat, state.currency) : "—");
-    setText($("shareCardNisab"), summary.hasNisabPrice ? fmt(summary.nisabValue) : "—");
+    setText($("shareCardZakat"), summary.due ? CS.formatMoney(summary.zakat, state.currency) : "-");
+    setText($("shareCardNisab"), summary.hasNisabPrice ? fmt(summary.nisabValue) : "-");
 
     var status;
     if (summary.netAssets <= 0) {
       status = "No assets entered yet";
     } else if (!summary.hasNisabPrice) {
-      status = "Metal price missing — nisab not checked";
+      status = "Metal price missing, nisab not checked";
     } else if (summary.due) {
       status = "Above nisab · Zakat is due";
     } else {
@@ -69,10 +69,8 @@
     return summary;
   }
 
-  function syncShareTrigger(summary) {
-    var trigger = $("whatsappShareBtn");
-    if (!trigger) return;
-    show(trigger, Boolean(summary) && summary.netAssets > 0);
+  function syncShareTrigger() {
+    /* The receipt opens from the action-row icon, which stays available. */
   }
 
   function setShareStatus(message, isError) {
@@ -101,12 +99,12 @@
     if (summary.due) {
       due = "Zakat due (2.5%): " + fmt(summary.zakat);
     } else if (summary.netAssets > 0) {
-      due = "Zakat due (2.5%): none — net wealth is below the nisab.";
+      due = "Zakat due (2.5%): none, net wealth is below the nisab.";
     } else {
-      due = "Zakat due (2.5%): none — no assets entered.";
+      due = "Zakat due (2.5%): none, no assets entered.";
     }
     return [
-      "ZakatDay — Zakat summary",
+      "ZakatDay. Zakat summary",
       "",
       "Currency: " + state.currency,
       "Nisab standard: " + summary.standardLabel,
@@ -115,7 +113,7 @@
       due,
       "",
       "Asset figures hidden by choice.",
-      "Calculated at zakatday.cc — estimate only, verify with a qualified scholar.",
+      "Calculated at zakatday.cc. Estimate only, verify with a qualified scholar.",
     ].join("\n");
   }
 
@@ -157,7 +155,7 @@
     return loadHtml2Canvas().then(function (h2c) {
       if (!h2c) return null;
       return h2c(node, {
-        backgroundColor: "#ffffff",
+        backgroundColor: readTokenColor("--white"),
         scale: Math.min(3, Math.max(2, window.devicePixelRatio || 2)),
         logging: false,
         useCORS: true,
@@ -202,12 +200,16 @@
     }, 4000);
   }
 
-  /** File sharing via the Web Share API; resolves "unsupported" when unavailable. */
-  function webShareFiles(file, text) {
+  /**
+   * File sharing via the Web Share API; resolves "unsupported" when unavailable.
+   * The caption is omitted on purpose: sharing a file together with text makes
+   * macOS and Chrome copy the same PNG onto the clipboard twice.
+   */
+  function webShareFiles(file) {
     if (!navigator.share || !navigator.canShare) return Promise.resolve("unsupported");
     if (!navigator.canShare({ files: [file] })) return Promise.resolve("unsupported");
     return navigator
-      .share({ files: [file], title: "My Zakat receipt", text: text })
+      .share({ files: [file] })
       .then(function () {
         return "shared";
       })
@@ -253,7 +255,7 @@
         if (!canvas) return "no-capture";
         return canvasToPngFile(canvas).then(function (file) {
           if (!file) return "no-file";
-          return webShareFiles(file, text).then(function (outcome) {
+          return webShareFiles(file).then(function (outcome) {
             if (outcome === "shared" || outcome === "cancelled") return outcome;
             downloadBlob(file, file.name);
             return "downloaded";
@@ -267,17 +269,17 @@
           setTimeout(closeShare, 500);
         } else if (outcome === "cancelled") {
           setShareBusy(false);
-          finish("Share cancelled — nothing was sent.", false);
+          finish("Share cancelled. Nothing was sent.", false);
         } else if (outcome === "downloaded") {
           goText("Receipt PNG saved to your device. Attach it in WhatsApp, then send the text.");
         } else if (outcome === "no-file") {
-          goText("Could not encode the image — sent the text summary instead.");
+          goText("Could not encode the image. Sent the text summary instead.");
         } else {
-          goText("Image generator unavailable — sent the text summary instead.");
+          goText("Image generator unavailable. Sent the text summary instead.");
         }
       })
       .catch(function () {
-        goText("Could not build the image — sent the text summary instead.");
+        goText("Could not build the image. Sent the text summary instead.");
       });
   }
 
@@ -293,7 +295,7 @@
   }
 
   function bindWhatsAppShare() {
-    var trigger = $("whatsappShareBtn");
+    var trigger = $("whatsappBtn");
     if (trigger) {
       trigger.addEventListener("click", function () {
         openWhatsAppShare();

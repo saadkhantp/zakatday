@@ -37,10 +37,10 @@
     render();
     if (!live.rates) {
       showToast(
-        "Rates offline — amounts re-labelled as " + next + " without conversion.",
+        "Rates offline. Amounts re-labelled as " + next + " without conversion.",
         { duration: 5600 },
       );
     } else {
-      showToast("Switched to " + next + " — amounts converted at live rates.", { duration: 2600 });
+      showToast("Switched to " + next + ". Amounts converted at live rates.", { duration: 2600 });
     }
   }

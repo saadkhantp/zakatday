@@ -1,10 +1,30 @@
 
-      <footer class="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 px-2 text-[0.7rem] text-slate-500 dark:text-slate-400">
-        <a href="./faq/" class="footer-link !text-[0.75rem]">Zakat guide &amp; FAQ</a>
-        <span aria-hidden="true">·</span>
-        <a href="./faq/#privacy" class="footer-link !text-[0.75rem]">Privacy</a>
-        <span aria-hidden="true">·</span>
-        <button type="button" id="feedbackBtn" class="footer-link !text-[0.75rem]">Feedback</button>
-        <span class="w-full text-center">© <span id="footerYear">2026</span> ZakatDay — estimates only; verify with a scholar.</span>
+      <footer
+        class="mt-10 mb-6 flex flex-col items-center gap-y-3 px-2 text-center text-[0.7rem] text-slate-500 dark:text-slate-400"
+      >
+        <p class="privacy-badge privacy-badge--centered mb-1">
+          <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+          <span>Nothing you type is sent or saved. No accounts, no cookies.</span>
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+          <a href="./faq/" class="footer-link !text-[0.75rem]">Zakat guide &amp; FAQ</a>
+          <button
+            type="button"
+            id="aboutBtn"
+            class="footer-link !text-[0.75rem] footer-link--sep"
+            aria-haspopup="dialog"
+            aria-controls="aboutModal"
+          >
+            How it works
+          </button>
+          <a href="./faq/#gold-silver" class="footer-link !text-[0.75rem] footer-link--sep"
+            >Gold &amp; silver rules</a
+          >
+          <a href="./faq/#privacy" class="footer-link !text-[0.75rem] footer-link--sep">Privacy details</a>
+          <button type="button" id="feedbackBtn" class="footer-link !text-[0.75rem] footer-link--sep">
+            Feedback
+          </button>
+        </div>
+        <p class="m-0 w-full text-center">© <span id="footerYear">2026</span> ZakatDay · estimates only; verify with a scholar.</p>
       </footer>
     </div>

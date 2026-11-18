@@ -133,7 +133,7 @@ const num = (text) => Number(String(text).replace(/[^\d.]/g, ""));
         pendingAssets.length +
         "): " +
         pendingAssets.join(", ") +
-        " — drop the files in /assets to clear",
+        ". Drop the files in /assets to clear",
     );
   }
   console.log(failures === 0 ? "\nSmoke test passed." : "\n" + failures + " smoke check(s) failed.");

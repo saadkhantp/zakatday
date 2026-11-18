@@ -1,3 +1,12 @@
+/* Design tokens. Every color in the app resolves to a variable in this file.
+   Palette entries are RGB channels so Tailwind opacity modifiers keep working:
+   rgb(var(--slate-900) / <alpha-value>).
+
+   Two files cannot read CSS variables, so they repeat token values:
+   - <meta name="theme-color"> fallbacks: --chrome-light (#f8fafc), --chrome-dark (#020617)
+   - manifest.json background_color: --chrome-light; theme_color: --brand-blue-deep (#008ac8)
+   theme-init.js replaces the meta tags from the tokens before paint. */
+
 :root {
   --background: 210 40% 98%;
   --foreground: 222 47% 11%;
@@ -21,15 +30,114 @@
   --radius: 0.625rem;
   --app-bg-top: 210 40% 98%;
   --app-bg-bottom: 214 32% 92%;
-  --app-overlay-top: #f8fafc;
-  --app-overlay-bottom: #e2e8f0;
 
-  /* ZakatDay accents (match AyahDay solar tokens) */
-  --zakat-teal: #09dd97;
-  --zakat-green: #10b981;
-  --zakat-gold: #d99c1f;
-  --zakat-silver: #94a3b8;
-  --zakat-debt: #f43f5e;
+  --white: 255 255 255;
+  --black: 0 0 0;
+  /* Tailwind preflight placeholder. Not part of the slate ramp. */
+  --gray-400: 156 163 175;
+
+  /* Slate */
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 2 6 23;
+
+  /* Sky. solar-blue uses the same stops. */
+  --sky-50: 240 249 255;
+  --sky-100: 224 242 254;
+  --sky-200: 186 230 253;
+  --sky-300: 125 211 252;
+  --sky-400: 56 189 248;
+  --sky-500: 14 165 233;
+  --sky-600: 2 132 199;
+  --sky-700: 3 105 161;
+  --sky-800: 7 89 133;
+  --sky-900: 12 74 110;
+  --sky-950: 8 47 73;
+
+  /* Rose */
+  --rose-50: 255 241 242;
+  --rose-100: 255 228 230;
+  --rose-200: 254 205 211;
+  --rose-300: 253 164 175;
+  --rose-400: 251 113 133;
+  --rose-500: 244 63 94;
+  --rose-600: 225 29 72;
+  --rose-700: 190 18 60;
+  --rose-800: 159 18 70;
+  --rose-900: 136 19 55;
+  --rose-950: 76 5 25;
+
+  /* Emerald. solar-green 100–900 uses these; 50 is its own stop below. */
+  --emerald-50: 236 253 245;
+  --emerald-100: 209 250 229;
+  --emerald-200: 167 243 208;
+  --emerald-300: 110 231 183;
+  --emerald-400: 52 211 153;
+  --emerald-500: 16 185 129;
+  --emerald-600: 5 150 105;
+  --emerald-700: 4 120 87;
+  --emerald-800: 6 95 70;
+  --emerald-900: 6 78 59;
+  --emerald-950: 2 44 34;
+
+  /* Amber */
+  --amber-50: 255 251 235;
+  --amber-100: 254 243 199;
+  --amber-200: 253 230 138;
+  --amber-300: 252 211 77;
+  --amber-400: 251 191 36;
+  --amber-500: 245 158 11;
+  --amber-600: 217 119 6;
+  --amber-700: 180 83 9;
+  --amber-800: 146 64 14;
+  --amber-900: 120 53 15;
+  --amber-950: 69 26 3;
+
+  /* Cyan */
+  --cyan-50: 236 254 255;
+  --cyan-100: 207 250 254;
+  --cyan-200: 165 243 252;
+  --cyan-300: 103 232 249;
+  --cyan-400: 34 211 238;
+  --cyan-500: 6 182 212;
+  --cyan-600: 8 145 178;
+  --cyan-700: 14 116 144;
+  --cyan-800: 21 94 117;
+  --cyan-900: 22 78 99;
+  --cyan-950: 8 51 68;
+
+  /* Brand stops that are not on the scales above. */
+  --solar-green-50: 236 253 243;
+  --solar-gold: 255 184 52;
+  --solar-gold-ink: 169 122 18;
+  --solar-teal: 9 221 151;
+  --brand-blue: 0 176 255;
+  --brand-blue-deep: 0 138 200;
+  --whatsapp: 7 94 84;
+  --whatsapp-hover: 13 128 115;
+  --whatsapp-pressed: 5 73 66;
+  --chart-metals: 217 156 31;
+  --chart-investments: 99 102 241;
+  --chart-business: 20 184 166;
+
+  --app-overlay-top: rgb(var(--slate-50));
+  --app-overlay-bottom: rgb(var(--slate-200));
+  --chrome-light: rgb(var(--slate-50));
+  --chrome-dark: rgb(var(--slate-950));
+
+  --zakat-teal: rgb(var(--solar-teal));
+  --zakat-green: rgb(var(--emerald-500));
+  --zakat-gold: rgb(var(--chart-metals));
+  --zakat-silver: rgb(var(--slate-400));
+  --zakat-debt: rgb(var(--rose-500));
 }
 
 .dark {
@@ -54,6 +162,6 @@
   --ring: 214 100% 60%;
   --app-bg-top: 222 47% 11%;
   --app-bg-bottom: 229 84% 5%;
-  --app-overlay-top: #0f172a;
-  --app-overlay-bottom: #020617;
+  --app-overlay-top: rgb(var(--slate-900));
+  --app-overlay-bottom: rgb(var(--slate-950));
 }

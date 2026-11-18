@@ -5,8 +5,8 @@
                 <span class="material-symbols-outlined">diamond</span>
               </span>
               <span class="asset-card__title">
-                Gold &amp; silver
-                <span class="asset-card__hint">Jewellery, coins &amp; bars — priced at live rates</span>
+                Gold &amp; Silver
+                <span class="asset-card__hint">Jewellery, coins &amp; bars, priced at live rates</span>
               </span>
               <span id="metalsTotal" class="asset-card__total">0</span>
               <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
@@ -16,11 +16,14 @@
                 <label class="money-field" for="goldGrams">
                   <span class="money-field__label">
                     Gold
-                    <select id="goldUnit" class="mini-select" aria-label="Gold weight unit">
-                      <option value="g">grams</option>
-                      <option value="tola">tola</option>
-                      <option value="oz">oz</option>
-                    </select>
+                    <span class="unit-select">
+                      <select id="goldUnit" class="unit-select__input" aria-label="Gold weight unit">
+                        <option value="g">grams</option>
+                        <option value="tola">tola</option>
+                        <option value="oz">oz</option>
+                      </select>
+                      <span class="material-symbols-outlined unit-select__icon" aria-hidden="true">expand_more</span>
+                    </span>
                   </span>
                   <span class="money-field__control">
                     <input
@@ -37,7 +40,7 @@
                 </label>
                 <label class="money-field" for="goldKarat">
                   <span class="money-field__label">Purity</span>
-                  <span class="money-field__control">
+                  <span class="money-field__control select-field">
                     <select id="goldKarat" class="mini-select w-full" data-metal="goldKarat">
                       <option value="24">24K · 999</option>
                       <option value="22">22K · 916</option>
@@ -45,6 +48,7 @@
                       <option value="18">18K · 750</option>
                       <option value="14">14K · 585</option>
                     </select>
+                    <span class="material-symbols-outlined select-field__icon" aria-hidden="true">expand_more</span>
                   </span>
                 </label>
               </div>
@@ -53,11 +57,14 @@
                 <label class="money-field" for="silverGrams">
                   <span class="money-field__label">
                     Silver
-                    <select id="silverUnit" class="mini-select" aria-label="Silver weight unit">
-                      <option value="g">grams</option>
-                      <option value="tola">tola</option>
-                      <option value="oz">oz</option>
-                    </select>
+                    <span class="unit-select">
+                      <select id="silverUnit" class="unit-select__input" aria-label="Silver weight unit">
+                        <option value="g">grams</option>
+                        <option value="tola">tola</option>
+                        <option value="oz">oz</option>
+                      </select>
+                      <span class="material-symbols-outlined unit-select__icon" aria-hidden="true">expand_more</span>
+                    </span>
                   </span>
                   <span class="money-field__control">
                     <input
@@ -74,13 +81,14 @@
                 </label>
                 <label class="money-field" for="silverPurity">
                   <span class="money-field__label">Purity</span>
-                  <span class="money-field__control">
+                  <span class="money-field__control select-field">
                     <select id="silverPurity" class="mini-select w-full" data-metal="silverPurity">
                       <option value="1">Fine · 999</option>
                       <option value="0.958">958</option>
                       <option value="0.925">Sterling · 925</option>
                       <option value="0.8">800</option>
                     </select>
+                    <span class="material-symbols-outlined select-field__icon" aria-hidden="true">expand_more</span>
                   </span>
                 </label>
               </div>
@@ -91,14 +99,14 @@
                   <span id="goldWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
                     >0 g fine</span
                   >
-                  <span id="goldValueText" class="karat-row__value">—</span>
+                  <span id="goldValueText" class="karat-row__value">-</span>
                 </div>
                 <div class="karat-row">
                   <span class="karat-row__label">Silver</span>
                   <span id="silverWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
                     >0 g fine</span
                   >
-                  <span id="silverValueText" class="karat-row__value">—</span>
+                  <span id="silverValueText" class="karat-row__value">-</span>
                 </div>
               </div>
               <p class="inline-note">

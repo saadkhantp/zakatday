@@ -64,7 +64,7 @@
         if (result.metals) {
           showToast("Live gold &amp; silver prices updated".replace("&amp;", "&"), { duration: 2600 });
         } else if (result.rates) {
-          showToast("Currency rates updated — metal prices unavailable, enter them manually.", {
+          showToast("Currency rates updated, but metal prices are unavailable. Enter them manually.", {
             duration: 5200,
           });
         } else {
@@ -95,7 +95,7 @@
   }
 
   function priceLabel(value) {
-    if (!value) return "—";
+    if (!value) return "-";
     var currency = CS.getCurrency(state.currency);
     var digits = value < 10 ? 3 : 2;
     return CS.formatMoney(value, state.currency, { decimals: digits }) +

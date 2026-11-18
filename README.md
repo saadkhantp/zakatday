@@ -11,7 +11,7 @@ Live at **https://www.zakatday.cc**.
 - **Live rates** come from jsDelivr's `currency-api` (gold/silver priced per troy
   ounce and converted to grams in your currency), with `open.er-api.com` as a
   fiat fallback and manual metal prices as the final override.
-- **Zakat maths**: 2.5% of net zakatable assets once they reach the nisab —
+- **Zakat maths**: 2.5% of net zakatable assets once they reach the nisab:
   612.36 g of silver or 87.48 g of gold (per the chosen standard).
 - **WhatsApp receipt**: “Send to WhatsApp” renders a PNG receipt in the tab with
   [html2canvas](https://html2canvas.hertzen.com/) (pinned CDN build), hands it to
@@ -24,14 +24,14 @@ Live at **https://www.zakatday.cc**.
 - Static HTML, served straight from the repository root (GitHub Pages + `CNAME`).
 - Tailwind CSS v3 compiled through PostCSS to `dist/app.css`.
 - Plain classic scripts (`window.CurrencyService`, `window.ZakatEngine`,
-  `window.ZakatDay`) — no bundler, no framework, no runtime dependencies.
+  `window.ZakatDay`); no bundler, no framework, no runtime dependencies.
 - Google Fonts (Mulish + Material Symbols) loaded from the CDN.
 
 ## Files
 
 | Path | Purpose |
 | --- | --- |
-| `index.html` | Calculator page (generated — edit the sources below) |
+| `index.html` | Calculator page (generated; edit the sources below) |
 | `faq/index.html` | Zakat guide, privacy notes and FAQ (generated) |
 | `app.js` | DOM wiring, rendering, sheets, sharing (generated) |
 | `currency-service.js` | Currency catalogue, live FX/metals, formatting, favourites |
@@ -42,10 +42,10 @@ Live at **https://www.zakatday.cc**.
 | `src/styles/tailwind-entry.css` | Tailwind entry point + component classes |
 | `dist/app.css` | Built stylesheet (committed, served as-is) |
 | `manifest.json` | PWA manifest (root-absolute icon paths) |
-| `assets/icons/` | **Pending artwork** — favicons, Apple touch icon, 192/512 PWA icons |
-| `assets/og/` | **Pending artwork** — `og-image.png` (1200×630) and `twitter-card.png` |
-| `assets/brand/` | **Pending artwork** — `logo.svg` used by the structured data |
-| `favicon.ico`, `favicon.svg` | **Pending artwork** — served from the site root |
+| `assets/icons/` | **Pending artwork**: favicons, Apple touch icon, 192/512 PWA icons |
+| `assets/og/` | **Pending artwork**: `og-image.png` (1200×630) and `twitter-card.png` |
+| `assets/brand/` | **Pending artwork**: `logo.svg` used by the structured data |
+| `favicon.ico`, `favicon.svg` | **Pending artwork**: served from the site root |
 
 ### Asset & manifest wiring
 
@@ -92,6 +92,20 @@ Chrome (`CHROME_PATH` overrides the default macOS location).
   duplicate ids and leftover Bootstrap references.
 - `scripts/build-app.cjs` concatenates `build-fragments/app-*.js` and syntax-checks it.
 
+### Page layout
+
+`<main>` is a `.section-stack` (1.5rem between sections). The order is: intro
+card with the "How it works?" trigger, live rates, currency pills, asset cards,
+the "Check Your Due Zakat" button, the results card (`#zakatCard`), the
+breakdown, then icon-only reset / share / WhatsApp actions. The About and
+how-it-works copy lives in `#aboutModal` (`build-fragments/89-about-modal.html`)
+and every guide link lives only in the footer.
+
+Scroll and value motion is opt-in: `theme-init.js` adds `.motion-in` to `<html>`
+when JS runs and reduced motion is off, `build-fragments/app-25.js` reveals
+below-the-fold sections with an IntersectionObserver, and the CSS keeps every
+element visible without the class. Content is never hidden by a failed script.
+
 ## Verification
 
 | Script | Checks |
@@ -99,7 +113,7 @@ Chrome (`CHROME_PATH` overrides the default macOS location).
 | `test:engine` | Currency service + zakat engine maths (60+ assertions, sandboxed) |
 | `test:css` | Every project-defined class in `index.html` survives cssnano |
 | `test:audit` | No `sessionStorage`/IndexedDB/cookies/URL writes; only 4 storage keys; every `getElementById` target exists; all local assets present |
-| `test:smoke` | Real Chrome: live rates, maths, currency conversion, manual prices, summary, reset, theme, privacy, the FAQ page, SEO/JSON-LD metadata and the WhatsApp receipt flow |
+| `test:smoke` | Real Chrome: live rates, maths, currency conversion, manual prices, summary, reset, the About modal, the "Check Your Due Zakat" hand-off, theme, privacy, the FAQ page, SEO/JSON-LD metadata and the WhatsApp receipt flow |
 
 ## Zakat accuracy
 

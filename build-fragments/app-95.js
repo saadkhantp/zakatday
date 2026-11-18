@@ -28,14 +28,6 @@
       });
     }
 
-    var manage = $("manageCurrenciesBtn");
-    if (manage) {
-      manage.addEventListener("click", function () {
-        refreshPickerViews();
-        openSheetEl($("currencySheet"), manage);
-      });
-    }
-
     each("[data-sheet-close]", function (node) {
       node.addEventListener("click", function () {
         closeSheetEl(node.closest(".more-sheet"));
@@ -47,7 +39,13 @@
         var action = node.dataset.moreAction;
         closeSheetEl($("moreSheet"));
         setTimeout(function () {
-          if (action === "currency") {
+          if (action === "about") {
+            /* The sheet returns focus to the menu button as it finishes
+               closing. Open after that so the dialog keeps the focus. */
+            setTimeout(function () {
+              openAbout($("moreMenuBtn"));
+            }, 200);
+          } else if (action === "currency") {
             refreshPickerViews();
             openSheetEl($("currencySheet"), $("currencyTrigger"));
           } else if (action === "rates") {
@@ -134,18 +132,12 @@
         shareText(summaryForShare());
       });
     }
-    var whatsapp = $("whatsappBtn");
-    if (whatsapp) {
-      whatsapp.addEventListener("click", function () {
-        window.open(whatsappUrl(summaryForShare()), "_blank", "noopener,noreferrer");
-      });
-    }
     var copy = $("copySummaryBtn");
     if (copy) {
       copy.addEventListener("click", function () {
         var text = $("summaryText") ? $("summaryText").textContent : "";
         copyText(text).then(function (ok) {
-          showToast(ok ? "Summary copied." : "Copy failed — select the text manually.", {
+          showToast(ok ? "Summary copied." : "Copy failed. Select the text manually.", {
             duration: 2600,
           });
         });

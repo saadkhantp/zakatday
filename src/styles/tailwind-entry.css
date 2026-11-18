@@ -24,6 +24,11 @@
     @apply font-sans antialiased;
     font-family: "Mulish", sans-serif;
     -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   .theme {
@@ -81,22 +86,22 @@
 }
 
 @layer utilities {
-  /* Plain CSS (not @apply) so cssnano never inlines it away — the markup uses
+  /* Plain CSS (not @apply) so cssnano never inlines it away: the markup uses
      this class directly on every card. */
   .glass-card {
     border-width: 1px;
     border-style: solid;
-    border-color: rgb(14 165 233 / 0.25);
-    background-color: rgb(255 255 255 / 0.85);
-    box-shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+    border-color: rgb(var(--sky-500) / 0.25);
+    background-color: rgb(var(--white) / 0.85);
+    box-shadow: 0 10px 30px rgb(var(--slate-900) / 0.08);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
   }
 
   .dark .glass-card {
-    border-color: rgb(14 165 233 / 0.2);
-    background-color: rgb(255 255 255 / 0.05);
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+    border-color: rgb(var(--sky-500) / 0.2);
+    background-color: rgb(var(--white) / 0.05);
+    box-shadow: 0 10px 30px rgb(var(--black) / 0.25);
   }
 
   /* Plain CSS: cssnano inlines @apply-only rules, and the markup uses these classes. */
@@ -107,7 +112,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* Brand gradient: #00B0FF → #008AC8 with a #09DD97 accent in the corner. */
+  /* Brand gradient: --brand-blue → --brand-blue-deep, with --solar-teal in the corner. */
   .text-gradient-solar {
     -webkit-background-clip: text;
     background-clip: text;
@@ -115,17 +120,17 @@
     background-image:
       radial-gradient(
         ellipse 26% 36% at 100% 100%,
-        #09dd97 0%,
+        rgb(var(--solar-teal)) 0%,
         transparent 68%
       ),
-      linear-gradient(112deg, #00b0ff 0%, #008ac8 82%);
+      linear-gradient(112deg, rgb(var(--brand-blue)) 0%, rgb(var(--brand-blue-deep)) 82%);
   }
 
   .text-gradient-zakat {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-image: linear-gradient(112deg, #09dd97 0%, #10b981 70%);
+    background-image: linear-gradient(112deg, rgb(var(--solar-teal)) 0%, rgb(var(--emerald-500)) 70%);
   }
 
   .emoji-flag {
@@ -217,12 +222,12 @@
   .nisab-meter__fill {
     @apply absolute inset-y-0 left-0 rounded-full transition-[width,background-color,box-shadow] duration-500 ease-smooth;
     width: 0;
-    background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+    background: linear-gradient(90deg, rgb(var(--sky-400)) 0%, rgb(var(--sky-500)) 100%);
   }
 
   .nisab-meter[data-state="due"] .nisab-meter__fill {
-    background: linear-gradient(90deg, #09dd97 0%, #10b981 100%);
-    box-shadow: 0 0 14px 1px rgba(9, 221, 151, 0.55);
+    background: linear-gradient(90deg, rgb(var(--solar-teal)) 0%, rgb(var(--emerald-500)) 100%);
+    box-shadow: 0 0 14px 1px rgb(var(--solar-teal) / 0.55);
   }
 
   .zakat-amount {
@@ -231,6 +236,59 @@
 
   .zakat-amount[data-state="due"] {
     @apply text-gradient-zakat;
+  }
+
+  /* Zakat result card: tinted so it reads as the output of the form above. */
+  .zakat-card {
+    @apply relative;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 40px -28px rgb(var(--slate-900) / 0.45);
+    outline: none;
+  }
+
+  .zakat-card__head {
+    @apply mb-3 flex items-center gap-3;
+  }
+
+  .zakat-card__icon {
+    @apply grid size-11 shrink-0 place-items-center rounded-2xl bg-sky-500/10 text-sky-700 dark:bg-sky-400/15 dark:text-sky-200;
+  }
+
+  .zakat-card__icon .material-symbols-outlined {
+    @apply text-[1.45rem] leading-none;
+  }
+
+  .zakat-card__title {
+    @apply font-logo text-[1.45rem] font-extrabold leading-none tracking-tight text-slate-900 dark:text-white;
+  }
+
+  .zakat-card__lede {
+    @apply mt-1 text-[0.72rem] font-semibold leading-snug text-slate-500 dark:text-slate-400;
+  }
+
+  .zakat-card:focus-visible {
+    @apply ring-2 ring-sky-500/40 ring-offset-2 ring-offset-transparent;
+  }
+
+  .zakat-card.is-flashing {
+    animation: cardFlash 0.9s ease-out;
+  }
+
+  /* "Check Your Due Zakat" sits right after the last input. */
+  .check-due-btn {
+    @apply w-full py-3 text-[0.88rem];
+  }
+
+  .check-due-btn[disabled] {
+    @apply cursor-not-allowed opacity-45;
+  }
+
+  .check-due-hint {
+    @apply m-0 text-center text-[0.7rem] font-semibold text-slate-500 dark:text-slate-400;
+  }
+
+  .check-due-hint[hidden] {
+    display: none;
   }
 
   /* ---------- Privacy ---------- */
@@ -252,6 +310,10 @@
 
   .reset-btn .material-symbols-outlined {
     @apply text-[0.95rem] leading-none;
+  }
+
+  .privacy-badge--centered {
+    @apply mx-auto flex w-fit max-w-full items-center justify-center text-center;
   }
 
   /* ---------- Favorite currency pills ---------- */
@@ -365,6 +427,33 @@
     @apply cursor-pointer rounded-lg border border-slate-200/90 bg-white/90 px-2 py-2 text-[0.78rem] font-bold text-slate-700 transition-colors hover:border-slate-300 focus-visible:border-sky-500/80 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky-500/20 dark:border-white/10 dark:bg-slate-950/50 dark:text-slate-200;
   }
 
+  /* Weight unit sits in the label as text plus a chevron, so the input
+     below lines up with the purity select. */
+  .unit-select {
+    @apply relative inline-flex items-center;
+  }
+
+  .unit-select__input {
+    @apply cursor-pointer appearance-none border-0 bg-transparent py-0 pl-0 pr-5 text-[0.78rem] font-bold text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 dark:text-slate-300;
+  }
+
+  .unit-select__icon {
+    @apply pointer-events-none absolute right-0 text-[1rem] leading-none text-slate-400;
+  }
+
+  .select-field__icon {
+    @apply pointer-events-none absolute right-3 z-[1] text-[1.15rem] leading-none text-slate-400;
+  }
+
+  .select-field .mini-select {
+    @apply appearance-none py-2 pl-2.5 pr-9 text-[0.95rem] font-semibold leading-normal;
+  }
+
+  .metal-grid .money-input,
+  .select-field .mini-select {
+    height: 2.625rem;
+  }
+
   .inline-note {
     @apply text-[0.68rem] font-medium leading-relaxed text-slate-500 dark:text-slate-400;
   }
@@ -437,7 +526,7 @@
   }
 
   .asset-card--metal .asset-card__icon {
-    @apply bg-solar-gold/15 text-[#a97a12] dark:bg-solar-gold/20 dark:text-solar-gold;
+    @apply bg-solar-gold/15 text-solar-gold-ink dark:bg-solar-gold/20 dark:text-solar-gold;
   }
 
   /* ---------- Breakdown bar ---------- */
@@ -449,24 +538,29 @@
     @apply h-full transition-[width] duration-500 ease-smooth;
   }
 
-  .breakdown-bar__seg--cash {
-    background: #0ea5e9;
+  .breakdown-bar__seg--cash,
+  .breakdown-legend__dot--cash {
+    background: rgb(var(--sky-500));
   }
 
-  .breakdown-bar__seg--metals {
-    background: #d99c1f;
+  .breakdown-bar__seg--metals,
+  .breakdown-legend__dot--metals {
+    background: rgb(var(--chart-metals));
   }
 
-  .breakdown-bar__seg--investments {
-    background: #6366f1;
+  .breakdown-bar__seg--investments,
+  .breakdown-legend__dot--investments {
+    background: rgb(var(--chart-investments));
   }
 
-  .breakdown-bar__seg--business {
-    background: #14b8a6;
+  .breakdown-bar__seg--business,
+  .breakdown-legend__dot--business {
+    background: rgb(var(--chart-business));
   }
 
-  .breakdown-bar__seg--debts {
-    background: #f43f5e;
+  .breakdown-bar__seg--debts,
+  .breakdown-legend__dot--debts {
+    background: rgb(var(--rose-500));
   }
 
   .breakdown-legend {
@@ -488,13 +582,34 @@
 
   /** Same greens as ayahday ResultsSidebar WhatsApp CTA */
   .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-1.5 rounded-xl border border-transparent bg-[#075E54] px-3.5 py-2.5 text-[0.82rem] font-bold text-white transition-[colors,background-color] duration-ui ease-smooth hover:bg-[#0d8073] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 active:bg-[#054942];
+    @apply inline-flex items-center justify-center gap-1.5 rounded-xl border border-transparent bg-whatsapp px-3.5 py-2.5 text-[0.82rem] font-bold text-white transition-[colors,background-color] duration-ui ease-smooth hover:bg-whatsapp-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 active:bg-whatsapp-pressed;
   }
 
   .btn-primary .material-symbols-outlined,
   .btn-secondary .material-symbols-outlined,
   .btn-whatsapp .material-symbols-outlined {
     @apply text-[1.05rem] leading-none;
+  }
+
+  /* ---------- Icon-only action buttons ---------- */
+  .btn-icon {
+    @apply inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-slate-300/80 bg-white/80 p-0 text-slate-600 transition-[color,background-color,border-color,transform] duration-ui ease-smooth hover:border-slate-400/70 hover:bg-white hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 active:translate-y-px dark:border-white/15 dark:bg-white/5 dark:text-slate-300 dark:hover:border-white/25 dark:hover:bg-white/10 dark:hover:text-white;
+  }
+
+  .btn-icon .material-symbols-outlined {
+    @apply text-[1.2rem] leading-none;
+  }
+
+  .btn-icon--whatsapp {
+    @apply border-transparent bg-whatsapp text-white hover:border-transparent hover:bg-whatsapp-hover hover:text-white focus-visible:ring-sky-400/50 active:bg-whatsapp-pressed dark:border-transparent dark:bg-whatsapp dark:text-white dark:hover:bg-whatsapp-hover dark:hover:text-white;
+  }
+
+  .action-row {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .action-row__share {
+    @apply flex items-center gap-2;
   }
 
   /* WhatsApp brand glyph (inline SVG; Material Symbols has no WhatsApp icon). */
@@ -507,6 +622,23 @@
 
   .footer-link {
     @apply cursor-pointer border-0 bg-transparent text-sm text-slate-600 underline underline-offset-2 transition hover:text-cyan-700 dark:text-slate-300 dark:hover:text-cyan-200;
+  }
+
+  /* A separator only reads as "between links" if it stays on the same line as
+     the link after it, so draw it as a pseudo-element on that link. */
+  .footer-link--sep {
+    position: relative;
+  }
+
+  .footer-link--sep::before {
+    content: "·";
+    position: absolute;
+    right: 100%;
+    width: 0.75rem;
+    text-align: center;
+    color: currentColor;
+    text-decoration: none;
+    pointer-events: none;
   }
 
   .stat-chip {
@@ -542,13 +674,18 @@
   }
 
   .more-sheet__panel {
-    @apply absolute inset-x-0 bottom-0 mx-auto flex w-full max-w-lg flex-col overflow-hidden rounded-t-3xl border border-b-0 border-slate-200/80 bg-white/95 shadow-[0_-16px_48px_rgba(15,23,42,0.18)] backdrop-blur-md dark:border-white/15 dark:bg-slate-900/95 dark:shadow-[0_-16px_48px_rgba(0,0,0,0.5)];
+    @apply absolute inset-x-0 bottom-0 mx-auto flex w-full max-w-lg flex-col overflow-hidden rounded-t-3xl border border-b-0 border-slate-200/80 bg-white/95 backdrop-blur-md dark:border-white/15 dark:bg-slate-900/95;
+    box-shadow: 0 -16px 48px rgb(var(--slate-900) / 0.18);
     max-height: min(82dvh, 38rem);
     padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
     transform: translateY(110%);
     transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
     touch-action: none;
     user-select: none;
+  }
+
+  .dark .more-sheet__panel {
+    box-shadow: 0 -16px 48px rgb(var(--black) / 0.5);
   }
 
   .more-sheet[data-open="true"] .more-sheet__panel {
@@ -696,8 +833,13 @@
 
   /* ---------- Rate editor popover ---------- */
   .rate-editor {
-    @apply absolute right-0 top-[calc(100%+0.5rem)] z-40 w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-slate-200/80 bg-white p-3 text-left shadow-[0_12px_36px_rgba(15,23,42,0.12)] dark:border-slate-400/30 dark:bg-slate-950 dark:shadow-[0_12px_36px_rgba(2,6,23,0.45)];
+    @apply absolute right-0 top-[calc(100%+0.5rem)] z-40 w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-slate-200/80 bg-white p-3 text-left dark:border-slate-400/30 dark:bg-slate-950;
+    box-shadow: 0 12px 36px rgb(var(--slate-900) / 0.12);
     user-select: text;
+  }
+
+  .dark .rate-editor {
+    box-shadow: 0 12px 36px rgb(var(--slate-950) / 0.45);
   }
 
   .rate-editor[hidden] {
@@ -749,8 +891,13 @@
   }
 
   .updates-modal__sheet {
-    @apply relative z-10 flex max-h-[min(88dvh,40rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.18)] dark:border-white/15 dark:bg-slate-900 dark:shadow-[0_18px_50px_rgba(0,0,0,0.5)];
+    @apply relative z-10 flex max-h-[min(88dvh,40rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-white/15 dark:bg-slate-900;
+    box-shadow: 0 18px 50px rgb(var(--slate-900) / 0.18);
     animation: modalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .dark .updates-modal__sheet {
+    box-shadow: 0 18px 50px rgb(var(--black) / 0.5);
   }
 
   .updates-modal__header {
@@ -861,7 +1008,7 @@
 }
 
 .brand-logo-slot:focus-visible {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid rgb(var(--sky-500));
   outline-offset: 3px;
 }
 
@@ -877,17 +1024,43 @@
   width: auto;
 }
 
-/* ---------- How ZakatDay works ---------- */
-.how-it-works {
+/* ---------- Page rhythm ---------- */
+/* One source of truth for vertical gaps between <main> sections. */
+.section-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.5rem;
+}
+
+/* ---------- Intro card (h1 + About trigger) ---------- */
+.intro-card {
   @apply section-card p-4;
 }
 
-.how-it-works__heading {
-  @apply section-heading;
+.intro-card__top {
+  @apply flex items-start justify-between gap-2;
 }
 
-.how-it-works__lede {
-  @apply mt-1.5 text-[0.8rem] leading-relaxed text-slate-600 dark:text-slate-300;
+.intro-card__title {
+  @apply font-logo text-[1.5rem] font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white;
+}
+
+.intro-card__lede {
+  @apply mt-1 text-[0.78rem] font-semibold leading-relaxed text-slate-600 dark:text-slate-300;
+}
+
+.intro-card__cta {
+  @apply mt-3 w-full;
+}
+
+/* ---------- About / How ZakatDay works ---------- */
+.about-modal__lede {
+  @apply m-0 text-[0.82rem] leading-relaxed text-slate-600 dark:text-slate-300;
+}
+
+#aboutModalBody p,
+#aboutModalBody dd {
+  line-height: 1.55;
 }
 
 .how-it-works__list {
@@ -910,6 +1083,49 @@
   @apply text-[0.76rem];
 }
 
+/* ---------- Motion: reveal on scroll, fade on change ---------- */
+/* `motion-in` is added by theme-init.js only when JS + motion are both on,
+   so nothing below ever hides content for users without JS. */
+.motion-in [data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.motion-in [data-reveal][data-revealed="true"] {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+.motion-fade {
+  animation: textFade 0.32s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-in [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-fade,
+  .zakat-card.is-flashing {
+    animation: none;
+  }
+}
+
+/* Result card is the primary output, so its edge uses the brand accent.
+   Unlayered so it wins over the utility-layer glass border. */
+.section-card.zakat-card {
+  border-width: 2px;
+  border-color: rgb(var(--brand-blue) / 0.9);
+}
+
 /* ---------- Share modal ---------- */
 .whatsapp-share-trigger {
   @apply text-[0.8rem];
@@ -929,6 +1145,11 @@
 
 .share-privacy__option input {
   @apply mt-0.5 size-4 shrink-0 cursor-pointer accent-emerald-600;
+  color-scheme: light;
+}
+
+.dark .share-privacy__option input {
+  color-scheme: dark;
 }
 
 .share-privacy__option small {
@@ -961,9 +1182,9 @@
   box-sizing: border-box;
   padding: 16px;
   border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  color: #0f172a;
+  background: rgb(var(--white));
+  border: 1px solid rgb(var(--slate-200));
+  color: rgb(var(--slate-900));
   font-family: "Mulish", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
@@ -975,7 +1196,7 @@
   justify-content: space-between;
   gap: 8px;
   padding-bottom: 10px;
-  border-bottom: 1px dashed #cbd5e1;
+  border-bottom: 1px dashed rgb(var(--slate-300));
 }
 
 .receipt-brand-slot__mark {
@@ -985,13 +1206,22 @@
 }
 
 .share-card__brand-rest {
-  color: #0f172a;
+  color: rgb(var(--slate-900));
+}
+
+/* html2canvas paints background-clip text as a solid block. The receipt logo
+   uses a flat brand color so the captured PNG matches the letters. */
+.share-card .text-gradient-solar {
+  background-image: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: rgb(var(--brand-blue));
 }
 
 .share-card__date {
   font-size: 0.66rem;
   font-weight: 700;
-  color: #64748b;
+  color: rgb(var(--slate-500));
   white-space: nowrap;
 }
 
@@ -1006,8 +1236,8 @@
   display: inline-block;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #f1f5f9;
-  color: #334155;
+  background: rgb(var(--slate-100));
+  color: rgb(var(--slate-700));
   font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -1028,13 +1258,13 @@
 }
 
 .share-card__row dt {
-  color: #475569;
+  color: rgb(var(--slate-600));
   font-weight: 600;
 }
 
 .share-card__row dd {
   margin: 0;
-  color: #0f172a;
+  color: rgb(var(--slate-900));
   font-weight: 800;
   white-space: nowrap;
 }
@@ -1042,15 +1272,15 @@
 .share-card__row--total {
   margin-top: 4px;
   padding-top: 6px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgb(var(--slate-200));
 }
 
 .share-card__note {
   margin: 8px 0 0;
   padding: 6px 8px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #64748b;
+  background: rgb(var(--slate-50));
+  color: rgb(var(--slate-500));
   font-size: 0.64rem;
   line-height: 1.4;
 }
@@ -1059,7 +1289,7 @@
   margin-top: 12px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #ecfdf3 0%, #e0f2fe 100%);
+  background: linear-gradient(135deg, rgb(var(--solar-green-50)) 0%, rgb(var(--sky-100)) 100%);
   text-align: center;
 }
 
@@ -1069,7 +1299,7 @@
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #047857;
+  color: rgb(var(--emerald-700));
 }
 
 .share-card__amount {
@@ -1078,7 +1308,7 @@
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: #0f172a;
+  color: rgb(var(--slate-900));
   word-break: break-word;
 }
 
@@ -1086,22 +1316,22 @@
   margin: 2px 0 0;
   font-size: 0.66rem;
   font-weight: 700;
-  color: #0369a1;
+  color: rgb(var(--sky-700));
 }
 
 .share-card__nisab-line {
   margin: 6px 0 0;
   font-size: 0.64rem;
   font-weight: 600;
-  color: #475569;
+  color: rgb(var(--slate-600));
 }
 
 .share-card__foot {
   margin: 10px 0 0;
   padding-top: 8px;
-  border-top: 1px dashed #cbd5e1;
+  border-top: 1px dashed rgb(var(--slate-300));
   font-size: 0.6rem;
   line-height: 1.4;
-  color: #94a3b8;
+  color: rgb(var(--slate-400));
   text-align: center;
 }

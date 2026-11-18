@@ -14,12 +14,13 @@ const order = [
   "85-asset-metals",
   "86-asset-investments",
   "87-asset-business-debts",
-  "89-how-it-works",
+  "88-zakat-result",
   "90-main-tail",
   "91-footer",
   "92-more-sheet",
   "93-currency-sheet",
   "94-modals",
+  "89-about-modal",
   "95-scripts",
 ];
 

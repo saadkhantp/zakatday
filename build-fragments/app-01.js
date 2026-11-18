@@ -3,7 +3,7 @@
  *
  * Owns DOM wiring only: all maths lives in zakat-engine.js, all rates and
  * formatting in currency-service.js. Nothing the user types is transmitted or
- * persisted — amounts exist only in the `state` object for this tab's lifetime.
+ * persisted. Amounts exist only in the `state` object for this tab's lifetime.
  */
 (function () {
   "use strict";

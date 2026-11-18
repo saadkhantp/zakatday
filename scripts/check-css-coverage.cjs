@@ -10,7 +10,7 @@ const root = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const cssPath = path.join(root, "dist/app.css");
 if (!fs.existsSync(cssPath)) {
-  console.log("dist/app.css missing — run npm run build first.");
+  console.log("dist/app.css missing. Run npm run build first.");
   process.exit(1);
 }
 const css = fs.readFileSync(cssPath, "utf8");

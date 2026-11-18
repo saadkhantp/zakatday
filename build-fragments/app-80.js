@@ -69,7 +69,7 @@
         closeRateEditor();
         render();
         showToast(
-          live.metals ? "Back to live metal prices." : "Live prices unavailable — enter a price.",
+          live.metals ? "Back to live metal prices." : "Live prices unavailable. Enter a price.",
           { duration: 3200 },
         );
       });

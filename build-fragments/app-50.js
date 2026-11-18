@@ -4,36 +4,7 @@
   /* ------------------------------------------------------------------ */
 
   function renderFavPills() {
-    var wrap = $("favPills");
-    if (!wrap) return;
-    var favorites = CS.getFavorites();
-    if (favorites.indexOf(state.currency) === -1) {
-      favorites = [state.currency].concat(favorites).slice(0, CS.MAX_FAVORITES);
-    }
-    wrap.textContent = "";
-    favorites.forEach(function (code) {
-      var meta = CS.getCurrency(code);
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "fav-pill";
-      btn.dataset.currency = code;
-      btn.setAttribute("aria-pressed", code === state.currency ? "true" : "false");
-      btn.setAttribute("aria-label", meta.name + " (" + code + ")");
-
-      var flag = document.createElement("span");
-      flag.className = "emoji-flag";
-      flag.setAttribute("aria-hidden", "true");
-      flag.textContent = CS.flagFor(meta.country);
-      var label = document.createElement("span");
-      label.textContent = code;
-      btn.appendChild(flag);
-      btn.appendChild(label);
-
-      btn.addEventListener("click", function () {
-        changeCurrency(code);
-      });
-      wrap.appendChild(btn);
-    });
+    /* Favourite pills were removed. Currency is chosen from the header. */
   }
 
   function renderCurrencyList(query) {

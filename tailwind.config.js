@@ -1,6 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-/* Aligned with ayahday/tailwind.config.js (solar tokens, smooth easing, animate plugin) */
+/* Aligned with ayahday/tailwind.config.js (solar tokens, smooth easing, animate plugin).
+   Color values live in src/styles/tokens.css. This file only points at them. */
 const tailwindcssAnimate = require("tailwindcss-animate");
+
+const channel = (token) => `rgb(var(${token}) / <alpha-value>)`;
+
+function scale(prefix, steps) {
+  const stops = steps || [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+  const colors = {};
+  for (const step of stops) colors[step] = channel(`--${prefix}-${step}`);
+  return colors;
+}
+
+const SOLAR_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 module.exports = {
   darkMode: ["class"],
@@ -52,46 +64,51 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        white: channel("--white"),
+        black: channel("--black"),
+        slate: scale("slate"),
+        sky: scale("sky"),
+        rose: scale("rose"),
+        emerald: scale("emerald"),
+        amber: scale("amber"),
+        cyan: scale("cyan"),
         solar: {
-          green: {
-            50: "#ecfdf3",
-            100: "#d1fae5",
-            200: "#a7f3d0",
-            300: "#6ee7b7",
-            400: "#34d399",
-            500: "#10b981",
-            600: "#059669",
-            700: "#047857",
-            800: "#065f46",
-            900: "#064e3b",
+          green: Object.assign(scale("emerald", SOLAR_STEPS), {
+            50: channel("--solar-green-50"),
+          }),
+          blue: scale("sky", SOLAR_STEPS),
+          slate: scale("slate", SOLAR_STEPS),
+          gold: {
+            DEFAULT: channel("--solar-gold"),
+            ink: channel("--solar-gold-ink"),
           },
-          blue: {
-            50: "#f0f9ff",
-            100: "#e0f2fe",
-            200: "#bae6fd",
-            300: "#7dd3fc",
-            400: "#38bdf8",
-            500: "#0ea5e9",
-            600: "#0284c7",
-            700: "#0369a1",
-            800: "#075985",
-            900: "#0c4a6e",
-          },
-          slate: {
-            50: "#f8fafc",
-            100: "#f1f5f9",
-            200: "#e2e8f0",
-            300: "#cbd5e1",
-            400: "#94a3b8",
-            500: "#64748b",
-            600: "#475569",
-            700: "#334155",
-            800: "#1e293b",
-            900: "#0f172a",
-          },
-          gold: "#FFB834",
-          teal: "#09dd97",
+          teal: channel("--solar-teal"),
         },
+        whatsapp: {
+          DEFAULT: channel("--whatsapp"),
+          hover: channel("--whatsapp-hover"),
+          pressed: channel("--whatsapp-pressed"),
+        },
+        /* Preflight placeholder color. Same value Tailwind used as gray-400. */
+        gray: {
+          400: channel("--gray-400"),
+        },
+      },
+      ringColor: {
+        DEFAULT: ({ opacityValue }) =>
+          opacityValue === undefined
+            ? "hsl(var(--ring))"
+            : `hsl(var(--ring) / ${opacityValue})`,
+      },
+      ringOffsetColor: {
+        DEFAULT: "rgb(var(--white))",
+      },
+      borderColor: {
+        DEFAULT: "hsl(var(--border) / <alpha-value>)",
+      },
+      boxShadow: {
+        sm: "0 1px 2px 0 rgb(var(--black) / 0.05)",
+        lg: "0 10px 15px -3px rgb(var(--black) / 0.1), 0 4px 6px -4px rgb(var(--black) / 0.1)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -124,12 +141,22 @@ module.exports = {
           to: { opacity: "1", transform: "translateY(0) scale(1)" },
         },
         meterGlow: {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(9, 221, 151, 0.55)" },
-          "50%": { boxShadow: "0 0 18px 2px rgba(9, 221, 151, 0.45)" },
+          "0%, 100%": { boxShadow: "0 0 0 0 rgb(var(--solar-teal) / 0.55)" },
+          "50%": { boxShadow: "0 0 18px 2px rgb(var(--solar-teal) / 0.45)" },
         },
         savedMenuPulse: {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.14)" },
+        },
+        /* Summary / result refreshes and the "Check your Zakat" confirmation. */
+        textFade: {
+          from: { opacity: "0", transform: "translateY(4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        cardFlash: {
+          "0%": { boxShadow: "0 0 0 0 rgb(var(--sky-500) / 0.55)" },
+          "45%": { boxShadow: "0 0 0 6px rgb(var(--sky-500) / 0.18)" },
+          "100%": { boxShadow: "0 0 0 0 rgb(var(--sky-500) / 0)" },
         },
       },
       animation: {
@@ -140,6 +167,8 @@ module.exports = {
         "list-item-in": "verseIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards",
         "meter-glow": "meterGlow 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite",
         "saved-menu-pulse": "savedMenuPulse 0.6s cubic-bezier(0.22, 1, 0.36, 1) 2",
+        "text-fade": "textFade 0.32s ease-out",
+        "card-flash": "cardFlash 0.9s ease-out",
       },
     },
   },

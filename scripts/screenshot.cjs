@@ -63,6 +63,12 @@ server.listen(0, "127.0.0.1", async () => {
       gold.dispatchEvent(new Event("input", { bubbles: true }));
     });
     await sleep(600);
+    await page.evaluate(() => {
+      document.querySelectorAll("[data-reveal]").forEach((node) => {
+        node.setAttribute("data-revealed", "true");
+      });
+    });
+    await sleep(300);
     await page.screenshot({ path: path.join(root, "dist", "preview-" + theme + ".png"), fullPage: true });
     console.log("wrote dist/preview-" + theme + ".png");
     await page.close();

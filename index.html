@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <!-- Google tag (gtag.js) — page views only; no calculator amounts are sent. -->
+    <!-- Google tag (gtag.js): page views only; no calculator amounts are sent. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q118LFKYR"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -17,10 +17,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>ZakatDay — Clean, Private Global Zakat Calculator (Live Gold, Silver &amp; FX)</title>
+    <title>ZakatDay: Clean, Private Global Zakat Calculator (Live Gold, Silver &amp; FX)</title>
     <meta
       name="description"
-      content="A clean, distraction-free Zakat calculator with live gold and silver nisab rates, 150+ currencies, tola, gram and karat support — and zero data storage."
+      content="A clean, distraction-free Zakat calculator with live gold and silver nisab rates, 150+ currencies, tola, gram and karat support, and zero data storage."
     />
     <meta name="color-scheme" content="light dark" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -44,7 +44,7 @@
     <meta property="og:site_name" content="ZakatDay" />
     <meta
       property="og:title"
-      content="ZakatDay — Clean, Private Global Zakat Calculator (Live Gold, Silver &amp; FX)"
+      content="ZakatDay: Clean, Private Global Zakat Calculator (Live Gold, Silver &amp; FX)"
     />
     <meta
       property="og:description"
@@ -55,18 +55,18 @@
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="ZakatDay — a clean, private Zakat calculator" />
+    <meta property="og:image:alt" content="ZakatDay, a clean and private Zakat calculator" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ZakatDay — Clean, Private Global Zakat Calculator" />
+    <meta name="twitter:title" content="ZakatDay: Clean, Private Global Zakat Calculator" />
     <meta
       name="twitter:description"
-      content="Live gold and silver nisab rates, 150+ currencies, tola/gram/karat support — and nothing you type is stored."
+      content="Live gold and silver nisab rates, 150+ currencies, tola/gram/karat support, and nothing you type is stored."
     />
     <meta name="twitter:image" content="https://www.zakatday.cc/assets/og/twitter-card.png" />
-    <meta name="twitter:image:alt" content="ZakatDay — a clean, private Zakat calculator" />
-    <!-- Browser chrome: the default meta comes first (theme.js keeps it in sync);
-         the prefers-color-scheme pair follows for browsers that honour it. -->
+    <meta name="twitter:image:alt" content="ZakatDay, a clean and private Zakat calculator" />
+    <!-- Browser chrome. Values match --chrome-light and --chrome-dark in
+         src/styles/tokens.css. theme-init.js rewrites them from those tokens. -->
     <meta name="theme-color" content="#f8fafc" />
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
@@ -75,7 +75,7 @@
     <meta name="apple-mobile-web-app-title" content="ZakatDay" />
     <meta name="application-name" content="ZakatDay" />
 
-    <!-- Icons & PWA. Standardised paths — drop the final artwork in as-is. -->
+    <!-- Icons & PWA. Standardised paths: drop the final artwork in as-is. -->
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -203,10 +203,6 @@
               ><span class="text-slate-900 dark:text-white">Day</span>
             </span>
           </a>
-          <span
-            class="hidden rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[0.56rem] font-extrabold uppercase tracking-wider text-emerald-700 sm:inline-block dark:border-emerald-400/30 dark:text-emerald-300"
-            >Zero storage</span
-          >
         </div>
 
         <div class="header-actions">
@@ -253,106 +249,8 @@
         </div>
       </header>
 
-      <main id="calculator" class="space-y-3">
-        <!-- ================= About ================= -->
-        <section class="section-card mb-3 p-3.5 sm:p-4" aria-labelledby="aboutHeading">
-          <h2 id="aboutHeading" class="section-heading">About ZakatDay</h2>
-          <p class="mt-1.5 text-[0.78rem] leading-relaxed text-slate-600 dark:text-slate-300">
-            ZakatDay works out the 2.5% Zakat due on your net zakatable wealth once it reaches the
-            nisab — using live gold and silver prices in your own currency. Everything is calculated
-            on your device: no account, no ads, and nothing you type is stored or sent.
-          </p>
-        </section>
-
-        <section class="section-card fade-in p-3.5 sm:p-4" aria-labelledby="heroTitle">
-          <div class="mb-3 flex items-center justify-between gap-2">
-            <div class="min-w-0">
-              <h1 id="heroTitle" class="section-heading">Your Zakat</h1>
-              <p class="mt-0.5 text-[0.68rem] font-semibold leading-snug text-slate-500 dark:text-slate-400">
-                Free Zakat calculator — private, live rates, no sign-up
-              </p>
-            </div>
-            <span id="heroCurrencyCode" class="stat-chip font-extrabold text-slate-800 dark:text-slate-100"
-              >USD</span
-            >
-          </div>
-
-          <div class="nisab-toggle mb-3.5" role="group" aria-label="Nisab standard">
-            <button type="button" class="nisab-toggle__btn" data-standard="silver" aria-pressed="true">
-              Silver nisab
-              <small>612.36 g · majority</small>
-            </button>
-            <button type="button" class="nisab-toggle__btn" data-standard="gold" aria-pressed="false">
-              Gold nisab
-              <small>87.48 g</small>
-            </button>
-          </div>
-
-          <p class="mb-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
-            Zakat due · 2.5%
-          </p>
-          <p id="zakatAmount" class="zakat-amount mb-3" data-state="none" aria-live="polite">—</p>
-
-          <div
-            id="nisabMeter"
-            class="nisab-meter mb-1.5"
-            data-state="below"
-            role="progressbar"
-            aria-labelledby="nisabMeterLabel"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow="0"
-          >
-            <div id="nisabMeterFill" class="nisab-meter__fill"></div>
-          </div>
-          <p
-            id="nisabMeterLabel"
-            class="text-[0.72rem] font-semibold leading-snug text-slate-500 dark:text-slate-400"
-          >
-            Enter your assets below to see your nisab position.
-          </p>
-
-          <dl class="mt-3 grid grid-cols-2 gap-2">
-            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
-              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Net worth
-              </dt>
-              <dd id="netAssetsValue" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
-                —
-              </dd>
-            </div>
-            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
-              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Nisab value
-              </dt>
-              <dd id="nisabValueText" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
-                —
-              </dd>
-            </div>
-          </dl>
-
-          <!-- WhatsApp receipt: hidden until there is something to send. -->
-          <button
-            type="button"
-            id="whatsappShareBtn"
-            class="btn-whatsapp whatsapp-share-trigger mt-3 w-full"
-            onclick="window.ZakatDay && window.ZakatDay.openWhatsAppShare()"
-            hidden
-          >
-            <svg
-              class="btn-whatsapp__icon"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413Z"
-              />
-            </svg>
-            Send to WhatsApp
-          </button>
-        </section>
+      <main id="calculator" class="section-stack">
+        <!-- Intro card removed. How it works lives in the header menu and the footer. -->
         <!-- ================= Live rates ================= -->
         <section class="rate-pill relative" aria-label="Live rates">
           <span class="flex items-center gap-1.5">
@@ -421,21 +319,6 @@
               </button>
             </div>
           </div>
-        </section>
-
-        <!-- ================= Favourite currencies ================= -->
-        <section aria-label="Favourite currencies">
-          <div class="mb-1.5 flex items-baseline justify-between gap-2 px-0.5">
-            <h2 class="section-heading">Currency</h2>
-            <button
-              type="button"
-              id="manageCurrenciesBtn"
-              class="text-[0.7rem] font-bold text-sky-700 underline-offset-2 hover:underline dark:text-sky-300"
-            >
-              Manage
-            </button>
-          </div>
-          <div id="favPills" class="fav-pills" role="group" aria-label="Switch currency"></div>
         </section>
         <!-- ================= Assets ================= -->
         <section class="space-y-2" aria-labelledby="assetsHeading">
@@ -517,8 +400,8 @@
                 <span class="material-symbols-outlined">diamond</span>
               </span>
               <span class="asset-card__title">
-                Gold &amp; silver
-                <span class="asset-card__hint">Jewellery, coins &amp; bars — priced at live rates</span>
+                Gold &amp; Silver
+                <span class="asset-card__hint">Jewellery, coins &amp; bars, priced at live rates</span>
               </span>
               <span id="metalsTotal" class="asset-card__total">0</span>
               <span class="asset-card__chev material-symbols-outlined" aria-hidden="true">expand_more</span>
@@ -528,11 +411,14 @@
                 <label class="money-field" for="goldGrams">
                   <span class="money-field__label">
                     Gold
-                    <select id="goldUnit" class="mini-select" aria-label="Gold weight unit">
-                      <option value="g">grams</option>
-                      <option value="tola">tola</option>
-                      <option value="oz">oz</option>
-                    </select>
+                    <span class="unit-select">
+                      <select id="goldUnit" class="unit-select__input" aria-label="Gold weight unit">
+                        <option value="g">grams</option>
+                        <option value="tola">tola</option>
+                        <option value="oz">oz</option>
+                      </select>
+                      <span class="material-symbols-outlined unit-select__icon" aria-hidden="true">expand_more</span>
+                    </span>
                   </span>
                   <span class="money-field__control">
                     <input
@@ -549,7 +435,7 @@
                 </label>
                 <label class="money-field" for="goldKarat">
                   <span class="money-field__label">Purity</span>
-                  <span class="money-field__control">
+                  <span class="money-field__control select-field">
                     <select id="goldKarat" class="mini-select w-full" data-metal="goldKarat">
                       <option value="24">24K · 999</option>
                       <option value="22">22K · 916</option>
@@ -557,6 +443,7 @@
                       <option value="18">18K · 750</option>
                       <option value="14">14K · 585</option>
                     </select>
+                    <span class="material-symbols-outlined select-field__icon" aria-hidden="true">expand_more</span>
                   </span>
                 </label>
               </div>
@@ -565,11 +452,14 @@
                 <label class="money-field" for="silverGrams">
                   <span class="money-field__label">
                     Silver
-                    <select id="silverUnit" class="mini-select" aria-label="Silver weight unit">
-                      <option value="g">grams</option>
-                      <option value="tola">tola</option>
-                      <option value="oz">oz</option>
-                    </select>
+                    <span class="unit-select">
+                      <select id="silverUnit" class="unit-select__input" aria-label="Silver weight unit">
+                        <option value="g">grams</option>
+                        <option value="tola">tola</option>
+                        <option value="oz">oz</option>
+                      </select>
+                      <span class="material-symbols-outlined unit-select__icon" aria-hidden="true">expand_more</span>
+                    </span>
                   </span>
                   <span class="money-field__control">
                     <input
@@ -586,13 +476,14 @@
                 </label>
                 <label class="money-field" for="silverPurity">
                   <span class="money-field__label">Purity</span>
-                  <span class="money-field__control">
+                  <span class="money-field__control select-field">
                     <select id="silverPurity" class="mini-select w-full" data-metal="silverPurity">
                       <option value="1">Fine · 999</option>
                       <option value="0.958">958</option>
                       <option value="0.925">Sterling · 925</option>
                       <option value="0.8">800</option>
                     </select>
+                    <span class="material-symbols-outlined select-field__icon" aria-hidden="true">expand_more</span>
                   </span>
                 </label>
               </div>
@@ -603,14 +494,14 @@
                   <span id="goldWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
                     >0 g fine</span
                   >
-                  <span id="goldValueText" class="karat-row__value">—</span>
+                  <span id="goldValueText" class="karat-row__value">-</span>
                 </div>
                 <div class="karat-row">
                   <span class="karat-row__label">Silver</span>
                   <span id="silverWeightText" class="text-[0.68rem] font-semibold tabular-nums text-slate-500 dark:text-slate-400"
                     >0 g fine</span
                   >
-                  <span id="silverValueText" class="karat-row__value">—</span>
+                  <span id="silverValueText" class="karat-row__value">-</span>
                 </div>
               </div>
               <p class="inline-note">
@@ -779,72 +670,94 @@
               </label>
               <p class="inline-note">
                 Include loans and bills due immediately. Long-term instalments are usually
-                deducted only for the coming year — ask a scholar about your situation.
+                deducted only for the coming year. Ask a scholar about your situation.
               </p>
             </div>
           </details>
         </section>
 
-        <section id="howItWorks" class="how-it-works" aria-labelledby="howItWorksHeading">
-          <h2 id="howItWorksHeading" class="how-it-works__heading">How ZakatDay works</h2>
-          <p class="how-it-works__lede">
-            ZakatDay is a free, ad-free Zakat calculator for Muslims in the US, UK, Pakistan, UAE,
-            Saudi Arabia, Malaysia, Canada, India, Australia and the EU. Enter your wealth in your
-            own currency and it works out 2.5% of your net zakatable assets — entirely on your
-            device.
+        <!-- ================= Check + result ================= -->
+        <section class="space-y-2" aria-labelledby="checkDueHeading">
+          <h2 id="checkDueHeading" class="sr-only">Check your Zakat</h2>
+          <button
+            type="button"
+            id="checkDueBtn"
+            class="btn-primary check-due-btn"
+            aria-controls="zakatCard"
+            disabled
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">calculate</span>
+            Check Your Due Zakat
+          </button>
+          <p id="checkDueHint" class="check-due-hint">
+            Enter at least one asset amount to check your Zakat.
+          </p>
+        </section>
+
+        <section id="zakatCard" class="section-card zakat-card p-3.5 sm:p-4" aria-labelledby="zakatCardTitle" tabindex="-1">
+          <div class="zakat-card__head">
+            <span class="zakat-card__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">mosque</span>
+            </span>
+            <div class="min-w-0">
+              <h1 id="zakatCardTitle" class="zakat-card__title">Your Zakat</h1>
+              <p class="zakat-card__lede">Results update live as you type.</p>
+            </div>
+          </div>
+
+          <div class="nisab-toggle mb-3.5" role="group" aria-label="Nisab standard">
+            <button type="button" class="nisab-toggle__btn" data-standard="silver" aria-pressed="true">
+              Silver nisab
+              <small>612.36 g · majority</small>
+            </button>
+            <button type="button" class="nisab-toggle__btn" data-standard="gold" aria-pressed="false">
+              Gold nisab
+              <small>87.48 g</small>
+            </button>
+          </div>
+
+          <p class="mb-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+            Zakat due · 2.5%
+          </p>
+          <p id="zakatAmount" class="zakat-amount mb-3" data-state="none" aria-live="polite">-</p>
+
+          <div
+            id="nisabMeter"
+            class="nisab-meter mb-1.5"
+            data-state="below"
+            role="progressbar"
+            aria-labelledby="nisabMeterLabel"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div id="nisabMeterFill" class="nisab-meter__fill"></div>
+          </div>
+          <p
+            id="nisabMeterLabel"
+            class="text-[0.72rem] font-semibold leading-snug text-slate-500 dark:text-slate-400"
+          >
+            Add your assets in the cards above to see your nisab position.
           </p>
 
-          <dl class="how-it-works__list">
-            <div class="how-it-works__item">
-              <dt>Nisab in grams and tolas</dt>
-              <dd>
-                Zakat becomes due once your wealth reaches the nisab: 612.36&nbsp;g of silver
-                (52.5&nbsp;tola) or 87.48&nbsp;g of gold (7.5&nbsp;tola). ZakatDay multiplies that
-                weight by the live price per gram of the metal you pick, so the threshold
-                updates with the market instead of a fixed figure.
+          <dl class="mt-3 grid grid-cols-2 gap-2">
+            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
+              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Net worth
+              </dt>
+              <dd id="netAssetsValue" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
+                -
               </dd>
             </div>
-            <div class="how-it-works__item">
-              <dt>2.5% over one lunar year</dt>
-              <dd>
-                The zakat rate is 2.5% (1/40) of the wealth you have held for a full hawl — one
-                lunar year. The calculator applies that rate to your net assets, after debts.
-              </dd>
-            </div>
-            <div class="how-it-works__item">
-              <dt>Karat, tola and troy ounce support</dt>
-              <dd>
-                Market prices quote fine 24K gold, so a 22K item weighing 10&nbsp;g holds only
-                9.17&nbsp;g of pure gold. Enter jewellery by weight in grams, tola or troy ounces
-                and choose 14K, 18K, 21K, 22K or 24K — ZakatDay converts to fine metal before
-                valuing it.
-              </dd>
-            </div>
-            <div class="how-it-works__item">
-              <dt>150+ currencies, live rates</dt>
-              <dd>
-                Work in USD, GBP, EUR, PKR, INR, AED, SAR, MYR, CAD, AUD and more than 140 other
-                currencies. Switching currency converts your amounts with live cross-rates rather
-                than resetting what you typed.
-              </dd>
-            </div>
-            <div class="how-it-works__item">
-              <dt>Zero storage, zero sign-up</dt>
-              <dd>
-                No account, no cookies carrying your figures, no database. Amounts live only in
-                this tab's memory and disappear when you close it. Preferred standard and currency
-                are the only saved settings.
+            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
+              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Nisab value
+              </dt>
+              <dd id="nisabValueText" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
+                -
               </dd>
             </div>
           </dl>
-
-          <p class="how-it-works__links">
-            <a href="./faq/" class="footer-link">Full Zakat guide &amp; FAQ</a>
-            <span aria-hidden="true">·</span>
-            <a href="./faq/#gold-silver" class="footer-link">Gold &amp; silver rules</a>
-            <span aria-hidden="true">·</span>
-            <a href="./faq/#privacy" class="footer-link">Privacy details</a>
-          </p>
         </section>
 
         <!-- ================= Breakdown ================= -->
@@ -854,7 +767,7 @@
             <span
               id="breakdownTotal"
               class="text-[0.72rem] font-extrabold tabular-nums text-slate-700 dark:text-slate-200"
-              >—</span
+              >-</span
             >
           </div>
           <div class="breakdown-bar" role="img" aria-labelledby="breakdownLegendTitle">
@@ -874,66 +787,91 @@
           </div>
           <p id="breakdownLegendTitle" class="sr-only">Share of gross assets by category</p>
           <div class="breakdown-legend">
-            <span><span class="breakdown-legend__dot" style="background: #0ea5e9"></span>Cash</span>
-            <span><span class="breakdown-legend__dot" style="background: #d99c1f"></span>Gold &amp; silver</span>
-            <span><span class="breakdown-legend__dot" style="background: #6366f1"></span>Investments</span>
-            <span><span class="breakdown-legend__dot" style="background: #14b8a6"></span>Business</span>
-            <span><span class="breakdown-legend__dot" style="background: #f43f5e"></span>Debts</span>
+            <span><span class="breakdown-legend__dot breakdown-legend__dot--cash"></span>Cash</span>
+            <span><span class="breakdown-legend__dot breakdown-legend__dot--metals"></span>Gold &amp; silver</span>
+            <span><span class="breakdown-legend__dot breakdown-legend__dot--investments"></span>Investments</span>
+            <span><span class="breakdown-legend__dot breakdown-legend__dot--business"></span>Business</span>
+            <span><span class="breakdown-legend__dot breakdown-legend__dot--debts"></span>Debts</span>
           </div>
         </section>
 
         <!-- ================= Actions ================= -->
-        <section class="space-y-2" aria-label="Actions">
-          <div class="grid grid-cols-2 gap-2">
+        <section class="space-y-2" aria-labelledby="actionsHeading">
+          <h2 id="actionsHeading" class="sr-only">Save, share or reset</h2>
+          <div class="action-row">
             <button
               type="button"
-              id="shareSummaryBtn"
-              class="btn-primary"
-              onclick="window.ZakatDay && window.ZakatDay.openSummary()"
+              id="resetBtn"
+              class="btn-icon"
+              data-confirm="false"
+              aria-label="Reset all amounts"
+              title="Reset all amounts"
             >
-              <span class="material-symbols-outlined" aria-hidden="true">share</span>
-              Share summary
-            </button>
-            <button
-              type="button"
-              id="whatsappBtn"
-              class="btn-whatsapp"
-              onclick="window.ZakatDay && window.ZakatDay.shareWhatsApp()"
-            >
-              <svg
-                class="btn-whatsapp__icon"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413Z"
-                />
-              </svg>
-              WhatsApp
-            </button>
-          </div>
-          <div class="flex flex-wrap items-center justify-between gap-2 px-0.5 pt-1">
-            <span class="privacy-badge">
-              <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
-              <span>Nothing you type is sent or saved — no accounts, no cookies.</span>
-            </span>
-            <button type="button" id="resetBtn" class="reset-btn" data-confirm="false">
               <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
-              <span id="resetBtnLabel">Reset</span>
             </button>
+            <div class="action-row__share">
+              <button
+                type="button"
+                id="shareSummaryBtn"
+                class="btn-icon"
+                onclick="window.ZakatDay && window.ZakatDay.openSummary()"
+                aria-label="Share summary"
+                title="Share summary"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">share</span>
+              </button>
+              <button
+                type="button"
+                id="whatsappBtn"
+                class="btn-icon btn-icon--whatsapp"
+                onclick="window.ZakatDay && window.ZakatDay.openWhatsAppShare()"
+                aria-label="Send summary on WhatsApp"
+                title="Send summary on WhatsApp"
+              >
+                <svg
+                  class="btn-whatsapp__icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413Z"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer class="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 px-2 text-[0.7rem] text-slate-500 dark:text-slate-400">
-        <a href="./faq/" class="footer-link !text-[0.75rem]">Zakat guide &amp; FAQ</a>
-        <span aria-hidden="true">·</span>
-        <a href="./faq/#privacy" class="footer-link !text-[0.75rem]">Privacy</a>
-        <span aria-hidden="true">·</span>
-        <button type="button" id="feedbackBtn" class="footer-link !text-[0.75rem]">Feedback</button>
-        <span class="w-full text-center">© <span id="footerYear">2026</span> ZakatDay — estimates only; verify with a scholar.</span>
+      <footer
+        class="mt-10 mb-6 flex flex-col items-center gap-y-3 px-2 text-center text-[0.7rem] text-slate-500 dark:text-slate-400"
+      >
+        <p class="privacy-badge privacy-badge--centered mb-1">
+          <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+          <span>Nothing you type is sent or saved. No accounts, no cookies.</span>
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+          <a href="./faq/" class="footer-link !text-[0.75rem]">Zakat guide &amp; FAQ</a>
+          <button
+            type="button"
+            id="aboutBtn"
+            class="footer-link !text-[0.75rem] footer-link--sep"
+            aria-haspopup="dialog"
+            aria-controls="aboutModal"
+          >
+            How it works
+          </button>
+          <a href="./faq/#gold-silver" class="footer-link !text-[0.75rem] footer-link--sep"
+            >Gold &amp; silver rules</a
+          >
+          <a href="./faq/#privacy" class="footer-link !text-[0.75rem] footer-link--sep">Privacy details</a>
+          <button type="button" id="feedbackBtn" class="footer-link !text-[0.75rem] footer-link--sep">
+            Feedback
+          </button>
+        </div>
+        <p class="m-0 w-full text-center">© <span id="footerYear">2026</span> ZakatDay · estimates only; verify with a scholar.</p>
       </footer>
     </div>
 
@@ -954,6 +892,13 @@
         </div>
         <div class="more-sheet__body">
           <h2 id="moreSheetTitle" class="more-sheet__title">More</h2>
+
+          <button type="button" class="more-menu-item" data-more-action="about">
+            <span class="more-menu-item__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">help</span>
+            </span>
+            <span class="more-menu-item__label">How it works</span>
+          </button>
 
           <button type="button" class="more-menu-item" data-more-action="currency">
             <span class="more-menu-item__icon" aria-hidden="true">
@@ -994,13 +939,6 @@
             <span class="more-menu-item__label">What's new</span>
           </button>
 
-          <a class="more-menu-item" href="./faq/">
-            <span class="more-menu-item__icon" aria-hidden="true">
-              <span class="material-symbols-outlined">menu_book</span>
-            </span>
-            <span class="more-menu-item__label">Zakat guide &amp; FAQ</span>
-          </a>
-
           <button type="button" class="more-menu-item" data-more-action="feedback">
             <span class="more-menu-item__icon" aria-hidden="true">
               <span class="material-symbols-outlined">mail</span>
@@ -1014,7 +952,7 @@
               Your amounts are never transmitted, logged or written to this device. Only your
               theme, currency and pinned currencies are remembered.
             </p>
-            <p class="mt-1.5">ZakatDay · v2.0 · <a href="./faq/#privacy" class="underline underline-offset-2">Privacy</a></p>
+            <p class="mt-1.5">ZakatDay · v2.0</p>
           </div>
         </div>
       </div>
@@ -1091,7 +1029,7 @@
               <h3>Zero storage, for real</h3>
               <p>
                 Amounts live only in this tab's memory. No database, no cookies, no analytics
-                events carrying your figures — close the tab and it is gone.
+                events carrying your figures. Close the tab and it is gone.
               </p>
             </div>
           </div>
@@ -1217,14 +1155,14 @@
               <input type="radio" id="shareModeItemized" name="sharePrivacy" value="itemized" checked />
               <span>
                 Include itemized breakdown
-                <small>Cash, metals, investments, business and debts — each figure shown.</small>
+                <small>Cash, metals, investments, business and debts, each figure shown.</small>
               </span>
             </label>
             <label class="share-privacy__option" for="shareModeTotals">
               <input type="radio" id="shareModeTotals" name="sharePrivacy" value="totals" />
               <span>
                 Total Zakat &amp; Nisab only
-                <small>Hide asset figures — only the nisab and the amount due are shown.</small>
+                <small>Hide asset figures. Only the nisab and the amount due are shown.</small>
               </span>
             </label>
           </fieldset>
@@ -1239,7 +1177,7 @@
                     ><span class="share-card__brand-rest">Day</span></span
                   >
                 </span>
-                <span id="shareCardDate" class="share-card__date">—</span>
+                <span id="shareCardDate" class="share-card__date">-</span>
               </div>
 
               <div class="share-card__meta">
@@ -1250,46 +1188,46 @@
               <dl id="shareCardBreakdown" class="share-card__rows">
                 <div class="share-card__row">
                   <dt>Cash &amp; bank</dt>
-                  <dd id="shareCardCash">—</dd>
+                  <dd id="shareCardCash">-</dd>
                 </div>
                 <div class="share-card__row">
                   <dt>Gold &amp; silver</dt>
-                  <dd id="shareCardMetals">—</dd>
+                  <dd id="shareCardMetals">-</dd>
                 </div>
                 <div class="share-card__row">
                   <dt>Investments</dt>
-                  <dd id="shareCardInvestments">—</dd>
+                  <dd id="shareCardInvestments">-</dd>
                 </div>
                 <div class="share-card__row">
                   <dt>Business assets</dt>
-                  <dd id="shareCardBusiness">—</dd>
+                  <dd id="shareCardBusiness">-</dd>
                 </div>
                 <div class="share-card__row">
                   <dt>Less debts</dt>
-                  <dd id="shareCardDebts">—</dd>
+                  <dd id="shareCardDebts">-</dd>
                 </div>
                 <div class="share-card__row share-card__row--total">
                   <dt>Net zakatable</dt>
-                  <dd id="shareCardNet">—</dd>
+                  <dd id="shareCardNet">-</dd>
                 </div>
               </dl>
 
               <p id="shareCardTotalsNote" class="share-card__note" hidden>
-                Asset figures hidden — this receipt shows the nisab and the total due only.
+                Asset figures hidden. This receipt shows the nisab and the total due only.
               </p>
 
               <div class="share-card__due">
                 <p class="share-card__due-label">Total Zakat due · 2.5%</p>
-                <p id="shareCardZakat" class="share-card__amount tabular-nums">—</p>
-                <p id="shareCardStatus" class="share-card__status">—</p>
+                <p id="shareCardZakat" class="share-card__amount tabular-nums">-</p>
+                <p id="shareCardStatus" class="share-card__status">-</p>
                 <p class="share-card__nisab-line">
                   Nisab (<span id="shareCardNisabStandard">silver</span>):
-                  <span id="shareCardNisab" class="tabular-nums">—</span>
+                  <span id="shareCardNisab" class="tabular-nums">-</span>
                 </p>
               </div>
 
               <p class="share-card__foot">
-                zakatday.cc · estimate only — verify with a qualified scholar
+                zakatday.cc · estimate only, verify with a qualified scholar
               </p>
             </div>
           </div>
@@ -1315,6 +1253,86 @@
         </div>
       </div>
     </div>
+
+        <!-- ================= Modal: about / how it works ================= -->
+        <div
+          id="aboutModal"
+          class="updates-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="aboutModalTitle"
+          hidden
+        >
+          <button type="button" class="updates-modal__backdrop" data-about-close aria-label="Close"></button>
+          <div class="updates-modal__sheet">
+            <div class="updates-modal__header">
+              <h2 id="aboutModalTitle" class="updates-modal__title">How ZakatDay works</h2>
+              <button type="button" class="header-icon-btn" data-about-close aria-label="Close">
+                <span class="header-icon-btn__glyph material-symbols-outlined" aria-hidden="true">close</span>
+              </button>
+            </div>
+            <div id="aboutModalBody" class="updates-modal__cards">
+              <p class="about-modal__lede">
+                ZakatDay is a free, ad-free Zakat calculator for Muslims in the US, UK, Pakistan,
+                UAE, Saudi Arabia, Malaysia, Canada, India, Australia and the EU. Enter your wealth
+                in your own currency and it works out 2.5% of your net zakatable assets, entirely
+                on your device.
+              </p>
+
+              <dl class="how-it-works__list">
+                <div class="how-it-works__item">
+                  <dt>Nisab in grams and tolas</dt>
+                  <dd>
+                    Zakat becomes due once your wealth reaches the nisab: 612.36&nbsp;g of silver
+                    (52.5&nbsp;tola) or 87.48&nbsp;g of gold (7.5&nbsp;tola). ZakatDay multiplies
+                    that weight by the live price per gram of the metal you pick, so the threshold
+                    updates with the market instead of a fixed figure.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>2.5% over one lunar year</dt>
+                  <dd>
+                    The zakat rate is 2.5% (1/40) of the wealth you have held for a full hawl, one
+                    lunar year. The calculator applies that rate to your net assets, after debts.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>Karat, tola and troy ounce support</dt>
+                  <dd>
+                    Market prices quote fine 24K gold, so a 22K item weighing 10&nbsp;g holds only
+                    9.17&nbsp;g of pure gold. Enter jewellery by weight in grams, tola or troy
+                    ounces and choose 14K, 18K, 21K, 22K or 24K. ZakatDay converts to fine metal
+                    before valuing it.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>150+ currencies, live rates</dt>
+                  <dd>
+                    Work in USD, GBP, EUR, PKR, INR, AED, SAR, MYR, CAD, AUD and more than 140
+                    other currencies. Switching currency converts your amounts with live
+                    cross-rates rather than resetting what you typed.
+                  </dd>
+                </div>
+                <div class="how-it-works__item">
+                  <dt>Zero storage, zero sign-up</dt>
+                  <dd>
+                    No account, no cookies carrying your figures, no database. Amounts live only
+                    in this tab's memory and disappear when you close it. Preferred standard and
+                    currency are the only saved settings.
+                  </dd>
+                </div>
+              </dl>
+
+              <p class="how-it-works__links">
+                <a href="./faq/" class="footer-link">Full Zakat guide &amp; FAQ</a>
+                <span aria-hidden="true">·</span>
+                <a href="./faq/#gold-silver" class="footer-link">Gold &amp; silver rules</a>
+                <span aria-hidden="true">·</span>
+                <a href="./faq/#privacy" class="footer-link">Privacy details</a>
+              </p>
+            </div>
+          </div>
+        </div>
 
     <script src="./currency-service.js"></script>
     <script src="./zakat-engine.js"></script>

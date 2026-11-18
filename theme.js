@@ -4,6 +4,20 @@
  */
 const THEME_STORAGE_KEY = "theme";
 
+/** Resolve a design token to a concrete CSS color.
+ *  Channel tokens ("255 255 255") become rgb(); full colors are computed. */
+function readTokenColor(name) {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  if (/^(?:\d*\.?\d+%?\s+){2}\d*\.?\d+%?$/.test(raw)) return "rgb(" + raw + ")";
+  const probe = document.createElement("span");
+  probe.hidden = true;
+  probe.style.color = "var(" + name + ")";
+  document.documentElement.appendChild(probe);
+  const color = getComputedStyle(probe).color;
+  probe.remove();
+  return color;
+}
+
 function getStoredTheme() {
   try {
     return localStorage.getItem(THEME_STORAGE_KEY);
@@ -37,7 +51,7 @@ function applyTheme(theme) {
   syncThemeToggleButton(resolved);
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) {
-    meta.content = resolved === "dark" ? "#020617" : "#f8fafc";
+    meta.content = readTokenColor(resolved === "dark" ? "--chrome-dark" : "--chrome-light");
   }
   return resolved;
 }

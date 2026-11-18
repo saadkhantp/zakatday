@@ -61,7 +61,7 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     gold: document.getElementById("goldPerGramText").textContent,
     silver: document.getElementById("silverPerGramText").textContent,
     status: document.getElementById("ratesDot").dataset.status,
-    currency: document.getElementById("heroCurrencyCode").textContent,
+    currency: document.getElementById("currencyTriggerCode").textContent,
   }));
   check("gold price rendered", num(rates.gold), (n) => n > 0);
   check("silver price rendered", num(rates.silver), (n) => n > 0);
@@ -110,7 +110,7 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     check("meter full when due", parseFloat(math.meter), (n) => n === 100);
   } else {
     check("no zakat below nisab", num(math.zakat), (n) => n === 0);
-    console.log("  info: below nisab — nisab value " + math.nisabText);
+    console.log("  info: below nisab, nisab value " + math.nisabText);
   }
 
   console.log("gold by karat and tola");
@@ -165,7 +165,7 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     );
   });
   /* Deterministic starting point: switch back to USD first (preference persists). */
-  const startCurrency = await page.$eval("#heroCurrencyCode", (el) => el.textContent);
+  const startCurrency = await page.$eval("#currencyTriggerCode", (el) => el.textContent);
   if (startCurrency !== "USD") {
     await domClick(page, "#currencyTrigger");
     await waitSheetOpen(page, "#currencySheet");
@@ -173,14 +173,14 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     await sleep(250);
     await domClick(page, "#currencyList .currency-option");
     await page.waitForFunction(
-      () => document.getElementById("heroCurrencyCode").textContent === "USD",
+      () => document.getElementById("currencyTriggerCode").textContent === "USD",
       { timeout: 8000 },
     );
     await sleep(400);
   }
   await sleep(350);
   const bankBefore = await page.$eval("#cashBank", (el) => el.value);
-  const currencyBefore = await page.$eval("#heroCurrencyCode", (el) => el.textContent);
+  const currencyBefore = await page.$eval("#currencyTriggerCode", (el) => el.textContent);
   await domClick(page, "#currencyTrigger");
   await waitSheetOpen(page, "#currencySheet");
   await domClick(page, "#currencySearch");
@@ -198,7 +198,7 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
   await domClick(page, "#currencyList .currency-option");
   await sleep(700);
   await page.waitForFunction(
-    () => document.getElementById("heroCurrencyCode").textContent === "PKR",
+    () => document.getElementById("currencyTriggerCode").textContent === "PKR",
     { timeout: 8000 },
   );
   const bankAfter = await page.$eval("#cashBank", (el) => el.value);
@@ -217,8 +217,8 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     "PKR",
   );
   check(
-    "favourite pill marked active",
-    await page.$eval("#favPills [aria-pressed=true]", (el) => el.dataset.currency),
+    "header currency shows PKR",
+    await page.$eval("#currencyTriggerCode", (el) => el.textContent.trim()),
     "PKR",
   );
   await page.waitForFunction(() => document.getElementById("currencySheet").hidden === true, {
@@ -288,11 +288,16 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     bank: document.getElementById("cashBank").value,
     gold: document.getElementById("goldGrams").value,
     zakat: document.getElementById("zakatAmount").textContent.trim(),
-    currency: document.getElementById("heroCurrencyCode").textContent,
+    currency: document.getElementById("currencyTriggerCode").textContent,
   }));
   check("inputs cleared", cleared.bank + cleared.gold, "");
-  check("zakat back to placeholder", cleared.zakat, "—");
+  check("zakat back to placeholder", cleared.zakat, "-");
   check("currency kept after reset", cleared.currency, "PKR");
+  check(
+    "check button disabled again after reset",
+    await page.$eval("#checkDueBtn", (el) => el.disabled),
+    true,
+  );
 
   console.log("theme");
   const darkBefore = await page.evaluate(() =>
@@ -332,6 +337,22 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     }),
     (blob) => !/(19000|70000|10000|60000)/.test(blob),
   );
+  const footerLayout = await page.evaluate(() => {
+    const footer = document.querySelector("footer");
+    const notice = footer && footer.querySelector(".privacy-badge");
+    const links = footer && footer.querySelector('a[href="./faq/"]');
+    if (!footer || !notice || !links) return { ok: false, reason: "missing footer parts" };
+    const inMain = Boolean(document.querySelector("main .privacy-badge"));
+    const noticeBox = notice.getBoundingClientRect();
+    const linkBox = links.getBoundingClientRect();
+    return {
+      ok: !inMain && noticeBox.bottom <= linkBox.top,
+      reason: inMain ? "notice still inside main" : "notice not above links",
+      gap: Math.round(linkBox.top - noticeBox.bottom),
+    };
+  });
+  check("privacy notice sits in the footer above the links", footerLayout.reason, "notice not above links");
+  check("privacy notice clears the links", footerLayout.gap, (gap) => gap >= 8);
 
   console.log("faq page");
   const faq = await page.goto(base + "/faq/", { waitUntil: "networkidle2" });
@@ -407,10 +428,60 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     await page.$$eval("h1", (list) => list.length),
     1,
   );
+
+  console.log("about modal");
   check(
-    "how-it-works section rendered",
-    await page.$eval("#howItWorks", (el) => el.querySelectorAll("dt").length),
+    "about modal starts hidden",
+    await page.$eval("#aboutModal", (el) => el.hidden),
+    true,
+  );
+  await domClick(page, "#aboutBtn");
+  await page.waitForFunction(() => !document.getElementById("aboutModal").hidden, { timeout: 4000 });
+  check(
+    "about modal merges the how-it-works list",
+    await page.$eval("#aboutModal", (el) => el.querySelectorAll("dt").length),
     (n) => n >= 4,
+  );
+  check(
+    "about trigger advertises the dialog",
+    await page.$eval("#aboutBtn", (el) => el.getAttribute("aria-haspopup")),
+    "dialog",
+  );
+  await page.keyboard.press("Escape");
+  await page.waitForFunction(() => document.getElementById("aboutModal").hidden, { timeout: 4000 });
+
+  console.log("actions & check button");
+  check(
+    "action buttons are icon only",
+    await page.evaluate(() =>
+      ["resetBtn", "shareSummaryBtn", "whatsappBtn"].map((id) => {
+        const el = document.getElementById(id);
+        const clone = el.cloneNode(true);
+        clone.querySelectorAll("svg, [aria-hidden='true']").forEach((n) => n.remove());
+        return {
+          id,
+          label: (el.getAttribute("aria-label") || "").length > 0,
+          text: clone.textContent.trim(),
+        };
+      }),
+    ),
+    (list) => list.every((item) => item.label && item.text === ""),
+  );
+  check(
+    "check button follows the inputs",
+    await page.evaluate(() => {
+      const btn = document.getElementById("checkDueBtn");
+      const card = document.getElementById("zakatCard");
+      const input = document.getElementById("cashHeld");
+      return (
+        Boolean(btn) &&
+        btn.disabled &&
+        Boolean(card) &&
+        Boolean(input.compareDocumentPosition(btn) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+        Boolean(btn.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING)
+      );
+    }),
+    true,
   );
 
   console.log("whatsapp receipt");
@@ -420,11 +491,25 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
   );
   await sleep(200);
   check(
-    "share trigger appears once amounts exist",
-    await page.$eval("#whatsappShareBtn", (el) => !el.hidden),
+    "check button enables once an asset is entered",
+    await page.$eval("#checkDueBtn", (el) => !el.disabled),
     true,
   );
-  await domClick(page, "#whatsappShareBtn");
+  check(
+    "check button scrolls to the result card",
+    await page.evaluate(async () => {
+      window.scrollTo(0, 0);
+      const btn = document.getElementById("checkDueBtn");
+      const card = document.getElementById("zakatCard");
+      btn.focus();
+      btn.click();
+      await new Promise((resolve) => setTimeout(resolve, 900));
+      const rect = card.getBoundingClientRect();
+      return window.pageYOffset > 0 && rect.top < window.innerHeight && rect.bottom > 0;
+    }),
+    true,
+  );
+  await domClick(page, "#whatsappBtn");
   check(
     "receipt modal opens",
     await page.$eval("#whatsappShareModal", (el) => !el.hidden),
@@ -450,12 +535,12 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
     (r) =>
       r.visible &&
       r.currency === r.expectedCurrency &&
-      (r.due ? /\d/.test(r.zakat) : r.zakat === "—"),
+      (r.due ? /\d/.test(r.zakat) : r.zakat === "-"),
   );
   check(
     "receipt nisab mirrors the engine",
     receipt,
-    (r) => (r.hasNisabPrice ? /\d/.test(r.nisab) : r.nisab === "—"),
+    (r) => (r.hasNisabPrice ? /\d/.test(r.nisab) : r.nisab === "-"),
   );
   const shareMaybe = await page.evaluate(() => {
     const summary = window.ZakatDay.getSummary();

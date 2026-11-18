@@ -26,8 +26,6 @@
     syncMetals();
     var summary = Engine.compute(state);
 
-    /* Hero */
-    setText($("heroCurrencyCode"), state.currency);
     setText($("currencyTriggerCode"), state.currency);
     setText($("currencyTriggerSymbol"), symbolFor(state.currency));
     var flag = $("currencyTriggerFlag");
@@ -42,8 +40,9 @@
     if (amount) {
       var hasInput = summary.netAssets > 0;
       amount.setAttribute("data-state", !hasInput ? "none" : summary.due ? "due" : "below");
-      setText(amount, hasInput ? fmtCompact(summary.zakat) : "—");
+      setText(amount, hasInput ? fmtCompact(summary.zakat) : "-");
     }
+    syncCheckDue(summary);
 
     var meter = $("nisabMeter");
     var fill = $("nisabMeterFill");
@@ -58,9 +57,9 @@
     if (meterLabel) {
       var text;
       if (summary.netAssets <= 0) {
-        text = "Enter your assets below to see your nisab position.";
+        text = "Add your assets in the cards above to see your nisab position.";
       } else if (!summary.hasNisabPrice) {
-        text = "Metal price missing — add a gold or silver price to check the nisab.";
+        text = "Metal price missing. Add a gold or silver price to check the nisab.";
       } else if (summary.due) {
         text = "Above nisab by " + fmtCompact(summary.netAssets - summary.nisabValue) + " · Zakat is due.";
       } else {
@@ -69,7 +68,7 @@
       setText(meterLabel, text);
     }
 
-    setText($("netAssetsValue"), summary.netAssets > 0 ? fmtCompact(summary.netAssets) : "—");
+    setText($("netAssetsValue"), summary.netAssets > 0 ? fmtCompact(summary.netAssets) : "-");
     setText(
       $("nisabValueText"),
       summary.hasNisabPrice ? fmtCompact(summary.nisabValue) : "set price",
@@ -83,8 +82,8 @@
     /* Metal rows inside the asset card */
     setText($("goldWeightText"), CS.formatNumber(state.gold.grams, 2) + " g fine");
     setText($("silverWeightText"), CS.formatNumber(state.silver.grams, 2) + " g fine");
-    setText($("goldValueText"), state.gold.value > 0 ? fmt(state.gold.value) : "—");
-    setText($("silverValueText"), state.silver.value > 0 ? fmt(state.silver.value) : "—");
+    setText($("goldValueText"), state.gold.value > 0 ? fmt(state.gold.value) : "-");
+    setText($("silverValueText"), state.silver.value > 0 ? fmt(state.silver.value) : "-");
 
     /* Card totals */
     setText($("cashTotal"), fmtCompact(summary.cash));
@@ -127,5 +126,5 @@
       var width = base > 0 ? Math.min(100, (value / base) * 100) : 0;
       node.style.width = width.toFixed(2) + "%";
     });
-    setText($("breakdownTotal"), base > 0 ? fmtCompact(base) + " total" : "—");
+    setText($("breakdownTotal"), base > 0 ? fmtCompact(base) + " total" : "-");
   }

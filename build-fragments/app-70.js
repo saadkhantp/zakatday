@@ -106,14 +106,14 @@
   /** Two-step reset: first click arms, second click clears everything. */
   function bindReset() {
     var btn = $("resetBtn");
-    var label = $("resetBtnLabel");
     if (!btn) return;
     var timer = null;
 
     function disarm() {
       resetArmed = false;
       btn.setAttribute("data-confirm", "false");
-      setText(label, "Reset");
+      btn.setAttribute("aria-label", "Reset all amounts");
+      btn.setAttribute("title", "Reset all amounts");
       if (timer) clearTimeout(timer);
     }
 
@@ -121,8 +121,10 @@
       if (!resetArmed) {
         resetArmed = true;
         btn.setAttribute("data-confirm", "true");
-        setText(label, "Sure? Tap again");
+        btn.setAttribute("aria-label", "Tap again to clear every amount");
+        btn.setAttribute("title", "Tap again to clear every amount");
         timer = setTimeout(disarm, 4000);
+        showToast("Tap reset once more to clear every amount.", { duration: 4000 });
         return;
       }
       disarm();

@@ -12,6 +12,7 @@ const order = [
   "app-01.js",
   "app-10.js",
   "app-20.js",
+  "app-25.js",
   "app-30.js",
   "app-40.js",
   "app-50.js",

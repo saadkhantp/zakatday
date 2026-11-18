@@ -1,0 +1,84 @@
+
+        <!-- ================= Check + result ================= -->
+        <section class="space-y-2" aria-labelledby="checkDueHeading">
+          <h2 id="checkDueHeading" class="sr-only">Check your Zakat</h2>
+          <button
+            type="button"
+            id="checkDueBtn"
+            class="btn-primary check-due-btn"
+            aria-controls="zakatCard"
+            disabled
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">calculate</span>
+            Check Your Due Zakat
+          </button>
+          <p id="checkDueHint" class="check-due-hint">
+            Enter at least one asset amount to check your Zakat.
+          </p>
+        </section>
+
+        <section id="zakatCard" class="section-card zakat-card p-3.5 sm:p-4" aria-labelledby="zakatCardTitle" tabindex="-1">
+          <div class="zakat-card__head">
+            <span class="zakat-card__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">mosque</span>
+            </span>
+            <div class="min-w-0">
+              <h1 id="zakatCardTitle" class="zakat-card__title">Your Zakat</h1>
+              <p class="zakat-card__lede">Results update live as you type.</p>
+            </div>
+          </div>
+
+          <div class="nisab-toggle mb-3.5" role="group" aria-label="Nisab standard">
+            <button type="button" class="nisab-toggle__btn" data-standard="silver" aria-pressed="true">
+              Silver nisab
+              <small>612.36 g · majority</small>
+            </button>
+            <button type="button" class="nisab-toggle__btn" data-standard="gold" aria-pressed="false">
+              Gold nisab
+              <small>87.48 g</small>
+            </button>
+          </div>
+
+          <p class="mb-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+            Zakat due · 2.5%
+          </p>
+          <p id="zakatAmount" class="zakat-amount mb-3" data-state="none" aria-live="polite">-</p>
+
+          <div
+            id="nisabMeter"
+            class="nisab-meter mb-1.5"
+            data-state="below"
+            role="progressbar"
+            aria-labelledby="nisabMeterLabel"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div id="nisabMeterFill" class="nisab-meter__fill"></div>
+          </div>
+          <p
+            id="nisabMeterLabel"
+            class="text-[0.72rem] font-semibold leading-snug text-slate-500 dark:text-slate-400"
+          >
+            Add your assets in the cards above to see your nisab position.
+          </p>
+
+          <dl class="mt-3 grid grid-cols-2 gap-2">
+            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
+              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Net worth
+              </dt>
+              <dd id="netAssetsValue" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
+                -
+              </dd>
+            </div>
+            <div class="rounded-lg bg-slate-100/70 px-2.5 py-2 dark:bg-white/5">
+              <dt class="text-[0.58rem] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Nisab value
+              </dt>
+              <dd id="nisabValueText" class="text-[0.76rem] font-bold tabular-nums text-slate-800 dark:text-slate-100">
+                -
+              </dd>
+            </div>
+          </dl>
+        </section>
