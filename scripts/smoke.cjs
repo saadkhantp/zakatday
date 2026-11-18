@@ -19,6 +19,8 @@ const MIME = {
   ".json": "application/json; charset=utf-8",
   ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
   ".xml": "application/xml; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
 };
@@ -77,21 +79,27 @@ const num = (text) => Number(String(text).replace(/[^\d.]/g, ""));
   const consoleErrors = [];
   const failedRequests = [];
   const pendingAssets = [];
-  /* Icon/OG artwork is not committed yet. Answer those paths with an empty 200
-     so headless Chrome logs no 404 noise, and list them once at the end. */
-  const isPendingAsset = (url) => {
-    const pathname = new URL(url).pathname;
-    return pathname.startsWith("/assets/") || /^\/favicon\.(ico|svg)$/.test(pathname);
-  };
+  /* Missing icon/OG files get an empty 200 so a gap does not fail the run.
+     Files that are already in the repo are served as themselves. */
+  const isBrandAsset = (pathname) =>
+    pathname.startsWith("/assets/") || /^\/favicon\.(ico|svg)$/.test(pathname);
   await page.setRequestInterception(true);
   page.on("request", (req) => {
-    if (!req.url().startsWith(base) || !isPendingAsset(req.url())) {
+    if (!req.url().startsWith(base)) {
       req.continue();
       return;
     }
-    if (!pendingAssets.includes(new URL(req.url()).pathname)) {
-      pendingAssets.push(new URL(req.url()).pathname);
+    const pathname = new URL(req.url()).pathname;
+    if (!isBrandAsset(pathname)) {
+      req.continue();
+      return;
     }
+    const file = path.join(root, pathname);
+    if (fs.existsSync(file) && fs.statSync(file).isFile()) {
+      req.continue();
+      return;
+    }
+    if (!pendingAssets.includes(pathname)) pendingAssets.push(pathname);
     req.respond({ status: 200, contentType: "image/png", body: "" });
   });
   page.on("console", (msg) => {

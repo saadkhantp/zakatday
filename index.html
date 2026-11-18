@@ -129,8 +129,8 @@
           "logo": {
             "@type": "ImageObject",
             "url": "https://www.zakatday.cc/assets/brand/logo.svg",
-            "width": 512,
-            "height": 512
+            "width": 209,
+            "height": 207
           }
         },
         "featureList": [
@@ -198,10 +198,20 @@
       <header class="header-bar mb-2">
         <div class="flex items-center gap-2">
           <a href="/" id="brandLogo" class="brand-logo-slot" aria-label="ZakatDay home">
-            <span class="brand-logo-slot__mark font-logo text-[1.45rem] leading-none">
-              <span class="text-gradient-solar">Zakat</span
-              ><span class="text-slate-900 dark:text-white">Day</span>
-            </span>
+            <img
+              class="brand-logo-slot__img brand-logo-slot__img--on-light"
+              src="/assets/brand/logo-mark.svg"
+              alt=""
+              width="36"
+              height="36"
+            />
+            <img
+              class="brand-logo-slot__img brand-logo-slot__img--on-dark"
+              src="/assets/brand/logo-mark-white.svg"
+              alt=""
+              width="36"
+              height="36"
+            />
           </a>
         </div>
 
@@ -1172,10 +1182,13 @@
             <div id="zakatShareCaptureRoot" class="share-card" data-theme="light" aria-hidden="true">
               <div class="share-card__head">
                 <span class="receipt-brand-slot">
-                  <span class="receipt-brand-slot__mark"
-                    ><span class="text-gradient-solar">Zakat</span
-                    ><span class="share-card__brand-rest">Day</span></span
-                  >
+                  <img
+                    class="receipt-brand-slot__mark"
+                    src="/assets/brand/logo-mark.svg"
+                    alt="ZakatDay"
+                    width="28"
+                    height="28"
+                  />
                 </span>
                 <span id="shareCardDate" class="share-card__date">-</span>
               </div>

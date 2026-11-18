@@ -998,7 +998,7 @@
 /* cssnano unchanged (see scripts/check-css-coverage.cjs).              */
 /* -------------------------------------------------------------------- */
 
-/* ---------- Brand slots (wordmark now, artwork later) ---------- */
+/* ---------- Brand mark (symbol only; white twin on dark) ---------- */
 .brand-logo-slot {
   display: inline-flex;
   align-items: center;
@@ -1012,16 +1012,23 @@
   outline-offset: 3px;
 }
 
-.brand-logo-slot__mark {
-  display: inline-flex;
-  align-items: baseline;
-}
-
 .brand-logo-slot img,
 .brand-logo-slot svg {
   display: block;
-  height: 1.9rem;
+  height: 2.25rem;
   width: auto;
+}
+
+.brand-logo-slot .brand-logo-slot__img--on-dark {
+  display: none;
+}
+
+.dark .brand-logo-slot .brand-logo-slot__img--on-light {
+  display: none;
+}
+
+.dark .brand-logo-slot .brand-logo-slot__img--on-dark {
+  display: block;
 }
 
 /* ---------- Page rhythm ---------- */
@@ -1200,22 +1207,9 @@
 }
 
 .receipt-brand-slot__mark {
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-}
-
-.share-card__brand-rest {
-  color: rgb(var(--slate-900));
-}
-
-/* html2canvas paints background-clip text as a solid block. The receipt logo
-   uses a flat brand color so the captured PNG matches the letters. */
-.share-card .text-gradient-solar {
-  background-image: none;
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
-  color: rgb(var(--brand-blue));
+  display: block;
+  height: 1.75rem;
+  width: auto;
 }
 
 .share-card__date {

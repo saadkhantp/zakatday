@@ -42,10 +42,10 @@ Live at **https://www.zakatday.cc**.
 | `src/styles/tailwind-entry.css` | Tailwind entry point + component classes |
 | `dist/app.css` | Built stylesheet (committed, served as-is) |
 | `manifest.json` | PWA manifest (root-absolute icon paths) |
-| `assets/icons/` | **Pending artwork**: favicons, Apple touch icon, 192/512 PWA icons |
-| `assets/og/` | **Pending artwork**: `og-image.png` (1200×630) and `twitter-card.png` |
-| `assets/brand/` | **Pending artwork**: `logo.svg` used by the structured data |
-| `favicon.ico`, `favicon.svg` | **Pending artwork**: served from the site root |
+| `assets/icons/` | Favicons, Apple touch icon, 192/512 PWA icons (symbol only) |
+| `assets/og/` | `og-image.png` (1200×630) and `twitter-card.png` |
+| `assets/brand/` | Symbol mark: `logo-mark.svg`, `logo-mark-white.svg`, and `logo.svg` |
+| `favicon.ico`, `favicon.svg` | Symbol favicon, served from the site root |
 
 ### Asset & manifest wiring
 
@@ -61,14 +61,12 @@ artwork can be dropped in without touching markup:
 | Manifest icons | `/assets/icons/icon-192.png`, `/assets/icons/icon-512.png`, `/assets/icons/icon-maskable-512.png` |
 | `og:image` / JSON-LD image | `/assets/og/og-image.png` (1200×630) |
 | `twitter:image` | `/assets/og/twitter-card.png` |
-| JSON-LD publisher logo | `/assets/brand/logo.svg` (512×512) |
+| JSON-LD publisher logo | `/assets/brand/logo.svg` (symbol, no wordmark) |
 
-Until those files exist the browser reports them as missing; `test:smoke` lists
-them once as "pending artwork" instead of failing, so the suite stays green
-while the design work lands. The header wordmark (`.brand-logo-slot`) and the
-receipt wordmark (`.receipt-brand-slot`) are marked slots: replace the inner
-mark with an image or inline SVG and the surrounding markup needs no changes.
-The old `zakat-day-logo-*.png` and `og-zakatday.jpg` files are no longer
+The header (`.brand-logo-slot`) and the receipt (`.receipt-brand-slot`) use the
+symbol only: emerald `logo-mark.svg` on light surfaces, white `logo-mark-white.svg`
+in dark mode. `test:smoke` still stubs a brand path only when that file is
+missing. The old `zakat-day-logo-*.png` and `og-zakatday.jpg` files are no longer
 referenced.
 
 ## Development
