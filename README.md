@@ -42,10 +42,10 @@ Live at **https://www.zakatday.cc**.
 | `src/styles/tailwind-entry.css` | Tailwind entry point + component classes |
 | `dist/app.css` | Built stylesheet (committed, served as-is) |
 | `manifest.json` | PWA manifest (root-absolute icon paths) |
-| `assets/icons/` | Favicons, Apple touch icon, 192/512 PWA icons (symbol only) |
+| `assets/icons/` | ZD tile: favicons, Apple touch icon, 192/512 PWA icons, `app-icon.svg` |
 | `assets/og/` | `og-image.png` (1200×630) and `twitter-card.png` |
-| `assets/brand/` | Symbol mark: `logo-mark.svg`, `logo-mark-white.svg`, and `logo.svg` |
-| `favicon.ico`, `favicon.svg` | Symbol favicon, served from the site root |
+| `assets/brand/` | Mulish wordmark: `logo-wordmark.svg`, `logo-wordmark-dark.svg`, PNGs, and `logo.svg` |
+| `favicon.ico`, `favicon.svg` | ZD favicon, served from the site root |
 
 ### Asset & manifest wiring
 
@@ -61,13 +61,14 @@ artwork can be dropped in without touching markup:
 | Manifest icons | `/assets/icons/icon-192.png`, `/assets/icons/icon-512.png`, `/assets/icons/icon-maskable-512.png` |
 | `og:image` / JSON-LD image | `/assets/og/og-image.png` (1200×630) |
 | `twitter:image` | `/assets/og/twitter-card.png` |
-| JSON-LD publisher logo | `/assets/brand/logo.svg` (symbol, no wordmark) |
+| JSON-LD publisher logo | `/assets/brand/logo.svg` (same art as `logo-wordmark.svg`) |
 
-The header (`.brand-logo-slot`) and the receipt (`.receipt-brand-slot`) use the
-symbol only: emerald `logo-mark.svg` on light surfaces, white `logo-mark-white.svg`
-in dark mode. `test:smoke` still stubs a brand path only when that file is
-missing. The old `zakat-day-logo-*.png` and `og-zakatday.jpg` files are no longer
-referenced.
+The header (`.brand-logo-slot`) uses the Mulish wordmark: blue “Zakat” and slate
+“Day” on light, white “Day” in dark mode. The receipt uses the light wordmark.
+`icon-512-maskable.png` is the same image as `icon-maskable-512.png`, which is
+the path the manifest already uses. `test:smoke` still stubs a brand path only
+when that file is missing. The old `zakat-day-logo-*.png` and `og-zakatday.jpg`
+files are no longer referenced.
 
 ## Development
 

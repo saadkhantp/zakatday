@@ -998,7 +998,7 @@
 /* cssnano unchanged (see scripts/check-css-coverage.cjs).              */
 /* -------------------------------------------------------------------- */
 
-/* ---------- Brand mark (symbol only; white twin on dark) ---------- */
+/* ---------- Wordmark (light twin, white "Day" on dark) ---------- */
 .brand-logo-slot {
   display: inline-flex;
   align-items: center;
@@ -1015,7 +1015,7 @@
 .brand-logo-slot img,
 .brand-logo-slot svg {
   display: block;
-  height: 2.25rem;
+  height: 1.7rem;
   width: auto;
 }
 
@@ -1208,7 +1208,7 @@
 
 .receipt-brand-slot__mark {
   display: block;
-  height: 1.75rem;
+  height: 1.05rem;
   width: auto;
 }
 
