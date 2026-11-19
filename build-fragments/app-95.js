@@ -104,14 +104,6 @@
         window.location.href = feedbackHref();
       });
     }
-
-    var withCode = $("summaryWithCode");
-    if (withCode) {
-      withCode.addEventListener("change", function () {
-        var pre = $("summaryText");
-        if (pre) pre.textContent = summaryForShare();
-      });
-    }
   }
 
   function feedbackHref() {

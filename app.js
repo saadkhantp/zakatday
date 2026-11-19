@@ -1182,13 +1182,12 @@
 
   function summaryForShare() {
     var summary = render();
-    var withCode = $("summaryWithCode") ? $("summaryWithCode").checked : false;
     return Engine.toSummaryText(
       summary,
       function (value) {
         return CS.formatMoney(value, state.currency);
       },
-      { withCode: withCode },
+      { withCode: true },
     );
   }
 
@@ -1646,14 +1645,6 @@
     if (feedback) {
       feedback.addEventListener("click", function () {
         window.location.href = feedbackHref();
-      });
-    }
-
-    var withCode = $("summaryWithCode");
-    if (withCode) {
-      withCode.addEventListener("change", function () {
-        var pre = $("summaryText");
-        if (pre) pre.textContent = summaryForShare();
       });
     }
   }

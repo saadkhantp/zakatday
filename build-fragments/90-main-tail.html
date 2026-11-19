@@ -43,8 +43,9 @@
               id="resetBtn"
               class="btn-icon"
               data-confirm="false"
-              aria-label="Reset all amounts"
-              title="Reset all amounts"
+              data-tooltip="Clear every amount you entered"
+              data-tip-align="start"
+              aria-label="Clear every amount you entered"
             >
               <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
             </button>
@@ -54,8 +55,9 @@
                 id="shareSummaryBtn"
                 class="btn-icon"
                 onclick="window.ZakatDay && window.ZakatDay.openSummary()"
-                aria-label="Share summary"
-                title="Share summary"
+                data-tooltip="Open a text summary to copy or send"
+                data-tip-align="end"
+                aria-label="Open a text summary to copy or send"
               >
                 <span class="material-symbols-outlined" aria-hidden="true">share</span>
               </button>
@@ -64,8 +66,9 @@
                 id="whatsappBtn"
                 class="btn-icon btn-icon--whatsapp"
                 onclick="window.ZakatDay && window.ZakatDay.openWhatsAppShare()"
-                aria-label="Send summary on WhatsApp"
-                title="Send summary on WhatsApp"
+                data-tooltip="Send your Zakat receipt on WhatsApp"
+                data-tip-align="end"
+                aria-label="Send your Zakat receipt on WhatsApp"
               >
                 <svg
                   class="btn-whatsapp__icon"

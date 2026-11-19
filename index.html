@@ -814,8 +814,9 @@
               id="resetBtn"
               class="btn-icon"
               data-confirm="false"
-              aria-label="Reset all amounts"
-              title="Reset all amounts"
+              data-tooltip="Clear every amount you entered"
+              data-tip-align="start"
+              aria-label="Clear every amount you entered"
             >
               <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
             </button>
@@ -825,8 +826,9 @@
                 id="shareSummaryBtn"
                 class="btn-icon"
                 onclick="window.ZakatDay && window.ZakatDay.openSummary()"
-                aria-label="Share summary"
-                title="Share summary"
+                data-tooltip="Open a text summary to copy or send"
+                data-tip-align="end"
+                aria-label="Open a text summary to copy or send"
               >
                 <span class="material-symbols-outlined" aria-hidden="true">share</span>
               </button>
@@ -835,8 +837,9 @@
                 id="whatsappBtn"
                 class="btn-icon btn-icon--whatsapp"
                 onclick="window.ZakatDay && window.ZakatDay.openWhatsAppShare()"
-                aria-label="Send summary on WhatsApp"
-                title="Send summary on WhatsApp"
+                data-tooltip="Send your Zakat receipt on WhatsApp"
+                data-tip-align="end"
+                aria-label="Send your Zakat receipt on WhatsApp"
               >
                 <svg
                   class="btn-whatsapp__icon"
@@ -856,13 +859,9 @@
       </main>
 
       <footer
-        class="site-footer mb-6 flex flex-col items-start gap-y-3 px-2 text-left text-[0.7rem] text-slate-500 dark:text-slate-400"
+        class="site-footer mb-6 flex flex-col items-center gap-y-3 px-2 text-center text-[0.7rem] text-slate-500 dark:text-slate-400"
       >
-        <p class="privacy-badge mb-1">
-          <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
-          <span>Nothing you type is saved.</span>
-        </p>
-        <div class="flex flex-wrap items-center justify-start gap-x-3 gap-y-2">
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
           <a href="./faq/" class="footer-link !text-[0.75rem]">Guide</a>
           <button
             type="button"
@@ -879,7 +878,7 @@
             Feedback
           </button>
         </div>
-        <p class="m-0 w-full text-left">© <span id="footerYear">2026</span> ZakatDay · estimates only; verify with a scholar.</p>
+        <p class="m-0 w-full text-center">© <span id="footerYear">2026</span> ZakatDay</p>
       </footer>
     </div>
 
@@ -1103,10 +1102,6 @@
         </div>
         <div class="updates-modal__cards">
           <pre id="summaryText" class="summary-pre" tabindex="0"></pre>
-          <label class="summary-option">
-            <input type="checkbox" id="summaryWithCode" />
-            Append the currency code after each amount
-          </label>
         </div>
         <div class="updates-modal__footer">
           <div class="grid grid-cols-2 gap-2">

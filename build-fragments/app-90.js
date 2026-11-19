@@ -29,13 +29,12 @@
 
   function summaryForShare() {
     var summary = render();
-    var withCode = $("summaryWithCode") ? $("summaryWithCode").checked : false;
     return Engine.toSummaryText(
       summary,
       function (value) {
         return CS.formatMoney(value, state.currency);
       },
-      { withCode: withCode },
+      { withCode: true },
     );
   }
 

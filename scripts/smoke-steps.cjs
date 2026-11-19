@@ -270,9 +270,11 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
   check("summary includes zakat line", summary.text, (t) => /ZAKAT DUE \(2\.5%\)/.test(t));
   check("summary names the currency", summary.text, (t) => /Currency: PKR/.test(t));
   check("summary includes nisab standard", summary.text, (t) => /Silver \(612\.36 g\)/.test(t));
-  await domClick(page, "#summaryWithCode");
-  const withCode = await page.$eval("#summaryText", (el) => el.textContent);
-  check("currency code toggle appends code", withCode, (t) => /PKR/.test(t));
+  check(
+    "summary always appends the currency code",
+    summary.text,
+    (t) => /ZAKAT DUE \(2\.5%\): .+ PKR/.test(t),
+  );
   await page.keyboard.press("Escape");
   await page.waitForFunction(() => document.getElementById("summaryModal").hidden, { timeout: 4000 });
 
@@ -339,20 +341,24 @@ module.exports = async function run({ page, base, check, num, consoleErrors, fai
   );
   const footerLayout = await page.evaluate(() => {
     const footer = document.querySelector("footer");
-    const notice = footer && footer.querySelector(".privacy-badge");
+    const copy = footer && footer.querySelector("p");
     const links = footer && footer.querySelector('a[href="./faq/"]');
-    if (!footer || !notice || !links) return { ok: false, reason: "missing footer parts" };
-    const inMain = Boolean(document.querySelector("main .privacy-badge"));
-    const noticeBox = notice.getBoundingClientRect();
-    const linkBox = links.getBoundingClientRect();
+    if (!footer || !copy || !links) return { reason: "missing footer parts", text: "" };
+    const notice = footer.textContent.indexOf("Nothing you type is saved") !== -1;
+    const style = getComputedStyle(footer);
+    const copyStyle = getComputedStyle(copy);
+    const centered = style.alignItems === "center" && copyStyle.textAlign === "center";
     return {
-      ok: !inMain && noticeBox.bottom <= linkBox.top,
-      reason: inMain ? "notice still inside main" : "notice not above links",
-      gap: Math.round(linkBox.top - noticeBox.bottom),
+      reason: notice ? "privacy note still present" : centered ? "footer centered" : "footer not centered",
+      text: copy.textContent,
     };
   });
-  check("privacy notice sits in the footer above the links", footerLayout.reason, "notice not above links");
-  check("privacy notice clears the links", footerLayout.gap, (gap) => gap >= 8);
+  check("privacy note removed and footer centered", footerLayout.reason, "footer centered");
+  check(
+    "footer drops the estimates disclaimer",
+    footerLayout.text,
+    (t) => t.indexOf("estimates only") === -1 && /ZakatDay/.test(t),
+  );
 
   console.log("faq page");
   const faq = await page.goto(base + "/faq/", { waitUntil: "networkidle2" });
