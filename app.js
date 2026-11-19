@@ -16,7 +16,7 @@
   var GOLD_PURITY = { 24: 1, 22: 22 / 24, 21: 21 / 24, 18: 18 / 24, 14: 14 / 24 };
   var METAL_STALE_MS = 1000 * 60 * 30;
 
-  var FEEDBACK_MAILTO = "salam@zakatday.cc";
+  var FEEDBACK_MAILTO = "saadkhan.net@gmail.com";
 
   var state = Engine.createState();
   var live = {
@@ -423,12 +423,13 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* "Check Your Due Zakat"                                             */
+  /* "Check your Zakat"                                                 */
   /* ------------------------------------------------------------------ */
 
   /**
-   * The results card sits below the inputs, so the button stays disabled until
-   * there is something to check, then hands the user straight to the result.
+   * The results card stays hidden until the user checks. The button stays
+   * disabled until there is something to check, then the card moves to the
+   * top of the page and stays there, updating as amounts change.
    */
   function bindCheckDue() {
     var btn = $("checkDueBtn");
@@ -437,6 +438,13 @@
 
     btn.addEventListener("click", function () {
       if (btn.disabled) return;
+      if (card && card.hidden) {
+        var main = $("calculator");
+        if (main && card.parentNode === main && main.firstElementChild !== card) {
+          main.insertBefore(card, main.firstElementChild);
+        }
+        card.hidden = false;
+      }
       render();
       scrollToNode(card, 12);
       if (card) {

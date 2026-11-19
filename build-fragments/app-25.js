@@ -153,12 +153,13 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* "Check Your Due Zakat"                                             */
+  /* "Check your Zakat"                                                 */
   /* ------------------------------------------------------------------ */
 
   /**
-   * The results card sits below the inputs, so the button stays disabled until
-   * there is something to check, then hands the user straight to the result.
+   * The results card stays hidden until the user checks. The button stays
+   * disabled until there is something to check, then the card moves to the
+   * top of the page and stays there, updating as amounts change.
    */
   function bindCheckDue() {
     var btn = $("checkDueBtn");
@@ -167,6 +168,13 @@
 
     btn.addEventListener("click", function () {
       if (btn.disabled) return;
+      if (card && card.hidden) {
+        var main = $("calculator");
+        if (main && card.parentNode === main && main.firstElementChild !== card) {
+          main.insertBefore(card, main.firstElementChild);
+        }
+        card.hidden = false;
+      }
       render();
       scrollToNode(card, 12);
       if (card) {

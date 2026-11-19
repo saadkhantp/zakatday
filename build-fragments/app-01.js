@@ -16,7 +16,7 @@
   var GOLD_PURITY = { 24: 1, 22: 22 / 24, 21: 21 / 24, 18: 18 / 24, 14: 14 / 24 };
   var METAL_STALE_MS = 1000 * 60 * 30;
 
-  var FEEDBACK_MAILTO = "salam@zakatday.cc";
+  var FEEDBACK_MAILTO = "saadkhan.net@gmail.com";
 
   var state = Engine.createState();
   var live = {

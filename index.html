@@ -697,14 +697,14 @@
             disabled
           >
             <span class="material-symbols-outlined" aria-hidden="true">calculate</span>
-            Check Your Due Zakat
+            Check your Zakat
           </button>
           <p id="checkDueHint" class="check-due-hint">
             Enter at least one asset amount to check your Zakat.
           </p>
         </section>
 
-        <section id="zakatCard" class="section-card zakat-card p-3.5 sm:p-4" aria-labelledby="zakatCardTitle" tabindex="-1">
+        <section id="zakatCard" class="section-card zakat-card p-3.5 sm:p-4" aria-labelledby="zakatCardTitle" tabindex="-1" hidden>
           <div class="zakat-card__head">
             <span class="zakat-card__icon" aria-hidden="true">
               <span class="material-symbols-outlined">mosque</span>
@@ -856,14 +856,14 @@
       </main>
 
       <footer
-        class="mt-10 mb-6 flex flex-col items-center gap-y-3 px-2 text-center text-[0.7rem] text-slate-500 dark:text-slate-400"
+        class="site-footer mb-6 flex flex-col items-start gap-y-3 px-2 text-left text-[0.7rem] text-slate-500 dark:text-slate-400"
       >
-        <p class="privacy-badge privacy-badge--centered mb-1">
+        <p class="privacy-badge mb-1">
           <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
-          <span>Nothing you type is sent or saved. No accounts, no cookies.</span>
+          <span>Nothing you type is saved.</span>
         </p>
-        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
-          <a href="./faq/" class="footer-link !text-[0.75rem]">Zakat guide &amp; FAQ</a>
+        <div class="flex flex-wrap items-center justify-start gap-x-3 gap-y-2">
+          <a href="./faq/" class="footer-link !text-[0.75rem]">Guide</a>
           <button
             type="button"
             id="aboutBtn"
@@ -873,15 +873,13 @@
           >
             How it works
           </button>
-          <a href="./faq/#gold-silver" class="footer-link !text-[0.75rem] footer-link--sep"
-            >Gold &amp; silver rules</a
-          >
-          <a href="./faq/#privacy" class="footer-link !text-[0.75rem] footer-link--sep">Privacy details</a>
+          <a href="./faq/#gold-silver" class="footer-link !text-[0.75rem] footer-link--sep">Rules</a>
+          <a href="./faq/#privacy" class="footer-link !text-[0.75rem] footer-link--sep">Privacy</a>
           <button type="button" id="feedbackBtn" class="footer-link !text-[0.75rem] footer-link--sep">
             Feedback
           </button>
         </div>
-        <p class="m-0 w-full text-center">© <span id="footerYear">2026</span> ZakatDay · estimates only; verify with a scholar.</p>
+        <p class="m-0 w-full text-left">© <span id="footerYear">2026</span> ZakatDay · estimates only; verify with a scholar.</p>
       </footer>
     </div>
 

@@ -274,6 +274,10 @@
     animation: cardFlash 0.9s ease-out;
   }
 
+  .zakat-card[hidden] {
+    display: none;
+  }
+
   /* "Check Your Due Zakat" sits right after the last input. */
   .check-due-btn {
     @apply w-full py-3 text-[0.88rem];
@@ -1037,6 +1041,18 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   row-gap: 1.5rem;
+}
+
+/* Unlayered so it wins over the global border reset. One step off the page
+   background: visible, without a hard edge. */
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(var(--slate-300));
+}
+
+.dark .site-footer {
+  border-top-color: rgb(var(--slate-600));
 }
 
 /* ---------- Intro card (h1 + About trigger) ---------- */
